@@ -30,6 +30,8 @@ namespace EcoScanner.Views
                 PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE },
                 CameraResolutionSelector = new CameraResolutionSelectorDelegate(SelectLowestResolutionMatchingDisplayAspectRatio)
             };
+            zxing.Options = options;
+
             base.OnAppearing();
             zxing.IsScanning = true;
             var PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE };
