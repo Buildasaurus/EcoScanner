@@ -6,6 +6,15 @@ using Android.Runtime;
 using Android.OS;
 using ZXing;
 
+using Android.Hardware;
+using Android.Hardware.Camera2;
+using Android.Hardware.Camera2.Params;
+using Xamarin.Forms.Platform.Android;
+using Android.Graphics;
+using static Android.App.ActivityManager;
+using Xamarin.Forms;
+using Android.Content;
+
 namespace EcoScanner.Droid
 {
     [Activity(Label = "EcoScanner", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
@@ -33,5 +42,6 @@ namespace EcoScanner.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }
