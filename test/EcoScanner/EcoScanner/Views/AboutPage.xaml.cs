@@ -18,8 +18,6 @@ namespace EcoScanner.Views
 {
     public partial class AboutPage : ContentPage
     {
-        double height = 0;
-        double width = 0;
         public AboutPage()
         {
             InitializeComponent();
