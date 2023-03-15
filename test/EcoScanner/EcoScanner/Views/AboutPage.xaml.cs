@@ -23,8 +23,6 @@ namespace EcoScanner.Views
         public AboutPage()
         {
             InitializeComponent();
-			height = abc.Height;
-            width = abc.Width;
 
 			zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() => {
                 lblResult.Text = result.Text;
@@ -53,6 +51,7 @@ namespace EcoScanner.Views
         
         public static CameraResolution SelectLowestResolutionMatchingDisplayAspectRatio(List<CameraResolution> availableResolutions, Grid abc)
         {
+            
             CameraResolution result = null;
 
             //a tolerance of 0.1 should not be visible to the user
@@ -88,7 +87,7 @@ namespace EcoScanner.Views
                     minDiff = Math.Abs(r.Height - targetHeight);
                 result = r;
             }
-
+            
             try
             {
                 Trace.WriteLine("result" + result.Height + " " + result.Width);
