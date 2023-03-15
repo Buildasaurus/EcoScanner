@@ -25,14 +25,14 @@ namespace EcoScanner.Views
         }
         protected override void OnAppearing()
         {
-            var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
-            {
-                PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE },
-                CameraResolutionSelector = new CameraResolutionSelectorDelegate(SelectLowestResolutionMatchingDisplayAspectRatio)
-            };
-            zxing.Options = options;
+			var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
+			{
+				PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE },
+				CameraResolutionSelector = new CameraResolutionSelectorDelegate((resolutions) => SelectLowestResolutionMatchingDisplayAspectRatio(resolutions, abc))
+			};
+			zxing.Options = options;
 
-            base.OnAppearing();
+			base.OnAppearing();
             zxing.IsScanning = true;
             var PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE };
           
@@ -43,18 +43,30 @@ namespace EcoScanner.Views
             base.OnDisappearing();
         }
 
-        
-        public static CameraResolution SelectLowestResolutionMatchingDisplayAspectRatio(List<CameraResolution> availableResolutions)
-        {
-            CameraResolution result = null;
+
+		public static CameraResolution SelectLowestResolutionMatchingDisplayAspectRatio(List<CameraResolution> availableResolutions, Grid abc)
+		{
+			CameraResolution result = null;
 
             //a tolerance of 0.1 should not be visible to the user
             double aspectTolerance = 0.1;
             var displayOrientationHeight = DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait ? DeviceDisplay.MainDisplayInfo.Height : DeviceDisplay.MainDisplayInfo.Width;
             var displayOrientationWidth = DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait ? DeviceDisplay.MainDisplayInfo.Width : DeviceDisplay.MainDisplayInfo.Height;
 
-            //calculatiing our targetRatio
-            var targetRatio = displayOrientationHeight / displayOrientationWidth;
+			try
+			{
+				var others = abc.RowDefinitions[0].Height.Value + abc.RowDefinitions[2].Height.Value;
+				displayOrientationHeight = abc.Height - others;
+				displayOrientationWidth = abc.Width;
+				Trace.WriteLine("using heights " + displayOrientationHeight + " and with " + displayOrientationWidth);
+			}
+			catch
+			{
+				Trace.WriteLine("Error: Couldn't get heights and widths.");
+			}
+
+			//calculatiing our targetRatio
+			var targetRatio = displayOrientationHeight / displayOrientationWidth;
             var targetHeight = displayOrientationHeight;
             var minDiff = double.MaxValue;
 
