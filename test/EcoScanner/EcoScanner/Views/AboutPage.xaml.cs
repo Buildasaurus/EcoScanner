@@ -1,10 +1,8 @@
-﻿using EcoScanner.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -21,8 +19,7 @@ namespace EcoScanner.Views
         public AboutPage()
         {
             InitializeComponent();
-
-			zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() => {
+            zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() => {
                 lblResult.Text = result.Text;
             });
         }
@@ -46,39 +43,37 @@ namespace EcoScanner.Views
             base.OnDisappearing();
         }
 
-        
-        public static CameraResolution SelectLowestResolutionMatchingDisplayAspectRatio(List<CameraResolution> availableResolutions, Grid abc)
-        {
-            
-            CameraResolution result = null;
+
+		public static CameraResolution SelectLowestResolutionMatchingDisplayAspectRatio(List<CameraResolution> availableResolutions, Grid abc)
+		{
+			CameraResolution result = null;
 
             //a tolerance of 0.1 should not be visible to the user
-            double aspectTolerance = 0.3;
-
-			var displayOrientationHeight = DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait ? DeviceDisplay.MainDisplayInfo.Height : DeviceDisplay.MainDisplayInfo.Width;
+            double aspectTolerance = 0.1;
+            var displayOrientationHeight = DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait ? DeviceDisplay.MainDisplayInfo.Height : DeviceDisplay.MainDisplayInfo.Width;
             var displayOrientationWidth = DeviceDisplay.MainDisplayInfo.Orientation == DisplayOrientation.Portrait ? DeviceDisplay.MainDisplayInfo.Width : DeviceDisplay.MainDisplayInfo.Height;
-            try
-            {
-                var others = abc.RowDefinitions[0].Height.Value + abc.RowDefinitions[2].Height.Value;
-                displayOrientationHeight = abc.Height - others;
-                displayOrientationWidth = abc.Width;
-				Trace.WriteLine("using heights " + displayOrientationHeight + " and with " + displayOrientationWidth);
 
+			try
+			{
+				var others = abc.RowDefinitions[0].Height.Value + abc.RowDefinitions[2].Height.Value;
+				displayOrientationHeight = abc.Height - others;
+				displayOrientationWidth = abc.Width;
+				Trace.WriteLine("using heights " + displayOrientationHeight + " and with " + displayOrientationWidth);
 			}
 			catch
-            {
-                Trace.WriteLine("Error: Couldn't get heights and widths.");
-            }
+			{
+				Trace.WriteLine("Error: Couldn't get heights and widths.");
+			}
 
 			//calculatiing our targetRatio
 			var targetRatio = displayOrientationHeight / displayOrientationWidth;
             var targetHeight = displayOrientationHeight;
             var minDiff = double.MaxValue;
 
-			//camera API lists all available resolutions from highest to lowest, perfect for us
-			//making use of this sorting, following code runs some comparisons to select the lowest resolution that matches the screen aspect ratio and lies within tolerance
-			//selecting the lowest makes Qr detection actual faster most of the time
-			foreach (var r in availableResolutions.Where(r => Math.Abs(((double)r.Width / r.Height) - targetRatio) < aspectTolerance))
+            //camera API lists all available resolutions from highest to lowest, perfect for us
+            //making use of this sorting, following code runs some comparisons to select the lowest resolution that matches the screen aspect ratio and lies within tolerance
+            //selecting the lowest makes Qr detection actual faster most of the time
+            foreach (var r in availableResolutions.Where(r => Math.Abs(((double)r.Width / r.Height) - targetRatio) < aspectTolerance))
             {
                 //slowly going down the list to the lowest matching solution with the correct aspect ratio
                 if (Math.Abs(r.Height - targetHeight) < minDiff)
@@ -86,7 +81,7 @@ namespace EcoScanner.Views
                 result = r;
             }
 
-			return result;
+            return result;
         }
     }
 }

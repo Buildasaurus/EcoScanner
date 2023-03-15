@@ -22,7 +22,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            
+
         </StackLayout>
         <Label x:Name="lblResult" Text="Thiss Text might Change" Grid.Row="0"/>
         <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"/>
