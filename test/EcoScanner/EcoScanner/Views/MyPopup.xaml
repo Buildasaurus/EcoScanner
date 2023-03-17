@@ -1,12 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EcoScanner.Views.MyPopup">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<popup:PopupPage
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+x:Class="EcoScanner.MyPopUp">
+    <StackLayout BackgroundColor="White" HorizontalOptions="Center"
+VerticalOptions="Center" Margin="20" Spacing="0">
+        <Label Text="Pop Up Demo" HorizontalOptions="Center" Margin="20"/>
+    </StackLayout>
+</popup:PopupPage>

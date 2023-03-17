@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyNamespace;
+using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -18,15 +20,19 @@ namespace EcoScanner.Views
     public partial class AboutPage : ContentPage
     {
 		ContentPage popup = new MyPopup();
+        bool onPopup = false;
 
 		public AboutPage()
         {
             InitializeComponent();
-            zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() => {
+            zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
                 lblResult.Text = result.Text;
-				Navigation.PushModalAsync(popup);
+                if (!onPopup)
+                {
+                    onPopup = true;
+                    await PopupNavigation.Instance.PushAsync((Rg.Plugins.Popup.Pages.PopupPage)popup);
+                }
 			});
-
         }
         protected override void OnAppearing()
         {

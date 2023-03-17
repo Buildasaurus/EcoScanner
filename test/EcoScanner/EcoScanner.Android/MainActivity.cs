@@ -34,7 +34,11 @@ namespace EcoScanner.Droid
             Xamarin.Essentials.Platform.Init(Application);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
-        }
+            //initialize popup magic.
+			Rg.Plugins.Popup.Popup.Init(this);
+			Xamarin.Forms.Forms.Init(this, savedInstanceState);
+			LoadApplication(new App());
+		}
 
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
@@ -42,6 +46,9 @@ namespace EcoScanner.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
-    }
+		public override void OnBackPressed()
+		{
+			Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
+		}
+	}
 }
