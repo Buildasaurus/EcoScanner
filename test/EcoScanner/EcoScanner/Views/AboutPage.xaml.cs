@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -16,12 +17,16 @@ namespace EcoScanner.Views
 {
     public partial class AboutPage : ContentPage
     {
-        public AboutPage()
+		ContentPage popup = new MyPopup();
+
+		public AboutPage()
         {
             InitializeComponent();
             zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() => {
                 lblResult.Text = result.Text;
-            });
+				Navigation.PushModalAsync(popup);
+			});
+
         }
         protected override void OnAppearing()
         {
@@ -35,9 +40,8 @@ namespace EcoScanner.Views
 			base.OnAppearing();
             zxing.IsScanning = true;
             var PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE };
-          
-        }
-        protected override void OnDisappearing()
+		}
+		protected override void OnDisappearing()
         {
             zxing.IsScanning = false;
             base.OnDisappearing();
