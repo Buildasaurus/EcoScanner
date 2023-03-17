@@ -1,4 +1,5 @@
 ﻿using Rg.Plugins.Popup.Services;
+using System;
 using Xamarin.Forms;
 
 namespace MyNamespace
@@ -8,26 +9,10 @@ namespace MyNamespace
 		public MyPopup()
 		{
 			InitializeComponent();
-
-			// set the page properties
-			BackgroundColor = Color.FromRgb(200, 10, 53);
-			Padding = new Thickness(20);
-
-			// add content to the popup
-			Content = new StackLayout
-			{
-				Children = {
-					new Label { Text = "This is a popup!", TextColor = Color.Green },
-				}
-			};
-			//Creates a cool close button, and "subscribes" to the click event. When it is clicked it pops (closes) the popup.
-			var closeButton = new Button { Text = "Close", BackgroundColor = Color.Red, TextColor = Color.Black };
-			closeButton.Clicked += async (sender, args) =>
-			{
-				await PopupNavigation.Instance.PopAsync();
-			};
-			((StackLayout)Content).Children.Add(closeButton);
-
+		}
+		private async void Close_Click(object sender, EventArgs e)
+		{
+			await PopupNavigation.Instance.PopAsync();
 		}
 	}
 }
