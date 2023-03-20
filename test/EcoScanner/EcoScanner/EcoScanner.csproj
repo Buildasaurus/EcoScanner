@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\a.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.5" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />  
@@ -25,5 +29,9 @@
 
   <ItemGroup>
     <Folder Include="Views\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\a.jpg" />
   </ItemGroup>
 </Project>
