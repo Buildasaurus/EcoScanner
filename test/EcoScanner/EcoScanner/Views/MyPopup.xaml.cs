@@ -1,9 +1,12 @@
 ﻿using Rg.Plugins.Popup.Services;
 using System;
+using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace MyNamespace
 {
+	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MyPopup : Rg.Plugins.Popup.Pages.PopupPage
 	{
 		public MyPopup()
@@ -14,5 +17,10 @@ namespace MyNamespace
 		{
 			await PopupNavigation.Instance.PopAsync();
 		}
-	}
+
+		private void open_Clicked(object sender, EventArgs e)
+		{
+			Trace.WriteLine("hi");
+        }
+    }
 }
