@@ -5,36 +5,36 @@ xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="25">
     
-    <StackLayout BackgroundColor="White" Padding="25" Opacity="100" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2" Grid.RowSpan="9">
-        <Grid x:Name="abc">
+    <StackLayout BackgroundColor="White" Padding="25">
+        <Grid x:Name="abc" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.075*"/>
-                <RowDefinition Height="0.075*"/>
-                <RowDefinition Height="0.175*"/>
-                <RowDefinition Height="0.075*"/>
-                <RowDefinition Height="0.125*"/>
-                <RowDefinition Height="0.15*"/>
-                <RowDefinition Height="0.075*"/>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="15*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50*"/>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="40*"/>
             </Grid.ColumnDefinitions>
-
+            <Label Text="Danske Æbler" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25" Grid.ColumnSpan="2"/>
+            <Label Text = "1 kg" TextColor = "Green" Grid.Row="1" Grid.Column="0"/>
+            <Image Source = "a.jpg" Margin = "30" Opacity = "0.5" Grid.Row="2" Grid.Column="1"/>
+            <Label Text="1 kg  af produkt udleder" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="10" Grid.ColumnSpan="2"/>
+            <Label Text="0,66 kg" Grid.Row="4" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
+            <Label Text="antal " Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
+            <Label Text="- 0 +" Grid.Row="5" Grid.Column="1" HorizontalTextAlignment="Center" FontSize="25"/>
+            <Label Text="udledning af 2 kilo bliver" Grid.Row="6" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="10" Grid.ColumnSpan="2"/>
+            <Label Text="1,32 kg " Grid.Row="4" Grid.Column="7" HorizontalTextAlignment="Center" FontSize="25"/>
+            <Button Clicked="Close_Click" x:Name="Close" Text = "Close" BackgroundColor = "Red" TextColor = "Black" Grid.Row="8" Grid.Column="0" HorizontalOptions="Center"/>
+            <Button Clicked="open_Clicked" x:Name="open" Text = "open" BackgroundColor = "Red" TextColor = "Black" Grid.Row="8" Grid.Column="1" HorizontalOptions="Center"/>
         </Grid>
-        <Label Text="Danske Æbler" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
-        <Label Text = "1 kg" TextColor = "Green" Grid.Row="1" Grid.Column="1"/>
-        <Image Source = "a.jpg" Margin = "30" Opacity = "0.5" Grid.Row="2" Grid.Column="1"/>
-        <Label Text="1 kg  af produkt udleder" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
-        <Label Text="0,66 kg " Grid.Row="4" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
-        <Label Text="antal " Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
-        <Label Text="- 0 +" Grid.Row="5" Grid.Column="1" HorizontalTextAlignment="Center" FontSize="25"/>
-        <Label Text="udledning af 2 kilo bliver" Grid.Row="6" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
-        <Label Text="1,32 kg " Grid.Row="4" Grid.Column="7" HorizontalTextAlignment="Center" FontSize="25"/>
-        <Button Clicked="Close_Click" x:Name="Close" Text = "Close" BackgroundColor = "Red" TextColor = "Black" Grid.Row="8" Grid.Column="0" />
-        <Button Clicked="open_Clicked" x:Name="open" Text = "open" BackgroundColor = "Red" TextColor = "Black" Grid.Row="8" Grid.Column="1"/>
+        
 
     </StackLayout>
 
