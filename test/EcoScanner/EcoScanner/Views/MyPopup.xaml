@@ -32,7 +32,7 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="25">
                 <Label Text="- 0 +" Grid.Row="5" Grid.Column="1" HorizontalTextAlignment="Center" FontSize="25"/>
                 <Label Text="udledning af 2 kilo bliver" Grid.Row="6" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="10" Grid.ColumnSpan="2"/>
                 <Label Text="1,32 kg " Grid.Row="7" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25" Grid.ColumnSpan="2"/>
-                <ImageButton Source="TilbageTilScannerKnap.png" Clicked="Close_Click" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" Background="white"/>
+                <ImageButton Source="TilbageTilScannerKnap.svg" Clicked="Close_Click" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" Background="white"/>
                 <ImageButton Source="TilfoejTilListeKnap.png" Clicked="Add_Clicked" x:Name="Add"  Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" Background="white"/>
             </Grid>
         
