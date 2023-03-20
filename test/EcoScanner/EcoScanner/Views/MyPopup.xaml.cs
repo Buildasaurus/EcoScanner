@@ -18,9 +18,9 @@ namespace MyNamespace
 			await PopupNavigation.Instance.PopAsync();
 		}
 
-		private void open_Clicked(object sender, EventArgs e)
+		private void Add_Clicked(object sender, EventArgs e)
 		{
-			Trace.WriteLine("hi");
-        }
-    }
+
+		}
+	}
 }
