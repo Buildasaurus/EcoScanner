@@ -26,7 +26,6 @@ namespace EcoScanner.Views
         {
             InitializeComponent();
             zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
-                lblResult.Text = result.Text;
                 if (!onPopup)
                 {
                     onPopup = true;

@@ -9,6 +9,12 @@
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" IconImageSource="SoegeIkon.png" Order="Primary" 
+                Command="{Binding SearchCommandBinding}" />
+
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
@@ -17,16 +23,19 @@
 
     <Grid x:Name="abc">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        </StackLayout>
-        <Label x:Name="lblResult" Text="Thiss Text might Change" Grid.Row="0"/>
-        <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"/>
-        <Button Grid.Row="2"></Button>
+        <Image Grid.Column="0" Grid.Row="0" Source="SoegeIkon.png" Scale="0.7" HorizontalOptions="Center"/>
+        <Entry Placeholder="Søg efter produkter" x:Name="søgebar" Grid.Row="0" Grid.Column="1"/>
+        <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="2"/>
+        <Button Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="White"></Button>
     </Grid>
 
 </ContentPage>

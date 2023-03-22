@@ -22,5 +22,26 @@ namespace MyNamespace
 		{
 
 		}
+
+		private void Close_Clicked(object sender, EventArgs e)
+		{
+
+		}
+
+
+		private void Minus_Clicked(object sender, EventArgs e)
+		{
+			int num = int.Parse(number.Text);
+			if (num > 0)
+				{
+				number.Text = "" + (num - 1);
+
+			}
+		}
+
+		private void Plus_Clicked(object sender, EventArgs e)
+		{
+			number.Text = "" + (int.Parse(number.Text) + 1);
+		}
 	}
 }
