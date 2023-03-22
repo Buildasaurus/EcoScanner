@@ -17,7 +17,7 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="25">
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="15*"/>
-                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="20*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"/>
@@ -25,15 +25,17 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="25">
                 </Grid.ColumnDefinitions>
                 <Label Text="Danske Æbler" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25" Grid.ColumnSpan="2"/>
                 <Label Text = "1 kg" TextColor = "Green" Grid.Row="1" Grid.Column="0"/>
-                <Image Source="Skalameter.png"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Image Source="Skalameter.png"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"/>
                 <Label Text="1 kg  af produkt udleder" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="10" Grid.ColumnSpan="2"/>
                 <Label Text="0,66 kg" Grid.Row="4" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
                 <Label Text="antal " Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25"/>
                 <Label Text="- 0 +" Grid.Row="5" Grid.Column="1" HorizontalTextAlignment="Center" FontSize="25"/>
                 <Label Text="udledning af 2 kilo bliver" Grid.Row="6" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="10" Grid.ColumnSpan="2"/>
                 <Label Text="1,32 kg " Grid.Row="7" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="25" Grid.ColumnSpan="2"/>
-                <ImageButton Source="TilbageTilScannerKnap.svg" Clicked="Close_Click" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" Background="white"/>
-                <ImageButton Source="TilfoejTilListeKnap.png" Clicked="Add_Clicked" x:Name="Add"  Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" Background="white"/>
+                <Image Source="TilbageTilScannerKnap.png" Grid.Row="8" Grid.Column="0"/>
+                <ImageButton Source="TilbageTilScannerKnap.png" Clicked="Close_Click" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand"  Opacity="0"/>
+                <Image Source="TilfoejTilListeKnap.png" Grid.Row="8" Grid.Column="1"/>
+                <ImageButton Source="TilfoejTilListeKnap.png" Clicked="Add_Clicked" x:Name="Add"  Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" Opacity="0" />
             </Grid>
         
 
