@@ -22,8 +22,4 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Images\" />
-  </ItemGroup>
 </Project>
