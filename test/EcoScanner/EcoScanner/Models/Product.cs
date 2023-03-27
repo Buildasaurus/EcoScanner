@@ -4,7 +4,10 @@ using System.Text;
 
 namespace EcoScanner.Models
 {
-    class Product
+    public class Product
     {
+        public int ID;
+        public string Name;
+        public float CO2;
     }
 }

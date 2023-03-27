@@ -1,4 +1,5 @@
-﻿using MyNamespace;
+﻿using EcoScanner.Models;
+using MyNamespace;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
+using ZXing.Client.Result;
 using ZXing.Mobile;
 using ZXing.Net.Mobile.Forms;
 using static ZXing.Mobile.MobileBarcodeScanningOptions;
@@ -19,19 +21,27 @@ namespace EcoScanner.Views
 {
     public partial class AboutPage : ContentPage
     {
-		ContentPage popup = new MyPopup();
 
 		public AboutPage()
         {
+            Databasehandler database = new Databasehandler();
             InitializeComponent();
 			MyPopup.onPopup = false;
-
 			zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
-                Trace.WriteLine(popup.IsVisible);
                 if (!MyPopup.onPopup)
                 {
 					MyPopup.onPopup = true;
-					await PopupNavigation.Instance.PushAsync((Rg.Plugins.Popup.Pages.PopupPage)popup);
+                    bool parsed = int.TryParse(result.Text, out int number);
+                    if (parsed)
+                    {
+						Product product = database.GetProduct(number);
+						await PopupNavigation.Instance.PushAsync(new MyPopup(product));
+					}
+                    else
+                    {
+                        MyPopup.onPopup = false;
+                        Trace.WriteLine("not a number");
+                    }
                     //result.Text
 				}
 			});
