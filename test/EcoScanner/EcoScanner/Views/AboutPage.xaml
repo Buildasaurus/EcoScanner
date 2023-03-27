@@ -9,24 +9,42 @@
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Search" IconImageSource="SoegeIkon.png" Order="Primary" 
+                Command="{Binding SearchCommandBinding}" />
+
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid x:Name="abc">
+    <Grid x:Name="abc" ColumnDefinitions="40, 2*, *">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*" />
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="75"/>
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
 
-        </StackLayout>
-        <Label x:Name="lblResult" Text="Thiss Text might Change" Grid.Row="0"/>
-        <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"/>
-        <Button Grid.Row="2"></Button>
+
+        <Image Grid.Column="0" Grid.Row="0" Source="SoegeIkon.png" Scale="0.7" HorizontalOptions="Center"/>
+        <Entry Placeholder="Søg efter produkter" x:Name="søgebar" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3"/>
+        <Image Source="ListeKnap.png" Grid.Column="2" Grid.Row="2" HorizontalOptions="Center"/>
+        <ImageButton Source="ListeKnap.png" x:Name="Minus"  Grid.Column="2" Grid.Row="2" Opacity="0" HorizontalOptions="Center"/>
+        <Label  Grid.Column="1" Grid.Row="2" VerticalOptions="Center" FontSize="21" TextColor="Black">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Total CO2e: "  />
+                    <Span Text="0,00" FontAttributes="Bold" TextColor="#01ABC9" FontSize="36"/>
+                    <Span Text="kg" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+
     </Grid>
 
 </ContentPage>

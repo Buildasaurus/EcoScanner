@@ -20,20 +20,24 @@ namespace EcoScanner.Views
     public partial class AboutPage : ContentPage
     {
 		ContentPage popup = new MyPopup();
-        bool onPopup = false;
 
 		public AboutPage()
         {
             InitializeComponent();
-            zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
-                lblResult.Text = result.Text;
-                if (!onPopup)
+			MyPopup.onPopup = false;
+
+			zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
+                Trace.WriteLine(popup.IsVisible);
+                if (!MyPopup.onPopup)
                 {
-                    onPopup = true;
-                    await PopupNavigation.Instance.PushAsync((Rg.Plugins.Popup.Pages.PopupPage)popup);
-                }
+					MyPopup.onPopup = true;
+					await PopupNavigation.Instance.PushAsync((Rg.Plugins.Popup.Pages.PopupPage)popup);
+                    //result.Text
+				}
 			});
         }
+
+
         protected override void OnAppearing()
         {
 			var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
