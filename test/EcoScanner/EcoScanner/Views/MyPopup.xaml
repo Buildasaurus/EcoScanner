@@ -28,8 +28,11 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="25"
                 </Grid.ColumnDefinitions>
                 <Label Text="Danske Æbler" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="32" Grid.ColumnSpan="2" x:Name="heading"/>
                 <Label Text = "1 kg" Grid.Row="1" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="14"/>
-                <Image Source="Skalameter.png"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent"/>
+                
+                <Image Source="Skalameter.png"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" x:Name="scale"/>
+
                 <Label Text="1 kg  af produkt udleder" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center"/>
+
                 <Label Text="0,66 kg" Grid.Row="4" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="28" TextColor="Green" FontAttributes="Bold" VerticalTextAlignment="Start"/>
                 <Label Text="Antal " Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Start" FontSize="21" VerticalTextAlignment="Center"/>
 
