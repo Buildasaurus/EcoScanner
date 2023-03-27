@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using FireSharp;
 using FireSharp.Config;
@@ -18,8 +19,11 @@ namespace EcoScanner.Models
 
 		IFirebaseClient client;
 
-		public Databasehandler() { }
-		Product GetProduct(int number)
+		public Databasehandler() 
+		{
+			client = new FirebaseClient(ifc);
+		}
+		public Product GetProduct(int number)
 		{
 			var result = client.Get("Madvare/" + number);
 			Product product = result.ResultAs<Product>();
