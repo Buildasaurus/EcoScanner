@@ -32,6 +32,7 @@ namespace EcoScanner.Views
                 {
 					MyPopup.onPopup = true;
 					await PopupNavigation.Instance.PushAsync((Rg.Plugins.Popup.Pages.PopupPage)popup);
+                    //result.Text
 				}
 			});
         }
