@@ -5,7 +5,8 @@ xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="25"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             android:Application.WindowSoftInputModeAdjust="Unspecified">
+             android:Application.WindowSoftInputModeAdjust="Unspecified"
+    BackgroundClicked="backgroundClosed">
 
     <Frame CornerRadius="10"  Margin="7, 70">
         <StackLayout BackgroundColor="White" >
