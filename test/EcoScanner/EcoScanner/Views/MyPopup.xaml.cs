@@ -19,7 +19,7 @@ namespace MyNamespace
 			this.product = product;
 			InitializeComponent();
 			heading.Text = product.Name;
-			double[] intervals = { 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
+			double[] intervals = { 0.0, 1.0, 2.0, 4.0, 7.0, 10.0,  float.PositiveInfinity };
 			int mappedNum = Array.IndexOf(intervals, intervals.First(x => x > product.CO2));
 			string path = "SkalaKlasse" + mappedNum + ".png";
 			
