@@ -1,2 +1,2 @@
-# EcoScanner
+# KliMad
 Eksamensprojekt DDU
