@@ -3,7 +3,7 @@
 xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="25"
+x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              android:Application.WindowSoftInputModeAdjust="Unspecified"
     BackgroundClicked="backgroundClosed">
