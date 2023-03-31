@@ -3,6 +3,7 @@ using FireSharp.Response;
 using FireSharp.Interfaces;
 using FireSharp;
 using System.Text.Json;
+using System.Linq;
 
 namespace Searchalgorythm
 {
@@ -56,18 +57,10 @@ namespace Searchalgorythm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string searchRequest = textBox1.Text;
-            
-            listBox1.Items.Clear();
-            foreach (var element in data)
-            {
-                
-                if (element.Value.Name.ToLower().Contains(searchRequest.ToLower()))
-                {
-                    listBox1.Items.Add(element.Value.Name);
-                }
-            }
-           if (listBox1.Items.Count == 0)
+
+            sortering();
+
+            if (listBox1.Items.Count == 0)
             {
                 MessageBox.Show("Der var intet der matchede din søgning:(");
             }
@@ -78,5 +71,167 @@ namespace Searchalgorythm
         {
 
         }
+
+        private void sortering()
+        {
+            List<string> list = new List<string>();
+			listBox1.Items.Clear();
+
+			foreach (var element in data)
+			{
+
+				if (element.Value.Name.ToLower().Contains(textBox1.Text.ToLower()))
+				{
+					list.Add(element.Value.Name);
+				}
+			}
+
+			for (int i = 0; i < list.Count; i++)
+			{
+
+
+				bool suffix = false;
+				bool prefix = false;
+
+					string[] alfabet = { " ", ","};
+					foreach (string item in alfabet)
+					{
+							if (list.ElementAt(i).IndexOf(item + textBox1.Text) > -1)
+							{
+								suffix = true;
+							}
+							if (list.ElementAt(i).IndexOf(textBox1.Text + item) > -1)
+							{
+								prefix = true;
+							}
+
+							if (list.ElementAt(i).LastIndexOf(item + textBox1.Text) > -1)
+							{
+								suffix = true;
+							}
+							if (list.ElementAt(i).LastIndexOf(textBox1.Text + item) > -1)
+							{
+								prefix = true;
+							}
+					}
+
+					if (prefix && suffix)
+					{
+						listBox1.Items.Add(list.ElementAt(i));
+					}
+			}
+
+			bool sorteret = false;
+
+			if (listBox1.Items.Count > 1)
+			{
+				while (!sorteret)
+				{
+					bool done = true;
+
+					for (int j = 0; j < listBox1.Items.Count - 1; j++)
+					{
+
+						string word1 = listBox1.Items[j].ToString();
+						string word2 = listBox1.Items[j + 1].ToString();
+						int index1 = word1.IndexOf(textBox1.Text);
+						int index2 = word2.IndexOf(textBox1.Text);
+						if (index1 > index2)
+						{
+							listBox1.Items.RemoveAt(j);
+							listBox1.Items.RemoveAt(j);
+							listBox1.Items.Insert(j, word2);
+							listBox1.Items.Insert(j + 1, word1);
+							done = false;
+						}
+						if (done)
+						{
+							sorteret = true;
+						}
+						else
+						{
+							sorteret = false;
+						}
+					}
+				}
+			}
+
+			int dumtTal = listBox1.Items.Count;
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				bool suffix = false;
+				bool prefix = false;
+
+				string[] alfabet = { " ", "," ,null};
+				foreach (string item in alfabet)
+				{
+					if (list.ElementAt(i).IndexOf(item + textBox1.Text) > -1)
+					{
+						suffix = true;
+					}
+					if (list.ElementAt(i).IndexOf(textBox1.Text + item) > -1)
+					{
+						prefix = true;
+					}
+
+					if (list.ElementAt(i).LastIndexOf(item + textBox1.Text) > -1)
+					{
+						suffix = true;
+					}
+					if (list.ElementAt(i).LastIndexOf(textBox1.Text + item) > -1)
+					{
+						prefix = true;
+					}
+				}
+
+				if ((prefix || suffix) && !listBox1.Items.Contains(list.ElementAt(i)))
+				{
+					listBox1.Items.Add(list.ElementAt(i));
+				}
+			}
+
+			if (listBox1.Items.Count > 1)
+			{
+				while (!sorteret)
+				{
+					bool done = true;
+
+					for (int j = dumtTal; j < listBox1.Items.Count - 1; j++)
+					{
+
+						string word1 = listBox1.Items[j].ToString();
+						string word2 = listBox1.Items[j + 1].ToString();
+						int index1 = word1.IndexOf(textBox1.Text);
+						int index2 = word2.IndexOf(textBox1.Text);
+						if (index1 > index2)
+						{
+							listBox1.Items.RemoveAt(j);
+							listBox1.Items.RemoveAt(j);
+							listBox1.Items.Insert(j, word2);
+							listBox1.Items.Insert(j + 1, word1);
+							done = false;
+						}
+						if (done)
+						{
+							sorteret = true;
+						}
+						else
+						{
+							sorteret = false;
+						}
+					}
+				}
+			}
+
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (!listBox1.Items.Contains(list.ElementAt(i)))
+				{
+					listBox1.Items.Add(list.ElementAt(i));
+				}
+			}
+
+		}
     }
 }
