@@ -9,21 +9,18 @@ using FireSharp.Response;
 
 namespace EcoScanner.Models
 {
-    public class Databasehandler
+    public static class Databasehandler
     {
-		IFirebaseConfig ifc = new FirebaseConfig()
+		static IFirebaseConfig ifc = new FirebaseConfig()
 		{
 			AuthSecret = "TlXCyZsxp3gJw2IXUP3266N6xvk95GWsUMXZLzdh",
 			BasePath = "https://foedevareklimabelastning-default-rtdb.europe-west1.firebasedatabase.app/"
 		};
 
-		IFirebaseClient client;
+		static IFirebaseClient client = new FirebaseClient(ifc);
 
-		public Databasehandler() 
-		{
-			client = new FirebaseClient(ifc);
-		}
-		public Product GetProduct(int number)
+		
+		static public Product GetProduct(int number)
 		{
 			var result = client.Get("Madvare/" + number);
 			Product product = result.ResultAs<Product>();

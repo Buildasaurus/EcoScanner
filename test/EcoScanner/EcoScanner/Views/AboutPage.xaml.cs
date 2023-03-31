@@ -24,7 +24,6 @@ namespace EcoScanner.Views
 
 		public AboutPage()
         {
-            Databasehandler database = new Databasehandler();
             InitializeComponent();
 			MyPopup.onPopup = false;
 			zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
@@ -34,7 +33,7 @@ namespace EcoScanner.Views
                     bool parsed = int.TryParse(result.Text, out int number);
                     if (parsed)
                     {
-						Product product = database.GetProduct(number);
+						Product product = Databasehandler.GetProduct(number);
 						await PopupNavigation.Instance.PushAsync(new MyPopup(product));
 					}
                     else
@@ -117,8 +116,7 @@ namespace EcoScanner.Views
 			//change View
 			//BindingContext = new Liste();
 			Trace.WriteLine( Shell.Current.CurrentState);
-			Routing.RegisterRoute("//Liste", typeof(Liste));
-			await Shell.Current.GoToAsync("//Liste");
+			await Shell.Current.GoToAsync("//ItemsPage");
 
 		}
 	}

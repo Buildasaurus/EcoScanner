@@ -16,9 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Liste.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <Compile Update="Views\ListePage.xaml.cs">
+      <DependentUpon>ListePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\MyPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
