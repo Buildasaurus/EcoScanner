@@ -116,9 +116,10 @@ namespace EcoScanner.Views
 
 			//change View
 			//BindingContext = new Liste();
-			await Navigation.PushAsync(new Liste());
+			Trace.WriteLine( Shell.Current.CurrentState);
+			Routing.RegisterRoute("//Liste", typeof(Liste));
+			await Shell.Current.GoToAsync("//Liste");
 
-			Navigation.RemovePage(this);
 		}
 	}
 }
