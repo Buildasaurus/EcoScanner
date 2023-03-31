@@ -12,7 +12,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Search" IconImageSource="SoegeIkon.png" Order="Primary" 
                 Command="{Binding SearchCommandBinding}" />
-
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -33,7 +32,7 @@
         <Entry Placeholder="Søg efter produkter" x:Name="søgebar" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
         <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3"/>
         <Image Source="ListeKnap.png" Grid.Column="2" Grid.Row="2" HorizontalOptions="Center"/>
-        <ImageButton Source="ListeKnap.png" x:Name="Minus"  Grid.Column="2" Grid.Row="2" Opacity="0" HorizontalOptions="Center"/>
+        <ImageButton Source="ListeKnap.png" x:Name="Minus"  Grid.Column="2" Grid.Row="2" Opacity="0" HorizontalOptions="Center" Clicked="Liste_clicked" />
         <Label  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalOptions="Center" FontSize ="21" LineBreakMode="MiddleTruncation" TextColor="Black" MaxLines="1" Margin="10">
             <Label.FormattedText>
                 <FormattedString>

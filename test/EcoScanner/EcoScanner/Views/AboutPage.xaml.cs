@@ -50,20 +50,22 @@ namespace EcoScanner.Views
 
         protected override void OnAppearing()
         {
-			var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
+            Trace.WriteLine("is appearing");
+            var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
 			{
 				PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE },
 				CameraResolutionSelector = new CameraResolutionSelectorDelegate((resolutions) => SelectLowestResolutionMatchingDisplayAspectRatio(resolutions, abc))
 			};
 			zxing.Options = options;
+			zxing.IsScanning = true;
 
 			base.OnAppearing();
-            zxing.IsScanning = true;
             var PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE };
 		}
 		protected override void OnDisappearing()
         {
-            zxing.IsScanning = false;
+			Trace.WriteLine("goodbye");
+			zxing.IsScanning = false;
             base.OnDisappearing();
         }
 
@@ -107,5 +109,16 @@ namespace EcoScanner.Views
 
             return result;
         }
-    }
+
+		private async void Liste_clicked(object sender, EventArgs e)
+		{
+			zxing.IsScanning = false;
+
+			//change View
+			//BindingContext = new Liste();
+			await Navigation.PushAsync(new Liste());
+
+			Navigation.RemovePage(this);
+		}
+	}
 }
