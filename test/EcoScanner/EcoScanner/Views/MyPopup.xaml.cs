@@ -19,10 +19,10 @@ namespace MyNamespace
 			this.product = product;
 			InitializeComponent();
 			heading.Text = product.Name;
-			double[] intervals = {1.0, 2.0, 4.0, 7.0, 10.0, 1000.0};
+			double[] intervals = {1.0, 2.5, 4.0, 7.5, 10.0, 1000.0};
 			int mappedNum = Array.IndexOf(intervals, intervals.First(x => x > product.CO2));
 			string path = "SkalaKlasse" + mappedNum + ".png";
-			
+			updateNumbers();
 			scale.Source = path;
 
 		}
@@ -30,6 +30,13 @@ namespace MyNamespace
 		{
 			await PopupNavigation.Instance.PopAsync();
 			onPopup = false;
+		}
+
+		private void updateNumbers()
+		{
+			single.Text = "" + product.CO2.ToString("0.0") + " kg CO2e";
+			description.Text = "Udledningen af " + number.Text + " bliver:";
+			tot.Text = (int.Parse(number.Text) * product.CO2).ToString("0.0") + " kg CO2e";
 		}
 
 		private void Add_Clicked(object sender, EventArgs e)
@@ -50,11 +57,13 @@ namespace MyNamespace
 				number.Text = "" + (num - 1);
 
 			}
+			updateNumbers();
 		}
 
 		private void Plus_Clicked(object sender, EventArgs e)
 		{
 			number.Text = "" + (int.Parse(number.Text) + 1);
+			updateNumbers();
 		}
 	}
 }

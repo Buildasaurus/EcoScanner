@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid x:Name="abc" ColumnDefinitions="40, 2*, *">
+    <Grid x:Name="abc" ColumnDefinitions="40, 2*, *" >
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" />
@@ -34,7 +34,7 @@
         <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3"/>
         <Image Source="ListeKnap.png" Grid.Column="2" Grid.Row="2" HorizontalOptions="Center"/>
         <ImageButton Source="ListeKnap.png" x:Name="Minus"  Grid.Column="2" Grid.Row="2" Opacity="0" HorizontalOptions="Center"/>
-        <Label  Grid.Column="1" Grid.Row="2" VerticalOptions="Center" FontSize="21" TextColor="Black">
+        <Label  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalOptions="Center" FontSize ="21" LineBreakMode="MiddleTruncation" TextColor="Black" MaxLines="1" Margin="10">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="Total CO2e: "  />
