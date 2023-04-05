@@ -29,8 +29,9 @@
 
 
         <Image Grid.Column="0" Grid.Row="0" Source="SoegeIkon.png" Scale="0.7" HorizontalOptions="Center"/>
-        <Entry Placeholder="Søg efter produkter" x:Name="søgebar" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3"/>
+        <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <zxing:ZXingScannerView Result="{Binding Result, Mode=TwoWay} " ScanResultCommand="{Binding ScanCommand }" 
+                                x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3"/>
         <Image Source="ListeKnap.png" Grid.Column="2" Grid.Row="2" HorizontalOptions="Center"/>
         <ImageButton Source="ListeKnap.png" x:Name="Minus"  Grid.Column="2" Grid.Row="2" Opacity="0" HorizontalOptions="Center" Clicked="Liste_clicked" />
         <Label  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalOptions="Center" FontSize ="21" LineBreakMode="MiddleTruncation" TextColor="Black" MaxLines="1" Margin="10">
