@@ -4,9 +4,14 @@ xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
+    xmlns:vm="clr-namespace:EcoScanner.ViewModels"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              android:Application.WindowSoftInputModeAdjust="Unspecified"
     BackgroundClicked="backgroundClosed">
+
+    <ContentPage.BindingContext>
+        <vm:MyPopupViewModel/>
+    </ContentPage.BindingContext>
 
     <Frame CornerRadius="10"  Margin="7, 40" >
         <StackLayout BackgroundColor="White" >
@@ -26,7 +31,7 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
                     <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Danske Æbler" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" x:Name="heading" TextColor="Black"/>
+                <Label Text="{Binding Text}" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" TextColor="Black"/>
                 <Label Text = "1 kg" Grid.Row="1" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="14" TextColor="Black"/>
                 
                 <Image Source="Skalameter.png"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" x:Name="scale"/>
