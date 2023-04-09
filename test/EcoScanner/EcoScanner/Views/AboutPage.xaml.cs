@@ -97,9 +97,9 @@ namespace EcoScanner.Views
 
 			//change View
 			//BindingContext = new Liste();
-			Trace.WriteLine( Shell.Current.CurrentState);
-			await Shell.Current.GoToAsync("//ItemsPage");
+			await Navigation.PushAsync(new Liste());
 
+			Navigation.RemovePage(this);
 		}
 	}
 }
