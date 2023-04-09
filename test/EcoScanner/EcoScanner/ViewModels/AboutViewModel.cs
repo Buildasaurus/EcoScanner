@@ -19,9 +19,14 @@ namespace EcoScanner.ViewModels
         public AboutViewModel()
         {
             Title = "About";
+			OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
+
 			ScanCommand = new Command(OnScanResultCommand);
 			MyPopup.onPopup = false;
+
 		}
+		public ICommand OpenWebCommand { get; }
+
 		public void Main()
         {
 		}
