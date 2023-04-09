@@ -3,14 +3,16 @@ using EcoScanner.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
     public class ListeViewModel : BaseViewModel
-    {
+	{
         private Product _selectedItem;
 
         public ObservableCollection<Product> Items { get; }
@@ -18,7 +20,11 @@ namespace EcoScanner.ViewModels
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
 
-        public ListeViewModel()
+		public string fileText {get;set;}
+
+		Liste liste = new Liste();
+
+		public ListeViewModel()
         {
             Title = "Liste";
             Items = new ObservableCollection<Product>();
@@ -27,6 +33,9 @@ namespace EcoScanner.ViewModels
             ItemTapped = new Command<Product>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            fileText = "nothing yet";
+
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -75,10 +84,14 @@ namespace EcoScanner.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
-        }
+            liste.writeText("newFile", "You Clicked Add");
+            fileText = liste.readText("newFile");
+            OnPropertyChanged(null);
+			//await Shell.Current.GoToAsync(nameof(NewItemPage));
+		}
 
-        async void OnItemSelected(Product item)
+
+		async void OnItemSelected(Product item)
         {
             if (item == null)
                 return;
