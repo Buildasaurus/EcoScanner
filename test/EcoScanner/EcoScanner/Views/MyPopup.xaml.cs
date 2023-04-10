@@ -1,4 +1,5 @@
 ﻿using EcoScanner.Models;
+using EcoScanner.ViewModels;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Diagnostics;
@@ -13,17 +14,22 @@ namespace MyNamespace
 	public partial class MyPopup : Rg.Plugins.Popup.Pages.PopupPage
 	{
 		public static bool onPopup = false;
+		MyPopupViewModel _viewModel;
+
 		public Product product;
 		public MyPopup(Product product)
 		{
-			this.product = product;
+			
 			InitializeComponent();
+			BindingContext = _viewModel = new MyPopupViewModel(product);
+
+			this.product = product;
 			//heading.Text = product.Name;
-			double[] intervals = {1.0, 2.5, 4.0, 7.5, 10.0, 1000.0};
+			/*double[] intervals = {1.0, 2.5, 4.0, 7.5, 10.0, 1000.0};
 			int mappedNum = Array.IndexOf(intervals, intervals.First(x => x > product.CO2));
 			string path = "SkalaKlasse" + mappedNum + ".png";
 			updateNumbers();
-			scale.Source = path;
+			scale.Source = path;*/
 		}
 		private async void Close_Click(object sender, EventArgs e)
 		{
@@ -49,7 +55,6 @@ namespace MyNamespace
 			if (num > 0)
 				{
 				number.Text = "" + (num - 1);
-
 			}
 			updateNumbers();
 		}
