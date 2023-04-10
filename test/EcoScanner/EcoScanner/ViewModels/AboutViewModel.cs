@@ -23,8 +23,12 @@ namespace EcoScanner.ViewModels
 
 			ScanCommand = new Command(OnScanResultCommand);
 			MyPopup.onPopup = false;
+			ListeClicked = new Command(Liste_clicked);
 
 		}
+		public bool IsScanning { get; set; }
+		public Command ListeClicked { get; }
+
 		public ICommand OpenWebCommand { get; } //DO NOT REMOVE - Causes invisible crash - just lovely
 
 		public void Main()
@@ -52,6 +56,16 @@ namespace EcoScanner.ViewModels
 		}
 		public Result Result { get; set; }
 		public Command ScanCommand { get; set; }
+		private async void Liste_clicked()
+		{
+			IsScanning = false;
+
+			//change View
+			//BindingContext = new Liste();
+			Trace.WriteLine(Shell.Current.CurrentState);
+			await Shell.Current.GoToAsync("//ItemsPage");
+
+		}
 	}
 
 

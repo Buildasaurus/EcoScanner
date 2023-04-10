@@ -29,7 +29,7 @@ namespace EcoScanner.Views
         }
 
 
-        protected override void OnAppearing()
+		protected override void OnAppearing()
         {
             Trace.WriteLine("is appearing");
             var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
@@ -91,15 +91,6 @@ namespace EcoScanner.Views
             return result;
         }
 
-		private async void Liste_clicked(object sender, EventArgs e)
-		{
-			zxing.IsScanning = false;
-
-			//change View
-			//BindingContext = new Liste();
-			Trace.WriteLine( Shell.Current.CurrentState);
-			await Shell.Current.GoToAsync("//ItemsPage");
-
-		}
+		
 	}
 }

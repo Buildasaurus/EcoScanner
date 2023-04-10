@@ -84,8 +84,8 @@ namespace EcoScanner.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            liste.writeText("newFile", "You Clicked Add");
-            fileText = liste.readText("newFile");
+            liste.saveProduct(new Product(2, "hello", (float)3.14), "ProductsInList");
+            fileText = liste.readText("ProductsInList");
             OnPropertyChanged(null);
 			//await Shell.Current.GoToAsync(nameof(NewItemPage));
 		}
