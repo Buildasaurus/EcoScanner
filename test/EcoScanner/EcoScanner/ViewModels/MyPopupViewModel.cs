@@ -21,6 +21,13 @@ namespace EcoScanner.ViewModels
 		public MyPopupViewModel() 
 		{
 			Text = "hej";
+			AddToList = new Command(addToList);
+		}
+		public Command AddToList { get; set; }
+
+		void addToList()
+		{
+			Liste.saveProduct(new Product(2, "popupproduct", (float)6.28));
 		}
 	}
 }

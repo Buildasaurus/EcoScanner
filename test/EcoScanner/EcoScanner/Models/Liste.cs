@@ -14,17 +14,15 @@ using Xamarin.Forms;
 
 namespace EcoScanner.Models
 {
-	internal class Liste
+	public static class Liste
 	{
-		string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/Liste";
-		public Liste()
+		static string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/Liste";
+		static string filePath = path + "/Products";
+		public static void createFolder()
 		{
 			Directory.CreateDirectory(path);
-			string filename = "myFile";
-			writeText(filename, "Hello World");
-			Trace.WriteLine(readText(filename));
 		}
-		public void writeText(string fileName, string text)
+		public static void writeText(string fileName, string text)
 		{
 			string filePath = path + "/" + fileName;
 			if (!File.Exists(filePath))
@@ -34,13 +32,12 @@ namespace EcoScanner.Models
 			else //file exists
 			{
 				//read file, then add to end of file.
-				string modtext = readText(fileName) + text;
+				string modtext = readText() + text;
 				File.WriteAllText(filePath, modtext);
 			}
 		}
-		public void saveProduct(Product product, string fileName)
+		public static void saveProduct(Product product)
 		{
-			string filePath = path + "/" + fileName;
 			if (!File.Exists(filePath))
 			{
 				List<Product> products = new List<Product>();
@@ -58,14 +55,41 @@ namespace EcoScanner.Models
 			}
 			
 		}
-		public string readText(string fileName)
+		public static List<Product> getProducts()
 		{
-			string filePath = path + "/" + fileName; 
+			if (!File.Exists(filePath))
+			{
+				return new List<Product>();
+			}
+			else //file exists
+			{
+				//return products
+				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
+				return products;
+			}
+
+		}
+		public static string readText()
+		{
 			if (File.Exists(filePath))
 			{
 				return File.ReadAllText(filePath);
 			}
-			return "Error, no file with such name";
+			return "No data yet";
+		}
+
+		public static void clearFile()
+		{
+			if (File.Exists(filePath))
+			{
+				File.Delete(filePath);
+				Trace.WriteLine("---- Removed file -----");
+			}
+			else
+			{
+				Trace.WriteLine("--- No file to remove ---");
+			}
+				
 		}
 
 

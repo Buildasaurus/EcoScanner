@@ -38,11 +38,6 @@ namespace MyNamespace
 			tot.Text = (int.Parse(number.Text) * product.CO2).ToString("0.0") + " kg CO2e";
 		}
 
-		private void Add_Clicked(object sender, EventArgs e)
-		{
-
-		}
-
 		private void backgroundClosed(object sender, EventArgs e)
 		{
 			onPopup = false;

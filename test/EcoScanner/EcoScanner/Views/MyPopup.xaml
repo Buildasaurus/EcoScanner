@@ -62,7 +62,7 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
                 <Image Source="TilbageTilScannerKnap.png" Grid.Row="8" Grid.Column="0"/>
                 <ImageButton Source="TilbageTilScannerKnap.png" Clicked="Close_Click" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand"  Opacity="0"/>
                 <Image Source="TilfoejTilListeKnap.png" Grid.Row="8" Grid.Column="1"/>
-                <ImageButton Source="TilfoejTilListeKnap.png" Clicked="Add_Clicked" x:Name="Add" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" Opacity="0" />
+                <ImageButton Source="TilfoejTilListeKnap.png" x:Name="Add" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" Opacity="0" Command="{Binding AddToList}"/>
             </Grid>
         
 

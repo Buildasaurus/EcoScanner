@@ -63,7 +63,7 @@ namespace EcoScanner.ViewModels
 			//change View
 			//BindingContext = new Liste();
 			Trace.WriteLine(Shell.Current.CurrentState);
-			await Shell.Current.GoToAsync("//ItemsPage");
+			await Shell.Current.GoToAsync("//ListePage");
 
 		}
 	}

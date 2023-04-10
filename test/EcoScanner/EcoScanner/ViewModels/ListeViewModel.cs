@@ -22,7 +22,6 @@ namespace EcoScanner.ViewModels
 
 		public string fileText {get;set;}
 
-		Liste liste = new Liste();
 
 		public ListeViewModel()
         {
@@ -45,11 +44,8 @@ namespace EcoScanner.ViewModels
             try
             {
                 Items.Clear();
-                List<Product> products = new List<Product>();
-                for (int i = 0; i < 20; i++) 
-                {
-                    products.Add(Databasehandler.GetProduct(i));
-				}
+                Trace.WriteLine(Liste.readText());
+                List<Product> products = Liste.getProducts();
                 var items = products;
                 foreach (var item in items)
                 {
@@ -84,8 +80,8 @@ namespace EcoScanner.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            liste.saveProduct(new Product(2, "hello", (float)3.14), "ProductsInList");
-            fileText = liste.readText("ProductsInList");
+			Liste.saveProduct(new Product(2, "hello", (float)3.14));
+            fileText = Liste.readText();
             OnPropertyChanged(null);
 			//await Shell.Current.GoToAsync(nameof(NewItemPage));
 		}
