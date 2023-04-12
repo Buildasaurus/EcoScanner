@@ -91,6 +91,9 @@ namespace EcoScanner.Views
             return result;
         }
 
-		
+		private void søgebar_Focused(object sender, FocusEventArgs e)
+		{
+
+		}
 	}
 }

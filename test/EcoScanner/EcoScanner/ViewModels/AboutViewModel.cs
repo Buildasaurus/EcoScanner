@@ -1,12 +1,15 @@
 ﻿using EcoScanner.Models;
+using EcoScanner.Views;
 using MyNamespace;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using ZXing;
@@ -24,10 +27,16 @@ namespace EcoScanner.ViewModels
 			ScanCommand = new Command(OnScanResultCommand);
 			MyPopup.onPopup = false;
 			ListeClicked = new Command(Liste_clicked);
-
+			SearchCommand = new Command(searchClicked);
+			SearchFocused = new Command(searchClicked);
 		}
+		public Command SearchCommand { get; set; }
 		public bool IsScanning { get; set; }
 		public Command ListeClicked { get; }
+		public Command SearchFocused { get; set; }
+
+
+
 
 		public ICommand OpenWebCommand { get; } //DO NOT REMOVE - Causes invisible crash - just lovely
 
@@ -56,6 +65,11 @@ namespace EcoScanner.ViewModels
 		}
 		public Result Result { get; set; }
 		public Command ScanCommand { get; set; }
+		private async void searchClicked()
+		{
+			Trace.WriteLine(Shell.Current.CurrentState);
+			await Shell.Current.GoToAsync("//SearchView");
+		}
 		private async void Liste_clicked()
 		{
 			IsScanning = false;
