@@ -8,7 +8,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}"/>
+            <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}" Text="{Binding Text}"/>
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
