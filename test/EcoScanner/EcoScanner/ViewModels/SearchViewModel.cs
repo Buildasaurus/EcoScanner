@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
-	public class SearchViewModel
+	public class SearchViewModel : BaseViewModel
 	{
 		public SearchViewModel() 
 		{
@@ -15,14 +15,19 @@ namespace EcoScanner.ViewModels
 		}
 		public Command SearchInitilized { get; set; }
 		public string Text { get; set; }
-		void search()
+		public string Info { get; set; }
+		async void search()
 		{
-			Databasehandler.LoadAllProducts();
+			await Databasehandler.LoadAllProducts();
 			List<Product> products = Databasehandler.Search(Text);
+			string builder = "";
 			foreach (Product product in products)
 			{
+				builder += product.Name + "\n";
 				Console.WriteLine(product.Name);
 			}
+			Info = builder;
+			OnPropertyChanged(null);
 		}
 	}
 }

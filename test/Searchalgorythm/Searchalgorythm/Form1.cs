@@ -44,8 +44,7 @@ namespace Searchalgorythm
             }
 
             FirebaseResponse response = await client.GetAsync("Madvare");
-            data = response.ResultAs<Dictionary<string, Vare>>();
-
+			data = response.ResultAs<Dictionary<string, Vare>>();
             foreach (var element in data)
             {
                 if (element.Value == null)

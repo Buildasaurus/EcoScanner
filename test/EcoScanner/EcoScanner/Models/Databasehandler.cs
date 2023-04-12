@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
@@ -31,27 +32,33 @@ namespace EcoScanner.Models
 			return product;
 		}
 
-		public async static void LoadAllProducts()
+		public async static Task LoadAllProducts()
 		{
 		
 			FirebaseResponse response = await client.GetAsync("Madvare");
 			data = response.ResultAs<Dictionary<string, Product>>();
 			//There are some data in the database that aren't products, that must be removed.
+			var keysToRemove = new List<string>();
+
 			foreach (var element in data)
 			{
 				if (element.Value == null)
 				{
-					data.Remove(element.Key);
+					keysToRemove.Add(element.Key);
 				}
+			}
+			foreach (var key in keysToRemove)
+			{
+				data.Remove(key);
 			}
 			allProductsLoaded = true;
 		}
 
 		static public List<Product> Search(string text)
 		{
-			if (!allProductsLoaded) //ERROR, doesn't load all products in time to be used
+			if (!allProductsLoaded) 
 			{
-				LoadAllProducts();
+				throw new NullReferenceException("CALL LOADALLPRODUCTS FIRST");
 			}
 			List<Product> matchingProducts = new List<Product>();
 			List<Product> sortedMatchingProducts = new List<Product>();
