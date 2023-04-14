@@ -62,6 +62,7 @@
 			this.IDtext.Name = "IDtext";
 			this.IDtext.Size = new System.Drawing.Size(268, 31);
 			this.IDtext.TabIndex = 3;
+			this.IDtext.TextChanged += new System.EventHandler(this.IDtext_TextChanged);
 			// 
 			// label1
 			// 
@@ -95,21 +96,13 @@
 			this.VareList.FormattingEnabled = true;
 			this.VareList.ItemHeight = 25;
 			this.VareList.Items.AddRange(new object[] {
-            "Kikærter, dåse",
-            "Gulerod, uspec., rå",
-            "Løg, rå",
-            "Hvidløg, rå",
+            "Pasta, rå",
+            "Parmesan ost, 32+",
             "Persille, rå",
-            "Havregryn, ikke beriget",
-            "Æg, høne, skrabehøns, rå",
-            "Creme fraiche 18 %",
-            "Mayonnaise",
-            "Purløg, rå",
-            "Agurk, syltet",
-            "Rødløg",
-            "Burgerboller",
-            "Salat, Iceberg, rå",
-            "Agurk, rå"});
+            "Basilikum, frisk",
+            "Hvidløg, rå",
+            "Citron, rå",
+            "Olivenolie"});
 			this.VareList.Location = new System.Drawing.Point(184, 141);
 			this.VareList.Name = "VareList";
 			this.VareList.Size = new System.Drawing.Size(268, 179);
@@ -120,21 +113,13 @@
 			this.AmountList.FormattingEnabled = true;
 			this.AmountList.ItemHeight = 25;
 			this.AmountList.Items.AddRange(new object[] {
-            "0.4",
-            "0.16",
-            "0.055",
+            "0.5",
+            "0.1",
+            "0.15",
+            "0.1",
             "0.004",
-            "0.06",
-            "0.03",
-            "0.06",
-            "0.2",
-            "0.03",
-            "0.018",
-            "0.075",
-            "0.11",
-            "0.3",
-            "0.096",
-            "0.450"});
+            "0.0425",
+            "0.135"});
 			this.AmountList.Location = new System.Drawing.Point(470, 141);
 			this.AmountList.Name = "AmountList";
 			this.AmountList.Size = new System.Drawing.Size(268, 179);

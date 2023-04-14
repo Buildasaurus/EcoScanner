@@ -67,5 +67,10 @@ namespace LavRet
 		{
 
 		}
+
+		private void IDtext_TextChanged(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
