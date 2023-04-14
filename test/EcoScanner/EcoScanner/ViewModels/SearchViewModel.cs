@@ -29,7 +29,7 @@ namespace EcoScanner.ViewModels
 		public Command SearchInitilized { get; set; }
 		public string Text { get; set; }
 		public string Info { get; set; }
-		async void search()
+		public async void search()
 		{
 			IsBusy = true;
 
@@ -54,6 +54,20 @@ namespace EcoScanner.ViewModels
 			}
 		}
 
+		public void onAppearing()
+		{
+			Trace.WriteLine("before isbusy = " + IsBusy);
+			IsBusy = true;
+			Items.Clear();
+			if (!MyPopup.onPopup)
+			{
+				Text = string.Empty;
+			}
+			
+			OnPropertyChanged(nameof(Items));
+			IsBusy=false;
+
+		}
 		async void OnItemSelected(Product item)
 		{
 			if (item == null)
