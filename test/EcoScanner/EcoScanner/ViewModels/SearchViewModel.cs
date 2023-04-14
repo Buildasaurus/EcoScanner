@@ -20,8 +20,6 @@ namespace EcoScanner.ViewModels
 			SearchInitilized = new Command(search);
 			ItemTapped = new Command<Product>(OnItemSelected);
 			Items = new ObservableCollection<Product>();
-
-
 		}
 		private Product _selectedItem;
 		public ObservableCollection<Product> Items { get; }
