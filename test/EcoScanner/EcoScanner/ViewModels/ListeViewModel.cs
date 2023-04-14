@@ -3,22 +3,25 @@ using EcoScanner.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
     public class ListeViewModel : BaseViewModel
-    {
+	{
         private Product _selectedItem;
-
         public ObservableCollection<Product> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
+		public string fileText {get;set;}
 
-        public ListeViewModel()
+
+		public ListeViewModel()
         {
             Title = "Liste";
             Items = new ObservableCollection<Product>();
@@ -27,6 +30,8 @@ namespace EcoScanner.ViewModels
             ItemTapped = new Command<Product>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            fileText = "nothing yet";
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -36,11 +41,8 @@ namespace EcoScanner.ViewModels
             try
             {
                 Items.Clear();
-                List<Product> products = new List<Product>();
-                for (int i = 0; i < 20; i++) 
-                {
-                    products.Add(Databasehandler.GetProduct(i));
-				}
+                Trace.WriteLine(Liste.readText());
+                List<Product> products = Liste.getProducts();
                 var items = products;
                 foreach (var item in items)
                 {
@@ -75,10 +77,14 @@ namespace EcoScanner.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
-        }
+			Liste.saveProduct(new Product(2, "hello", (float)3.14));
+            fileText = Liste.readText();
+            OnPropertyChanged(null);
+			//await Shell.Current.GoToAsync(nameof(NewItemPage));
+		}
 
-        async void OnItemSelected(Product item)
+
+		async void OnItemSelected(Product item)
         {
             if (item == null)
                 return;

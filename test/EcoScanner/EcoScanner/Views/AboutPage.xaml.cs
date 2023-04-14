@@ -25,29 +25,11 @@ namespace EcoScanner.Views
 		public AboutPage()
         {
             InitializeComponent();
-			MyPopup.onPopup = false;
-			zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
-                if (!MyPopup.onPopup)
-                {
-					MyPopup.onPopup = true;
-                    bool parsed = int.TryParse(result.Text, out int number);
-                    if (parsed)
-                    {
-						Product product = Databasehandler.GetProduct(number);
-						await PopupNavigation.Instance.PushAsync(new MyPopup(product));
-					}
-                    else
-                    {
-                        MyPopup.onPopup = false;
-                        Trace.WriteLine("not a number");
-                    }
-                    //result.Text
-				}
-			});
+			
         }
 
 
-        protected override void OnAppearing()
+		protected override void OnAppearing()
         {
             Trace.WriteLine("is appearing");
             var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
@@ -109,14 +91,8 @@ namespace EcoScanner.Views
             return result;
         }
 
-		private async void Liste_clicked(object sender, EventArgs e)
+		private void søgebar_Focused(object sender, FocusEventArgs e)
 		{
-			zxing.IsScanning = false;
-
-			//change View
-			//BindingContext = new Liste();
-			Trace.WriteLine( Shell.Current.CurrentState);
-			await Shell.Current.GoToAsync("//ItemsPage");
 
 		}
 	}

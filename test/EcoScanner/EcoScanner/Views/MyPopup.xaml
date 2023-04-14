@@ -4,6 +4,7 @@ xmlns="http://xamarin.com/schemas/2014/forms"
 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
+    xmlns:vm="clr-namespace:EcoScanner.ViewModels"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              android:Application.WindowSoftInputModeAdjust="Unspecified"
     BackgroundClicked="backgroundClosed">
@@ -26,14 +27,14 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
                     <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Danske Æbler" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" x:Name="heading" TextColor="Black"/>
-                <Label Text = "1 kg" Grid.Row="1" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="14" TextColor="Black"/>
+                <Label Text="{Binding ProductName}" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" TextColor="Black"/>
+                <Label Text = "{Binding ProductUnit}" Grid.Row="1" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="14" TextColor="Black"/>
                 
-                <Image Source="Skalameter.png"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" x:Name="scale"/>
+                <Image Source="{Binding ScalePath}"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" x:Name="scale"/>
 
                 <Label Text="1 kg  af produkt udleder" Grid.Row="3" Grid.Column="0"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center"/>
 
-                <Label Text="0,66 kg" Grid.Row="4" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="28" TextColor="Green" FontAttributes="Bold" VerticalTextAlignment="Start" x:Name="single"/>
+                <Label Text="{Binding SingleWeight}" Grid.Row="4" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="28" TextColor="Green" FontAttributes="Bold" VerticalTextAlignment="Start" x:Name="single"/>
                 <Label Text="Antal " TextColor="Black" Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Start" FontSize="21" VerticalTextAlignment="Center"/>
 
                 <Grid x:Name="inner" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="5" Grid.Column="1">
@@ -44,20 +45,20 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
                     </Grid.ColumnDefinitions>
 
                     <Image Source="MinusKnap.png" Grid.Column="0"/>
-                    <ImageButton Source="MinusKnap.png" Clicked="Minus_Clicked" x:Name="Minus"  Grid.Column="0" Opacity="0"/>
+                    <ImageButton Source="MinusKnap.png" Command="{Binding MinusClicked}" x:Name="Minus"  Grid.Column="0" Opacity="0"/>
                      
-                    <Entry Keyboard="Numeric" Text="1" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
+                    <Entry Keyboard="Numeric" Text="{Binding Number}" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
 
                     <Image Source="PlusKnap.png" Grid.Column="2"/>
-                    <ImageButton Source="PlusKnap.png" Clicked="Plus_Clicked" x:Name="Plus"  Grid.Column="2" Opacity="0"/>
+                    <ImageButton Source="PlusKnap.png" Command="{Binding PlusClicked}" x:Name="Plus"  Grid.Column="2" Opacity="0"/>
                 </Grid>
 
-                <Label Text="Udledning af 2 kilo bliver" Grid.Row="6" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center" x:Name="description"/>
-                <Label Text="1,32 kg " Grid.Row="7" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" TextColor="#01ABC9" FontAttributes="Bold" x:Name="tot"/>
+                <Label Text="{Binding Description}" Grid.Row="6" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center" x:Name="description"/>
+                <Label Text="{Binding TotalWeight}" Grid.Row="7" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" TextColor="#01ABC9" FontAttributes="Bold" x:Name="tot"/>
                 <Image Source="TilbageTilScannerKnap.png" Grid.Row="8" Grid.Column="0"/>
                 <ImageButton Source="TilbageTilScannerKnap.png" Clicked="Close_Click" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand"  Opacity="0"/>
                 <Image Source="TilfoejTilListeKnap.png" Grid.Row="8" Grid.Column="1"/>
-                <ImageButton Source="TilfoejTilListeKnap.png" Clicked="Add_Clicked" x:Name="Add" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" Opacity="0" />
+                <ImageButton Source="TilfoejTilListeKnap.png" x:Name="Add" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" Opacity="0" Command="{Binding AddToList}"/>
             </Grid>
         
 
