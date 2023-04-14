@@ -10,11 +10,6 @@
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Search" IconImageSource="SoegeIkon.png" Order="Primary" 
-                Command="{Binding SearchCommand}" />
-    </ContentPage.ToolbarItems>
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>

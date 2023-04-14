@@ -14,12 +14,10 @@ namespace EcoScanner.ViewModels
     public class ListeViewModel : BaseViewModel
 	{
         private Product _selectedItem;
-
         public ObservableCollection<Product> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
-
 		public string fileText {get;set;}
 
 
@@ -34,7 +32,6 @@ namespace EcoScanner.ViewModels
             AddItemCommand = new Command(OnAddItem);
 
             fileText = "nothing yet";
-
         }
 
         async Task ExecuteLoadItemsCommand()

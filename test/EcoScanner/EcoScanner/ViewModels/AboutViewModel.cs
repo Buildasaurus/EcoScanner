@@ -21,16 +21,14 @@ namespace EcoScanner.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
+            Title = "Scanner";
 			OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart")); //DO NOT REMOVE - Causes invisible crash - just lovely
 
 			ScanCommand = new Command(OnScanResultCommand);
 			MyPopup.onPopup = false;
 			ListeClicked = new Command(Liste_clicked);
-			SearchCommand = new Command(searchClicked);
 			SearchFocused = new Command(searchClicked);
 		}
-		public Command SearchCommand { get; set; }
 		public bool IsScanning { get; set; }
 		public Command ListeClicked { get; }
 		public Command SearchFocused { get; set; }
