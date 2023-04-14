@@ -30,7 +30,6 @@ namespace EcoScanner.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-            // In OnCreate method
             Xamarin.Essentials.Platform.Init(Application);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 

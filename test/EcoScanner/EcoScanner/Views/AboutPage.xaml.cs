@@ -24,46 +24,29 @@ namespace EcoScanner.Views
 
 		public AboutPage()
         {
-            Databasehandler database = new Databasehandler();
             InitializeComponent();
-			MyPopup.onPopup = false;
-			zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(async () => {
-                if (!MyPopup.onPopup)
-                {
-					MyPopup.onPopup = true;
-                    bool parsed = int.TryParse(result.Text, out int number);
-                    if (parsed)
-                    {
-						Product product = database.GetProduct(number);
-						await PopupNavigation.Instance.PushAsync(new MyPopup(product));
-					}
-                    else
-                    {
-                        MyPopup.onPopup = false;
-                        Trace.WriteLine("not a number");
-                    }
-                    //result.Text
-				}
-			});
+			
         }
 
 
-        protected override void OnAppearing()
+		protected override void OnAppearing()
         {
-			var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
+            Trace.WriteLine("is appearing");
+            var options = new ZXing.Mobile.MobileBarcodeScanningOptions()
 			{
 				PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE },
 				CameraResolutionSelector = new CameraResolutionSelectorDelegate((resolutions) => SelectLowestResolutionMatchingDisplayAspectRatio(resolutions, abc))
 			};
 			zxing.Options = options;
+			zxing.IsScanning = true;
 
 			base.OnAppearing();
-            zxing.IsScanning = true;
             var PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE };
 		}
 		protected override void OnDisappearing()
         {
-            zxing.IsScanning = false;
+			Trace.WriteLine("goodbye");
+			zxing.IsScanning = false;
             base.OnDisappearing();
         }
 
@@ -107,5 +90,10 @@ namespace EcoScanner.Views
 
             return result;
         }
-    }
+
+		private void søgebar_Focused(object sender, FocusEventArgs e)
+		{
+
+		}
+	}
 }

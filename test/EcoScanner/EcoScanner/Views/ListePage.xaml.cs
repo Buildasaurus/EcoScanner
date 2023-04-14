@@ -12,15 +12,15 @@ using Xamarin.Forms.Xaml;
 
 namespace EcoScanner.Views
 {
-    public partial class ItemsPage : ContentPage
+    public partial class ListePage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        ListeViewModel _viewModel;
 
-        public ItemsPage()
+        public ListePage()
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new ListeViewModel();
         }
 
         protected override void OnAppearing()
@@ -28,5 +28,5 @@ namespace EcoScanner.Views
             base.OnAppearing();
             _viewModel.OnAppearing();
         }
-    }
+	}
 }

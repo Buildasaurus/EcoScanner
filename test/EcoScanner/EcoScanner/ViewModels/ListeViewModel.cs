@@ -1,31 +1,37 @@
 ﻿using EcoScanner.Models;
 using EcoScanner.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
-    {
-        private Item _selectedItem;
-
-        public ObservableCollection<Item> Items { get; }
+    public class ListeViewModel : BaseViewModel
+	{
+        private Product _selectedItem;
+        public ObservableCollection<Product> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<Item> ItemTapped { get; }
+        public Command<Product> ItemTapped { get; }
+		public string fileText {get;set;}
 
-        public ItemsViewModel()
+
+		public ListeViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Title = "Liste";
+            Items = new ObservableCollection<Product>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<Item>(OnItemSelected);
+            ItemTapped = new Command<Product>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            fileText = "nothing yet";
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -35,7 +41,9 @@ namespace EcoScanner.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                Trace.WriteLine(Liste.readText());
+                List<Product> products = Liste.getProducts();
+                var items = products;
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -57,7 +65,7 @@ namespace EcoScanner.ViewModels
             SelectedItem = null;
         }
 
-        public Item SelectedItem
+        public Product SelectedItem
         {
             get => _selectedItem;
             set
@@ -69,16 +77,20 @@ namespace EcoScanner.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
-        }
+			Liste.saveProduct(new Product(2, "hello", (float)3.14));
+            fileText = Liste.readText();
+            OnPropertyChanged(null);
+			//await Shell.Current.GoToAsync(nameof(NewItemPage));
+		}
 
-        async void OnItemSelected(Item item)
+
+		async void OnItemSelected(Product item)
         {
             if (item == null)
                 return;
 
             // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.Name)}={item.Name}");
         }
     }
 }

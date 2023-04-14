@@ -10,7 +10,7 @@ namespace EcoScanner.Views
 {
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Product Item { get; set; }
 
         public NewItemPage()
         {

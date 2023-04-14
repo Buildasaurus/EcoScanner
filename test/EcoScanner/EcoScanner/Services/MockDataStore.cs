@@ -6,33 +6,25 @@ using System.Threading.Tasks;
 
 namespace EcoScanner.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore
     {
-        readonly List<Item> items;
+        readonly List<Product> items;
 
         public MockDataStore()
         {
-            items = new List<Item>()
-            {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "god spaghetti", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
-            };
+            items = new List<Product>();
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Product item)
         {
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Product item)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var oldItem = items.Where((Product arg) => arg.Name == item.Name).FirstOrDefault();
             items.Remove(oldItem);
             items.Add(item);
 
@@ -41,18 +33,18 @@ namespace EcoScanner.Services
 
         public async Task<bool> DeleteItemAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
+            var oldItem = items.Where((Product arg) => arg.Name == id).FirstOrDefault();
             items.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Product> GetItemAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(items.FirstOrDefault(s => s.Name == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Product>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }

@@ -6,47 +6,24 @@ using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
-    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    [QueryProperty(nameof(ID), nameof(ID))]
     public class ItemDetailViewModel : BaseViewModel
     {
-        private string itemId;
-        private string text;
-        private string description;
-        public string Id { get; set; }
+		public int ID  { get; set;}
+		public string Name { get; set; }
+		public float CO2 { get; set; }
 
-        public string Text
-        {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
 
-        public string Description
-        {
-            get => description;
-            set => SetProperty(ref description, value);
-        }
 
-        public string ItemId
-        {
-            get
-            {
-                return itemId;
-            }
-            set
-            {
-                itemId = value;
-                LoadItemId(value);
-            }
-        }
 
-        public async void LoadItemId(string itemId)
+        public void LoadItemId(int itemId)
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
-                Text = item.Text;
-                Description = item.Description;
+                var item = Databasehandler.GetProduct(itemId);
+                Name = item.Name;
+                CO2 = item.CO2;
+                ID = item.ID;
             }
             catch (Exception)
             {
