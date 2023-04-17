@@ -6,10 +6,6 @@
              Title="{Binding Title}"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
 
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Accent">#96d1ff</Color>
@@ -41,7 +37,7 @@
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="Total CO2e: "  />
-                    <Span Text="0,00" FontAttributes="Bold" TextColor="#01ABC9" FontSize="36"/>
+                    <Span BindingContext="{vm:ListeViewModel}" Text="{Binding Total}" FontAttributes="Bold" TextColor="#01ABC9" FontSize="36"/>
                     <Span Text="kg" />
                 </FormattedString>
             </Label.FormattedText>

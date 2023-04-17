@@ -33,7 +33,7 @@ namespace EcoScanner.ViewModels
 		public Command ListeClicked { get; }
 		public Command SearchFocused { get; set; }
 
-
+		
 
 
 		public ICommand OpenWebCommand { get; } //DO NOT REMOVE - Causes invisible crash - just lovely

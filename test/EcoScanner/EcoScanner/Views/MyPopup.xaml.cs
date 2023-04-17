@@ -33,8 +33,7 @@ namespace MyNamespace
 		}
 		private async void Close_Click(object sender, EventArgs e)
 		{
-			await PopupNavigation.Instance.PopAsync();
-			onPopup = false;
+			
 		}
 
 		private void updateNumbers()

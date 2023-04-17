@@ -27,6 +27,7 @@ namespace EcoScanner.ViewModels
 		Product product;
 		public Command MinusClicked { get; }
 		public Command PlusClicked { get; }
+		public Command CloseClicked { get; }
 
 		public MyPopupViewModel(Product product) 
 		{
@@ -38,6 +39,7 @@ namespace EcoScanner.ViewModels
 			AddToList = new Command(addToList);
 			PlusClicked = new Command(plusClicked);
 			MinusClicked = new Command(minusClicked);
+			CloseClicked = new Command(closeClicked);
 
 			//image correction for scale
 			double[] intervals = { 1.0, 2.5, 4.0, 7.5, 10.0, 1000.0 };
@@ -53,6 +55,7 @@ namespace EcoScanner.ViewModels
 		void addToList()
 		{
 			Liste.saveProduct(product);
+			closeClicked();
 		}
 		void minusClicked()
 		{
@@ -68,7 +71,11 @@ namespace EcoScanner.ViewModels
 			Number = "" + (int.Parse(Number) + 1);
 			updateNumbers();
 		}
-
+		async void closeClicked()
+		{
+			await PopupNavigation.Instance.PopAsync();
+			MyPopup.onPopup = false;
+		}
 		private void updateNumbers()
 		{
 			SingleWeight = "" + product.CO2.ToString("0.0") + " kg CO2e";

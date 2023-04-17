@@ -19,8 +19,15 @@ namespace EcoScanner.ViewModels
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
 		public string fileText {get;set;}
-
-
+		public static event EventHandler SumChanged; 
+        
+        public string Total
+		{
+			get
+            {
+				return Liste.getSum().ToString("0.00 "); 
+            }
+		}
 		public ListeViewModel()
         {
             Title = "Liste";
@@ -32,9 +39,19 @@ namespace EcoScanner.ViewModels
             AddItemCommand = new Command(OnAddItem);
 
             fileText = "nothing yet";
-        }
+            SumChanged += (sender, e) => OnTotalChanged();
+		}
+        public static void invoke()
+        {
+			SumChanged.Invoke(null, EventArgs.Empty);
+		}
+		public void OnTotalChanged()
+		{
+			OnPropertyChanged((nameof(Total)));
+		}
 
-        async Task ExecuteLoadItemsCommand()
+
+		async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 

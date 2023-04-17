@@ -11,6 +11,7 @@ using System.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net.NetworkInformation;
 using Xamarin.Forms;
+using EcoScanner.ViewModels;
 
 namespace EcoScanner.Models
 {
@@ -53,7 +54,9 @@ namespace EcoScanner.Models
 				string json = JsonSerializer.Serialize(products);
 				File.WriteAllText(filePath, json);
 			}
-			
+			ListeViewModel.invoke();
+
+
 		}
 		public static List<Product> getProducts()
 		{
@@ -67,7 +70,20 @@ namespace EcoScanner.Models
 				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
 				return products;
 			}
+		}
 
+		public static float getSum()
+		{
+			if (!File.Exists(filePath))
+			{
+				return 0;
+			}
+			else //file exists
+			{
+				//return products
+				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
+				return products.Sum(item => item.CO2);
+			}
 		}
 		public static string readText()
 		{
