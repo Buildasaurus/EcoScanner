@@ -34,7 +34,7 @@ x:Class="MyNamespace.MyPopup" BackgroundColor="#C0808080" Padding="20"
 
                 <Label Text="1 kg  af produkt udleder" Grid.Row="3" Grid.Column="0"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center"/>
 
-                <Label Text="{Binding SingleWeight}" Grid.Row="4" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="28" TextColor="Green" FontAttributes="Bold" VerticalTextAlignment="Start" x:Name="single"/>
+                <Label Text="{Binding weightOf1kg}" Grid.Row="4" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="28" TextColor="Green" FontAttributes="Bold" VerticalTextAlignment="Start" x:Name="single"/>
                 <Label Text="Antal " TextColor="Black" Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Start" FontSize="21" VerticalTextAlignment="Center"/>
 
                 <Grid x:Name="inner" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="5" Grid.Column="1">

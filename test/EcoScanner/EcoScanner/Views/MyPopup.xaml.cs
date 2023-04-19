@@ -31,37 +31,17 @@ namespace MyNamespace
 			updateNumbers();
 			scale.Source = path;*/
 		}
-		private async void Close_Click(object sender, EventArgs e)
+		public MyPopup(Product product, float weight, string unit)
 		{
-			
-		}
 
-		private void updateNumbers()
-		{
-			single.Text = "" + product.CO2.ToString("0.0") + " kg CO2e";
-			description.Text = "Udledningen af " + number.Text + " bliver:";
-			tot.Text = (int.Parse(number.Text) * product.CO2).ToString("0.0") + " kg CO2e";
-		}
+			InitializeComponent();
+			BindingContext = _viewModel = new MyPopupViewModel(product, weight, unit);
 
+			this.product = product;
+		}
 		private void backgroundClosed(object sender, EventArgs e)
 		{
 			onPopup = false;
-		}
-
-		private void Minus_Clicked(object sender, EventArgs e)
-		{
-			int num = int.Parse(number.Text);
-			if (num > 0)
-				{
-				number.Text = "" + (num - 1);
-			}
-			updateNumbers();
-		}
-
-		private void Plus_Clicked(object sender, EventArgs e)
-		{
-			number.Text = "" + (int.Parse(number.Text) + 1);
-			updateNumbers();
 		}
 	}
 }
