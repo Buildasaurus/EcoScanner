@@ -174,7 +174,7 @@ namespace EcoScanner.Models
 		private static List<Product> sortAfterIndex(List<Product> list, string text, int startindex)
 		{
 			bool sorteret = false;
-			if (list.Count > 1) //requires that there is at least one word, to be sorted.
+			if (list.Count - startindex > 1) //requires that there is at least one word, to be sorted.
 			{
 				while (!sorteret)
 				{

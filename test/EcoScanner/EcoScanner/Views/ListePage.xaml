@@ -24,10 +24,28 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="10" x:DataType="model:Product">
-                            <Label Text="{Binding Name}" 
+                            <Grid ColumnDefinitions="*, *">
+                                <Label Text="{Binding Name}" 
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"/>
+                                FontSize="16"
+                                       Grid.Column="0"/>
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="1" x:DataType="local:ListeViewModel" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="MinusKnap.png" Grid.Column="0"/>
+                                    <ImageButton Source="MinusKnap.png" Command="{Binding MinusClicked}" x:Name="Minus"  Grid.Column="0" Opacity="0"/>
+
+                                    <Entry  x:DataType="model:Product" Keyboard="Numeric" Text="{Binding Count}" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
+
+                                    <Image Source="PlusKnap.png" Grid.Column="2"/>
+                                    <ImageButton Source="PlusKnap.png" Command="{Binding PlusClicked}" x:Name="Plus"  Grid.Column="2" Opacity="0"/>
+                                </Grid>
+                            </Grid>
                             <Label Text="{Binding CO2}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"

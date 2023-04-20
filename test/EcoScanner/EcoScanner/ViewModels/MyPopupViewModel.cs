@@ -82,6 +82,7 @@ namespace EcoScanner.ViewModels
 
 		void addToList()
 		{
+			product.Count = int.Parse(Number);
 			Liste.saveProduct(product);
 			closeClicked();
 		}

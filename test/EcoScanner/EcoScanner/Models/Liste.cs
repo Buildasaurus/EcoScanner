@@ -39,9 +39,14 @@ namespace EcoScanner.Models
 		}
 		public static void saveProduct(Product product)
 		{
+			if (product.Count == 0)
+			{
+				return;
+			}
 			if (!File.Exists(filePath))
 			{
 				List<Product> products = new List<Product>();
+				
 				products.Add(product);
 				string json = JsonSerializer.Serialize(products);
 				File.WriteAllText(filePath, json);
