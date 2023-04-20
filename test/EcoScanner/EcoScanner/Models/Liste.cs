@@ -12,6 +12,8 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Net.NetworkInformation;
 using Xamarin.Forms;
 using EcoScanner.ViewModels;
+using System.Threading;
+using System.Drawing;
 
 namespace EcoScanner.Models
 {
@@ -36,6 +38,51 @@ namespace EcoScanner.Models
 				string modtext = readText() + text;
 				File.WriteAllText(filePath, modtext);
 			}
+		}
+
+		public static void updateProduct(Product product)
+		{
+			
+			if (!File.Exists(filePath))
+			{
+				List<Product> products = new List<Product>();
+
+				products.Add(product);
+				string json = JsonSerializer.Serialize(products);
+				File.WriteAllText(filePath, json);
+			}
+			else //file exists
+			{
+				
+				//read file, then add to end of file.
+				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
+
+				//search for product with identical name
+				int count = 0;
+
+				foreach (Product prod in products)
+				{
+					if (prod.Name == product.Name)
+					{
+						break;
+					}
+					count++;
+				}
+
+				if (product.Count == 0) //Delete file
+				{
+					products.RemoveAt(count);
+				}
+				else
+				{
+					products[count] = product;
+				}
+
+				string json = JsonSerializer.Serialize(products);
+				File.WriteAllText(filePath, json);
+
+			}
+			ListeViewModel.invoke();
 		}
 		public static void saveProduct(Product product)
 		{

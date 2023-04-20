@@ -14,7 +14,7 @@ namespace EcoScanner.ViewModels
     public class ListeViewModel : BaseViewModel
 	{
         private Product _selectedItem;
-        public ObservableCollection<Product> Items { get; }
+        public ObservableCollection<Product> Items { get; set; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
@@ -40,8 +40,10 @@ namespace EcoScanner.ViewModels
             ItemTapped = new Command<Product>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+            PlusClicked = new Command<Product>(plusClicked);
+			MinusClicked = new Command<Product>(minusClicked);
 
-            fileText = "nothing yet";
+			fileText = "nothing yet";
             SumChanged += (sender, e) => OnTotalChanged();
 		}
         public static void invoke()
@@ -52,8 +54,41 @@ namespace EcoScanner.ViewModels
 		{
 			OnPropertyChanged((nameof(Total)));
 		}
+        void updateItem(ref Product item)
+        {
+			Liste.updateProduct(item);
 
+			int count = 0;
+			//cursed way of making sure that Items realises it has been changed.
+			IsBusy = true; //this causes the refresh circle to appear - without it though, you can click fast, and it breaks the updating for some reason.
 
+			foreach (Product it in Items)
+			{
+				if (it.Name == item.Name)
+				{
+					Items[count] = item;
+					break;
+				}
+				count++;
+			}
+			IsBusy = false;
+		}
+        void plusClicked(Product item)
+        {
+			if (item == null)
+				return;
+
+			item.Count++;
+			updateItem(ref item);
+		}
+        void minusClicked(Product item)
+        {
+			if (item == null)
+				return;
+
+            item.Count--;
+            updateItem(ref item);
+		}
 		async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
