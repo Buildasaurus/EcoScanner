@@ -14,6 +14,8 @@ using Xamarin.Forms;
 using EcoScanner.ViewModels;
 using System.Threading;
 using System.Drawing;
+using System.ComponentModel;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace EcoScanner.Models
 {
@@ -39,7 +41,10 @@ namespace EcoScanner.Models
 				File.WriteAllText(filePath, modtext);
 			}
 		}
-
+		/// <summary>
+		/// Takes the new product. Looks for product with equal name, and sets old product to new product.
+		/// </summary>
+		/// <param name="product"></param>
 		public static void updateProduct(Product product)
 		{
 			
@@ -69,7 +74,7 @@ namespace EcoScanner.Models
 					count++;
 				}
 
-				if (product.Count == 0) //Delete file
+				if (product.Count == 0) //Delete product
 				{
 					products.RemoveAt(count);
 				}
@@ -84,6 +89,10 @@ namespace EcoScanner.Models
 			}
 			ListeViewModel.invoke();
 		}
+		/// <summary>
+		/// saves a product to the list. If the product already exists in the list, it simply adds to the count.
+		/// </summary>
+		/// <param name="product"></param>
 		public static void saveProduct(Product product)
 		{
 			if (product.Count == 0)
@@ -102,7 +111,23 @@ namespace EcoScanner.Models
 			{
 				//read file, then add to end of file.
 				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
-				products.Add(product);
+
+				//search for product with identical name
+
+				var index = products.FindIndex(x => x.Name == product.Name);
+				if((index != -1)) //if exists, and isn't 0
+				{
+					//update the count of the product
+					products[index].Count += product.Count;
+					if (products[index].Count == 0)
+					{
+						products.RemoveAt(index);
+					}
+				}
+				else if(index == -1 && product.Count > 0) //if doesn't exist, and has count more than 0.
+				{
+					products.Add(product);
+				}
 				string json = JsonSerializer.Serialize(products);
 				File.WriteAllText(filePath, json);
 			}

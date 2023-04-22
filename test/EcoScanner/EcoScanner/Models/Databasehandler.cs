@@ -102,7 +102,7 @@ namespace EcoScanner.Models
 					}
 				}
 
-				if (prefix && suffix)
+				if (prefix && suffix) //add all to new list, that has " " or "," before or after
 				{
 					sortedMatchingProducts.Add(matchingProducts.ElementAt(i));
 				}
@@ -161,7 +161,7 @@ namespace EcoScanner.Models
 				}
 			}
 
-			return matchingProducts;
+			return sortedMatchingProducts;
 		}
 
 		/// <summary>

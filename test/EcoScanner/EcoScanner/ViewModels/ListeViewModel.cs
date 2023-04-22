@@ -56,7 +56,7 @@ namespace EcoScanner.ViewModels
 		}
         void updateItem(ref Product item)
         {
-			Liste.updateProduct(item);
+			Liste.saveProduct(item);
 
 			int count = 0;
 			//cursed way of making sure that Items realises it has been changed.
@@ -66,7 +66,6 @@ namespace EcoScanner.ViewModels
 			{
 				if (it.Name == item.Name)
 				{
-					Items[count] = item;
 					break;
 				}
 				count++;
@@ -78,7 +77,7 @@ namespace EcoScanner.ViewModels
 			if (item == null)
 				return;
 
-			item.Count++;
+            item.Count = 1;
 			updateItem(ref item);
 		}
         void minusClicked(Product item)
@@ -86,7 +85,7 @@ namespace EcoScanner.ViewModels
 			if (item == null)
 				return;
 
-            item.Count--;
+            item.Count = -1;
             updateItem(ref item);
 		}
 		async Task ExecuteLoadItemsCommand()

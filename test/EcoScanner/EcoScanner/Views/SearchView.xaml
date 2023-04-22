@@ -2,14 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcoScanner.Views.SearchView"
+             Title="{Binding Title}"
              xmlns:vm="clr-namespace:EcoScanner.ViewModels"
              xmlns:model="clr-namespace:EcoScanner.Models" x:DataType="vm:SearchViewModel">
     <ContentPage.BindingContext>
         <vm:SearchViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="5">
             <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}" Text="{Binding Text,Mode=TwoWay}"/>
+            <Grid ColumnDefinitions="*, *" RowDefinitions="Auto">
+                <Label Grid.Column="0">Navn på produkt</Label>
+                <Label Grid.Column="1"  HorizontalOptions="End">kg CO2e pr kg produkt</Label>
+            </Grid>
             <RefreshView x:DataType="vm:SearchViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                 <CollectionView x:Name="ItemsListView"
                     ItemsSource="{Binding Items, Mode=TwoWay}"
@@ -17,14 +22,23 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Padding="10" x:DataType="model:Product">
-                                <Label Text="{Binding Name}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"/>
-                                <Label Text="{Binding CO2}" 
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+                                <Grid ColumnDefinitions="3*, *">
+                                    <Label Text="{Binding Name}" 
+                                    LineBreakMode="WordWrap" 
+                                    Style="{DynamicResource ListItemTextStyle}" 
+                                    FontSize="16"
+                                    Grid.Column="0"
+                                    TextColor="Black"  />
+
+                                    <Label Text="{Binding CO2, StringFormat='{}{0:F2} kg CO2e'}" 
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="13" 
+                                    Grid.Column="1"
+                                    HorizontalOptions="End"
+                                    TextColor="Black" />
+                                </Grid>
+                                
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer 
                                     NumberOfTapsRequired="1"
