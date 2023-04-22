@@ -18,7 +18,6 @@ namespace EcoScanner.ViewModels
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
-		public string fileText {get;set;}
 		public static event EventHandler SumChanged; 
         public Command MinusClicked { get; set; }
         public Command PlusClicked { get; set; }
@@ -43,7 +42,6 @@ namespace EcoScanner.ViewModels
             PlusClicked = new Command<Product>(plusClicked);
 			MinusClicked = new Command<Product>(minusClicked);
 
-			fileText = "nothing yet";
             SumChanged += (sender, e) => OnTotalChanged();
 		}
         public static void invoke()
@@ -132,7 +130,6 @@ namespace EcoScanner.ViewModels
         private async void OnAddItem(object obj)
         {
 			Liste.saveProduct(new Product(2, "hello", (float)3.14, 3));
-            fileText = Liste.readText();
             OnPropertyChanged(null);
 			//await Shell.Current.GoToAsync(nameof(NewItemPage));
 		}

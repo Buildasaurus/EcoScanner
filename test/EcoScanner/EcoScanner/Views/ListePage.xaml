@@ -15,7 +15,6 @@
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
     <StackLayout>
-        <Label Text="{Binding fileText}"></Label>
 
         <RefreshView x:DataType="local:ListeViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <CollectionView x:Name="ItemsListView"
@@ -24,13 +23,15 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="10" x:DataType="model:Product">
-                            <Grid ColumnDefinitions="*, *">
+                            <Grid ColumnDefinitions="*, *" RowDefinitions="30, 40">
                                 <Label Text="{Binding Name}" 
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"
-                                       Grid.Column="0"/>
-                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="1">
+                                FontSize="20"
+                                       Grid.Column="0"
+                                       Grid.Row="0"/>
+                                <!-- + and - Buttons    -->
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
@@ -45,11 +46,17 @@
                                     <Image Source="PlusKnap.png" Grid.Column="2"/>
                                     <ImageButton Source="PlusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=PlusClicked}" CommandParameter="{Binding .}"  Grid.Column="2" Opacity="0"/>
                                 </Grid>
+                                <Label Text="{Binding CO2, StringFormat='{}{0:F2} kg CO2e'}" 
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    FontSize="16" 
+                                    Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalOptions="Center"
+                                    HorizontalOptions="End"
+                                    TextColor="Black" />
                             </Grid>
-                            <Label Text="{Binding CO2}" 
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+                            
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer 
                                     NumberOfTapsRequired="1"
@@ -62,5 +69,20 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
+        <Grid BackgroundColor="LightGray" RowDefinitions="30, 80, 80" ColumnDefinitions="*, *">
+            <Label HorizontalOptions="Center" FontSize="24">Total:</Label>
+            <Label Grid.Column="1" HorizontalOptions="Center" FontSize="24">4,9 kg co2e</Label>
+
+            <Image Source="TilfoejTilHistorikKnap.png" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <ImageButton Source="TilfoejTilHistorikKnap.png" Opacity="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+            <Image Source="TilbageKnap.png" Grid.Row="2" Grid.Column="0"/>
+            <ImageButton Source="TilbageKnap.png" Opacity="0" Grid.Row="2" Grid.Column="0"/>
+
+            <Image Source="RydListenKnap.png" Grid.Row="2" Grid.Column="1"/>
+            <ImageButton Source="RydListenKnap.png" Opacity="0"  Grid.Row="2" Grid.Column="1"/>
+        </Grid>
+
     </StackLayout>
+    
 </ContentPage>
