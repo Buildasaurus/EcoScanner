@@ -1,4 +1,5 @@
-﻿using Rg.Plugins.Popup.Services;
+﻿using EcoScanner.Views;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,6 +21,7 @@ namespace EcoScanner.ViewModels
 		{
 			//close popup
 			Trace.WriteLine("close popup");
+			WarningPopupView.onPopup = false;
 			await PopupNavigation.Instance.PopAsync();
 
 		}
@@ -27,6 +29,7 @@ namespace EcoScanner.ViewModels
 		{
 			Trace.WriteLine("clear pressd");
 			ListeViewModel.invokeClearList();
+			WarningPopupView.onPopup = false;
 			await PopupNavigation.Instance.PopAsync();
 
 		}

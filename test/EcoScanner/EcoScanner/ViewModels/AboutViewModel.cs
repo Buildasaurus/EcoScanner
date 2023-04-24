@@ -43,20 +43,30 @@ namespace EcoScanner.ViewModels
 
 		private async void OnScanResultCommand()
 		{
-			if (!MyPopup.onPopup)
+			if (!MyPopup.onPopup && !WarningPopupView.onPopup)
 			{
-				MyPopup.onPopup = true;
-				string[] a = Result.Text.Split(' '); //split into "number", "weight", "unit"
-				bool parsed = int.TryParse(a[0], out int number);
-				bool weightparsed = float.TryParse(a[1], out float weight);
-				if (parsed && weightparsed)	
+				try
 				{
-					Product product = Databasehandler.GetProduct(number);
-					await PopupNavigation.Instance.PushAsync(new MyPopup(product, weight, a[2]));
+					string[] a = Result.Text.Split(' '); //split into "number", "weight", "unit"
+					bool parsed = int.TryParse(a[0], out int number);
+					bool weightparsed = false;
+					float weight = 0;
+					weightparsed = float.TryParse(a[1], out weight);
+					if (parsed && weightparsed)
+					{
+						MyPopup.onPopup = true;
+						Product product = Databasehandler.GetProduct(number);
+						await PopupNavigation.Instance.PushAsync(new MyPopup(product, weight, a[2]));
+					}
+					else
+					{
+						throw new Exception();
+					}
 				}
-				else
+				catch
 				{
-					MyPopup.onPopup = false;
+					WarningPopupView.onPopup = true;
+					await PopupNavigation.Instance.PushAsync(new WarningPopupView("Ikke korrekt QR code", 1));
 					Trace.WriteLine("not a number");
 				}
 				//result.Text
