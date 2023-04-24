@@ -1,6 +1,6 @@
 ﻿using EcoScanner.Models;
 using EcoScanner.ViewModels;
-using MyNamespace;
+
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;

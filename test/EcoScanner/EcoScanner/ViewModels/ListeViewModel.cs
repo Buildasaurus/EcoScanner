@@ -1,5 +1,6 @@
 ﻿using EcoScanner.Models;
 using EcoScanner.Views;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,10 +21,12 @@ namespace EcoScanner.ViewModels
         public Command<Product> ItemTapped { get; }
 		public static event EventHandler SumChanged; 
         public Command MinusClicked { get; set; }
+        public Command ClearListClicked { get; set; }
         public Command PlusClicked { get; set; }
         public int Number { get; set; } = 0;
-        
-        public string Total
+		public static event EventHandler ClearList;
+
+		public string Total
 		{
 			get
             {
@@ -41,12 +44,23 @@ namespace EcoScanner.ViewModels
             AddItemCommand = new Command(OnAddItem);
             PlusClicked = new Command<Product>(plusClicked);
 			MinusClicked = new Command<Product>(minusClicked);
-
-            SumChanged += (sender, e) => OnTotalChanged();
+            ClearListClicked = new Command(clearList);
+            ClearList += (sender, e) => clearTheList();
+			SumChanged += (sender, e) => OnTotalChanged();
 		}
         public static void invoke()
         {
 			SumChanged.Invoke(null, EventArgs.Empty);
+		}
+        public static void invokeClearList()
+        {
+            ClearList.Invoke(null, EventArgs.Empty);
+        }
+        void clearTheList()
+        {
+            Items.Clear();
+            Liste.clearFile();
+
 		}
 		public void OnTotalChanged()
 		{
@@ -86,6 +100,11 @@ namespace EcoScanner.ViewModels
             item.Count = -1;
             updateItem(ref item);
 		}
+        async void clearList()
+        {
+			await PopupNavigation.Instance.PushAsync(new WarningPopupView("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om", 2));
+		}
+
 		async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;

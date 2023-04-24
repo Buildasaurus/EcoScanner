@@ -8,7 +8,7 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MyNamespace
+namespace EcoScanner.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MyPopup : Rg.Plugins.Popup.Pages.PopupPage

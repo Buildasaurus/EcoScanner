@@ -1,5 +1,4 @@
 ﻿using EcoScanner.Models;
-using MyNamespace;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -12,6 +11,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using ZXing;
 using ZXing.Mobile;
+using EcoScanner.Views;
 
 namespace EcoScanner.ViewModels
 {

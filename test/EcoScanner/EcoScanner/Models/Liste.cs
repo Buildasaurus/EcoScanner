@@ -41,54 +41,7 @@ namespace EcoScanner.Models
 				File.WriteAllText(filePath, modtext);
 			}
 		}
-		/// <summary>
-		/// Takes the new product. Looks for product with equal name, and sets old product to new product.
-		/// </summary>
-		/// <param name="product"></param>
-		public static void updateProduct(Product product)
-		{
-			
-			if (!File.Exists(filePath))
-			{
-				List<Product> products = new List<Product>();
-
-				products.Add(product);
-				string json = JsonSerializer.Serialize(products);
-				File.WriteAllText(filePath, json);
-			}
-			else //file exists
-			{
-				
-				//read file, then add to end of file.
-				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
-
-				//search for product with identical name
-				int count = 0;
-
-				foreach (Product prod in products)
-				{
-					if (prod.Name == product.Name)
-					{
-						break;
-					}
-					count++;
-				}
-
-				if (product.Count == 0) //Delete product
-				{
-					products.RemoveAt(count);
-				}
-				else
-				{
-					products[count] = product;
-				}
-
-				string json = JsonSerializer.Serialize(products);
-				File.WriteAllText(filePath, json);
-
-			}
-			ListeViewModel.invoke();
-		}
+		
 		/// <summary>
 		/// saves a product to the list. If the product already exists in the list, it simply adds to the count.
 		/// </summary>
@@ -170,7 +123,9 @@ namespace EcoScanner.Models
 			}
 			return "No data yet";
 		}
-
+		/// <summary>
+		/// clears all the text in a file
+		/// </summary>
 		public static void clearFile()
 		{
 			if (File.Exists(filePath))

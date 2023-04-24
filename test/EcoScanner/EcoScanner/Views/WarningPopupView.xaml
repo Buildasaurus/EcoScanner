@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<popup:PopupPage
+xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+x:Class="EcoScanner.Views.WarningPopupView" BackgroundColor="#C0808080" Padding="20"
+    xmlns:vm="clr-namespace:EcoScanner.ViewModels"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
+    x:DataType="vm:WarningPopupViewModel"
+    android:Application.WindowSoftInputModeAdjust="Unspecified"
+    BackgroundClicked="backgroundClosed">
+    <Frame CornerRadius="10"  Margin="7, 100" >
+        <StackLayout>
+            <Label Text="{Binding Message}"></Label>
+            <ContentView Content="{Binding ButtonContent}"/>
+        </StackLayout>
+       
+    </Frame>
+</popup:PopupPage>
