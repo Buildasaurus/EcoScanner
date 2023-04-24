@@ -54,7 +54,8 @@ namespace FBConfig
                 var setter = client.Set("Madvare/" + vareID.ToString(), vr);
                 vareID++;
             }
-            
-        }
+			MessageBox.Show("færdig");
+
+		}
     }
 }

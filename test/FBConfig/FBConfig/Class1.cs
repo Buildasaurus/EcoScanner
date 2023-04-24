@@ -11,6 +11,5 @@ namespace FBConfig
         public int ID;
         public string Name;
         public float CO2;
-
     }
 }
