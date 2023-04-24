@@ -23,6 +23,7 @@ namespace EcoScanner.ViewModels
 		public string weightOf1kg { get; set; }
 		public string Description { get; set; }
 		public string TotalWeight { get; set; }
+		public string Color { get; set; }
 		public string Number { get; set; }
 		Product product;
 		public Command MinusClicked { get; }
@@ -30,6 +31,7 @@ namespace EcoScanner.ViewModels
 		public Command CloseClicked { get; }
 		float weight;
 		string unit;
+		string[] colors = { "#237536", "#5bc45b", "#fce475", "#ffac3d", "#ff7a35", "#d53d3a" };
 
 		public MyPopupViewModel(Product product) 
 		{
@@ -48,6 +50,7 @@ namespace EcoScanner.ViewModels
 			int mappedNum = Array.IndexOf(intervals, intervals.First(x => x > product.CO2));
 			string path = "SkalaKlasse" + mappedNum + ".png";
 			ScalePath = path;
+			Color = colors[mappedNum];
 
 			//update other numbers on popup
 			updateNumbers();
@@ -74,6 +77,7 @@ namespace EcoScanner.ViewModels
 			int mappedNum = Array.IndexOf(intervals, intervals.First(x => x > product.CO2));
 			string path = "SkalaKlasse" + mappedNum + ".png";
 			ScalePath = path;
+			Color = colors[mappedNum];
 
 			//update other numbers on popup
 			updateNumbers();
