@@ -23,6 +23,7 @@ namespace EcoScanner.ViewModels
         public Command MinusClicked { get; set; }
         public Command ClearListClicked { get; set; }
         public Command PlusClicked { get; set; }
+        public Command ReturnPressed { get; set; }
         public int Number { get; set; } = 0;
 		public static event EventHandler ClearList;
 
@@ -45,6 +46,7 @@ namespace EcoScanner.ViewModels
             PlusClicked = new Command<Product>(plusClicked);
 			MinusClicked = new Command<Product>(minusClicked);
             ClearListClicked = new Command(clearList);
+            ReturnPressed = new Command(returnPressed);
             ClearList += (sender, e) => clearTheList();
 			SumChanged += (sender, e) => OnTotalChanged();
 		}
@@ -61,6 +63,10 @@ namespace EcoScanner.ViewModels
             Items.Clear();
             Liste.clearFile();
 
+		}
+        async void returnPressed()
+        {
+			await Shell.Current.GoToAsync("//AboutPage");
 		}
 		public void OnTotalChanged()
 		{
@@ -103,6 +109,7 @@ namespace EcoScanner.ViewModels
         async void clearList()
         {
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om", 2));
+
 		}
 
 		async Task ExecuteLoadItemsCommand()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -15,15 +16,18 @@ namespace EcoScanner.ViewModels
 			BackPressed = new Command(backPressed);
 			ClearListPressed = new Command(clearListPressed);
 		}
-		void backPressed()
+		async void backPressed()
 		{
 			//close popup
 			Trace.WriteLine("close popup");
+			await PopupNavigation.Instance.PopAsync();
+
 		}
-		void clearListPressed()
+		async void clearListPressed()
 		{
 			Trace.WriteLine("clear pressd");
 			ListeViewModel.invokeClearList();
+			await PopupNavigation.Instance.PopAsync();
 
 		}
 	}
