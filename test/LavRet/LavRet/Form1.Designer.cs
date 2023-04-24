@@ -96,13 +96,18 @@
 			this.VareList.FormattingEnabled = true;
 			this.VareList.ItemHeight = 25;
 			this.VareList.Items.AddRange(new object[] {
-            "Pasta, rå",
-            "Parmesan ost, 32+",
-            "Persille, rå",
-            "Basilikum, frisk",
-            "Hvidløg, rå",
+            "Vand, postevand, vejl. Værdier",
+            "Ris, parboiled, rå",
+            "Æblemost, uspec.",
+            "Bouillon, hønsekød, spiseklar",
+            "Olivenolie",
+            "Broccoli, rå",
+            "Asparges, grønne, rå",
+            "Forårsløg, rå",
             "Citron, rå",
-            "Olivenolie"});
+            "Spinat, rå",
+            "Parmesan ost, 32+",
+            "Hasselnød, tørret"});
 			this.VareList.Location = new System.Drawing.Point(184, 141);
 			this.VareList.Name = "VareList";
 			this.VareList.Size = new System.Drawing.Size(268, 179);
@@ -113,13 +118,18 @@
 			this.AmountList.FormattingEnabled = true;
 			this.AmountList.ItemHeight = 25;
 			this.AmountList.Items.AddRange(new object[] {
-            "0.5",
             "0.1",
-            "0.15",
-            "0.1",
-            "0.004",
+            "0.2",
+            "0.2",
+            "0.015",
+            "0.028",
+            "0.06",
+            "0.09",
+            "0.038",
             "0.0425",
-            "0.135"});
+            "0.025",
+            "0.12",
+            "0.007"});
 			this.AmountList.Location = new System.Drawing.Point(470, 141);
 			this.AmountList.Name = "AmountList";
 			this.AmountList.Size = new System.Drawing.Size(268, 179);

@@ -157,28 +157,30 @@ namespace Searchalgorythm
 
 			int dumtTal = listBox1.Items.Count;
 
+			
 			for (int i = 0; i < list.Count; i++)
 			{
 				bool suffix = false;
 				bool prefix = false;
 
-				string[] alfabet = { " ", "," ,null};
+				string[] alfabet = { " ", ",", null};
 				foreach (string item in alfabet)
 				{
-					if (list.ElementAt(i).IndexOf(item + textBox1.Text) > -1)
+					string Vare = list.ElementAt(i).ToLower();
+					if (Vare.IndexOf(item + textBox1.Text.ToLower()) > -1)
 					{
 						suffix = true;
 					}
-					if (list.ElementAt(i).IndexOf(textBox1.Text + item) > -1)
+					if (Vare.IndexOf(item + textBox1.Text.ToLower()) > -1)
 					{
 						prefix = true;
 					}
 
-					if (list.ElementAt(i).LastIndexOf(item + textBox1.Text) > -1)
+					if (Vare.LastIndexOf(item + textBox1.Text.ToLower()) > -1)
 					{
 						suffix = true;
 					}
-					if (list.ElementAt(i).LastIndexOf(textBox1.Text + item) > -1)
+					if (Vare.LastIndexOf(item + textBox1.Text.ToLower()) > -1)
 					{
 						prefix = true;
 					}
@@ -190,6 +192,8 @@ namespace Searchalgorythm
 				}
 			}
 
+			sorteret = false;
+
 			if (listBox1.Items.Count > 1)
 			{
 				while (!sorteret)
@@ -199,10 +203,10 @@ namespace Searchalgorythm
 					for (int j = dumtTal; j < listBox1.Items.Count - 1; j++)
 					{
 
-						string word1 = listBox1.Items[j].ToString();
-						string word2 = listBox1.Items[j + 1].ToString();
-						int index1 = word1.IndexOf(textBox1.Text);
-						int index2 = word2.IndexOf(textBox1.Text);
+						string word1 = listBox1.Items[j].ToString().ToLower();
+						string word2 = listBox1.Items[j + 1].ToString().ToLower();
+						int index1 = word1.IndexOf(textBox1.Text.ToLower());
+						int index2 = word2.IndexOf(textBox1.Text.ToLower());
 						if (index1 > index2)
 						{
 							listBox1.Items.RemoveAt(j);
