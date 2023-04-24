@@ -1,5 +1,6 @@
 ﻿using EcoScanner.Models;
-using MyNamespace;
+using EcoScanner.ViewModels;
+
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,13 @@ namespace EcoScanner.Views
 {
     public partial class AboutPage : ContentPage
     {
-
+		AboutViewModel viewmodel = new AboutViewModel();
 		public AboutPage()
         {
             InitializeComponent();
-			
-        }
+			BindingContext = viewmodel;
+
+		}
 
 
 		protected override void OnAppearing()
@@ -95,5 +97,6 @@ namespace EcoScanner.Views
 		{
 
 		}
+		
 	}
 }

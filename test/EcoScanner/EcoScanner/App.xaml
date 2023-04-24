@@ -5,9 +5,13 @@
     <!--
         Define global resources and styles here, that apply to all pages in your app.
     -->
+    
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">

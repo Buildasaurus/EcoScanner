@@ -11,6 +11,11 @@ using System.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net.NetworkInformation;
 using Xamarin.Forms;
+using EcoScanner.ViewModels;
+using System.Threading;
+using System.Drawing;
+using System.ComponentModel;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace EcoScanner.Models
 {
@@ -36,11 +41,21 @@ namespace EcoScanner.Models
 				File.WriteAllText(filePath, modtext);
 			}
 		}
+		
+		/// <summary>
+		/// saves a product to the list. If the product already exists in the list, it simply adds to the count.
+		/// </summary>
+		/// <param name="product"></param>
 		public static void saveProduct(Product product)
 		{
+			if (product.Count == 0)
+			{
+				return;
+			}
 			if (!File.Exists(filePath))
 			{
 				List<Product> products = new List<Product>();
+				
 				products.Add(product);
 				string json = JsonSerializer.Serialize(products);
 				File.WriteAllText(filePath, json);
@@ -49,11 +64,29 @@ namespace EcoScanner.Models
 			{
 				//read file, then add to end of file.
 				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
-				products.Add(product);
+
+				//search for product with identical name
+
+				var index = products.FindIndex(x => x.Name == product.Name);
+				if((index != -1)) //if exists, and isn't 0
+				{
+					//update the count of the product
+					products[index].Count += product.Count;
+					if (products[index].Count == 0)
+					{
+						products.RemoveAt(index);
+					}
+				}
+				else if(index == -1 && product.Count > 0) //if doesn't exist, and has count more than 0.
+				{
+					products.Add(product);
+				}
 				string json = JsonSerializer.Serialize(products);
 				File.WriteAllText(filePath, json);
 			}
-			
+			ListeViewModel.invoke();
+
+
 		}
 		public static List<Product> getProducts()
 		{
@@ -67,7 +100,20 @@ namespace EcoScanner.Models
 				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
 				return products;
 			}
+		}
 
+		public static float getSum()
+		{
+			if (!File.Exists(filePath))
+			{
+				return 0;
+			}
+			else //file exists
+			{
+				//return products
+				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
+				return products.Sum(item => item.CO2);
+			}
 		}
 		public static string readText()
 		{
@@ -77,7 +123,9 @@ namespace EcoScanner.Models
 			}
 			return "No data yet";
 		}
-
+		/// <summary>
+		/// clears all the text in a file
+		/// </summary>
 		public static void clearFile()
 		{
 			if (File.Exists(filePath))

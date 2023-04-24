@@ -102,7 +102,7 @@ namespace EcoScanner.Models
 					}
 				}
 
-				if (prefix && suffix)
+				if (prefix && suffix) //add all to new list, that has " " or "," before or after
 				{
 					sortedMatchingProducts.Add(matchingProducts.ElementAt(i));
 				}
@@ -161,7 +161,7 @@ namespace EcoScanner.Models
 				}
 			}
 
-			return matchingProducts;
+			return sortedMatchingProducts;
 		}
 
 		/// <summary>
@@ -174,7 +174,7 @@ namespace EcoScanner.Models
 		private static List<Product> sortAfterIndex(List<Product> list, string text, int startindex)
 		{
 			bool sorteret = false;
-			if (list.Count > 1) //requires that there is at least one word, to be sorted.
+			if (list.Count - startindex > 1) //requires that there is at least one word, to be sorted.
 			{
 				while (!sorteret)
 				{

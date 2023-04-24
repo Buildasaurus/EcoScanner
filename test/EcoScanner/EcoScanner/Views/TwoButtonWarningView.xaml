@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcoScanner.Views.TwoButtonWarningView">
+  <ContentView.Content>
+        <StackLayout>
+            <Grid RowDefinitions="*" ColumnDefinitions="*, *">
+                <Label Text="single button" />
+                <Image Source="TilbageKnap.png" Grid.Row="0" Grid.Column="0"/>
+                <ImageButton Command="{Binding BackPressed}" Source="TilbageKnap.png" Opacity="0" Grid.Row="0" Grid.Column="0"/>
+                <Image Source="RydListenKnap.png" Grid.Row="0" Grid.Column="1"/>
+                <ImageButton Command="{Binding ClearListPressed}" Source="RydListenKnap.png" Opacity="0" Grid.Row="0" Grid.Column="1"/>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

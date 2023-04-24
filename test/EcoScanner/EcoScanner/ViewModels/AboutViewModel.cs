@@ -1,6 +1,5 @@
 ﻿using EcoScanner.Models;
 using EcoScanner.Views;
-using MyNamespace;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -33,7 +32,7 @@ namespace EcoScanner.ViewModels
 		public Command ListeClicked { get; }
 		public Command SearchFocused { get; set; }
 
-
+		
 
 
 		public ICommand OpenWebCommand { get; } //DO NOT REMOVE - Causes invisible crash - just lovely
@@ -47,11 +46,13 @@ namespace EcoScanner.ViewModels
 			if (!MyPopup.onPopup)
 			{
 				MyPopup.onPopup = true;
-				bool parsed = int.TryParse(Result.Text, out int number);
-				if (parsed)	
+				string[] a = Result.Text.Split(' '); //split into "number", "weight", "unit"
+				bool parsed = int.TryParse(a[0], out int number);
+				bool weightparsed = float.TryParse(a[1], out float weight);
+				if (parsed && weightparsed)	
 				{
 					Product product = Databasehandler.GetProduct(number);
-					await PopupNavigation.Instance.PushAsync(new MyPopup(product));
+					await PopupNavigation.Instance.PushAsync(new MyPopup(product, weight, a[2]));
 				}
 				else
 				{

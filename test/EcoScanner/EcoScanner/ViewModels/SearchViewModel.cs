@@ -1,6 +1,5 @@
 ﻿using EcoScanner.Models;
 using EcoScanner.Views;
-using MyNamespace;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,8 @@ namespace EcoScanner.ViewModels
 			SearchInitilized = new Command(search);
 			ItemTapped = new Command<Product>(OnItemSelected);
 			Items = new ObservableCollection<Product>();
+			Title = "Søg efter Produkter";
+
 		}
 		private Product _selectedItem;
 		public ObservableCollection<Product> Items { get; }
@@ -63,7 +64,6 @@ namespace EcoScanner.ViewModels
 			{
 				Text = string.Empty;
 			}
-			
 			OnPropertyChanged(nameof(Items));
 			IsBusy=false;
 

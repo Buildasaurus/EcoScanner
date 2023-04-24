@@ -1,19 +1,25 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading;
 
 namespace EcoScanner.Models
 {
-    public class Product
-    {
-        public int ID { get; set; }
+	public class Product
+	{
+		public int ID { get; set; }
 		public string Name { get; set; }
 		public float CO2 { get; set; }
-		public Product(int ID, string name, float CO2)
+		public int Count { get; set; }
+
+		public Product(int ID, string name, float CO2, int count = 1)
 		{
 			this.ID = ID;
 			this.Name = name;
 			this.CO2 = CO2;
+			this.Count = count;
 		}
 	}
 }

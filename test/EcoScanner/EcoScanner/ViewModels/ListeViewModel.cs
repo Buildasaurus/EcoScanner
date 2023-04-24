@@ -1,5 +1,6 @@
 ﻿using EcoScanner.Models;
 using EcoScanner.Views;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,13 +15,25 @@ namespace EcoScanner.ViewModels
     public class ListeViewModel : BaseViewModel
 	{
         private Product _selectedItem;
-        public ObservableCollection<Product> Items { get; }
+        public ObservableCollection<Product> Items { get; set; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
-		public string fileText {get;set;}
+		public static event EventHandler SumChanged; 
+        public Command MinusClicked { get; set; }
+        public Command ClearListClicked { get; set; }
+        public Command PlusClicked { get; set; }
+        public Command ReturnPressed { get; set; }
+        public int Number { get; set; } = 0;
+		public static event EventHandler ClearList;
 
-
+		public string Total
+		{
+			get
+            {
+				return Liste.getSum().ToString("0.00 "); 
+            }
+		}
 		public ListeViewModel()
         {
             Title = "Liste";
@@ -30,11 +43,76 @@ namespace EcoScanner.ViewModels
             ItemTapped = new Command<Product>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-
-            fileText = "nothing yet";
+            PlusClicked = new Command<Product>(plusClicked);
+			MinusClicked = new Command<Product>(minusClicked);
+            ClearListClicked = new Command(clearList);
+            ReturnPressed = new Command(returnPressed);
+            ClearList += (sender, e) => clearTheList();
+			SumChanged += (sender, e) => OnTotalChanged();
+		}
+        public static void invoke()
+        {
+			SumChanged.Invoke(null, EventArgs.Empty);
+		}
+        public static void invokeClearList()
+        {
+            ClearList.Invoke(null, EventArgs.Empty);
         }
+        void clearTheList()
+        {
+            Items.Clear();
+            Liste.clearFile();
 
-        async Task ExecuteLoadItemsCommand()
+		}
+        async void returnPressed()
+        {
+			await Shell.Current.GoToAsync("//AboutPage");
+		}
+		public void OnTotalChanged()
+		{
+			OnPropertyChanged((nameof(Total)));
+		}
+        void updateItem(ref Product item)
+        {
+			Liste.saveProduct(item);
+
+			int count = 0;
+			//cursed way of making sure that Items realises it has been changed.
+			IsBusy = true; //this causes the refresh circle to appear - without it though, you can click fast, and it breaks the updating for some reason.
+
+			foreach (Product it in Items)
+			{
+				if (it.Name == item.Name)
+				{
+					break;
+				}
+				count++;
+			}
+			IsBusy = false;
+		}
+        void plusClicked(Product item)
+        {
+			if (item == null)
+				return;
+
+            item.Count = 1;
+			updateItem(ref item);
+		}
+        void minusClicked(Product item)
+        {
+			if (item == null)
+				return;
+
+            item.Count = -1;
+            updateItem(ref item);
+		}
+        async void clearList()
+        {
+			await PopupNavigation.Instance.PushAsync(new WarningPopupView("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om", 2));
+
+		}
+
+		async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
@@ -77,8 +155,7 @@ namespace EcoScanner.ViewModels
 
         private async void OnAddItem(object obj)
         {
-			Liste.saveProduct(new Product(2, "hello", (float)3.14));
-            fileText = Liste.readText();
+			Liste.saveProduct(new Product(2, "hello", (float)3.14, 3));
             OnPropertyChanged(null);
 			//await Shell.Current.GoToAsync(nameof(NewItemPage));
 		}
