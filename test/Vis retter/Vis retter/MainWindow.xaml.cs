@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,21 @@ namespace Vis_retter
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		Retter ret = new Retter();
 		public MainWindow(Retter ret)
 		{
 			InitializeComponent();
 			RetName.Text = ret.Name;
 			CO2udledning.Text = ValueAfRet + "kg CO2e pr. person";
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(new ProcessStartInfo
+			{
+				FileName = ret.URL,
+				UseShellExecute = true
+			});
 		}
 	}
 }
