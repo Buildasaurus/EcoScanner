@@ -13,6 +13,11 @@ namespace EcoScanner.Models
 		public string Name { get; set; }
 		public float CO2 { get; set; }
 		public int Count { get; set; }
+		public float TotCo2 { get
+			{
+				return Count*CO2;
+			}
+		}
 
 		public Product(int ID, string name, float CO2, int count = 1)
 		{

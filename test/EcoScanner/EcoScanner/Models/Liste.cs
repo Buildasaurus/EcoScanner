@@ -152,7 +152,7 @@ namespace EcoScanner.Models
 			{
 				//return products
 				List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
-				return products.Sum(item => item.CO2);
+				return products.Sum(item => item.CO2 * item.Count);
 			}
 		}
 		public static string readText()
