@@ -55,10 +55,10 @@ x:Class="EcoScanner.Views.MyPopup" BackgroundColor="#C0808080" Padding="20"
 
                 <Label Text="{Binding Description}" Grid.Row="6" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center" x:Name="description"/>
                 <Label Text="{Binding TotalWeight}" Grid.Row="7" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" TextColor="#01ABC9" FontAttributes="Bold" x:Name="tot"/>
-                <Image Source="TilbageTilScannerKnap.png" Grid.Row="8" Grid.Column="0"/>
-                <ImageButton Source="TilbageTilScannerKnap.png" Command="{Binding CloseClicked}" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand"  Opacity="0"/>
-                <Image Source="TilfoejTilListeKnap.png" Grid.Row="8" Grid.Column="1"/>
-                <ImageButton Source="TilfoejTilListeKnap.png" x:Name="Add" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" Opacity="0" Command="{Binding AddToList}"/>
+                <Image Source="TilbageKnap.png" Grid.Row="8" Grid.Column="0"/>
+                <ImageButton Source="TilbageKnap.png" Command="{Binding CloseClicked}" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand"  Opacity="0"/>
+                <Image Source="{Binding ConfirmPath}" Grid.Row="8" Grid.Column="1"/>
+                <ImageButton Source="{Binding ConfirmPath}" x:Name="Add" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" Opacity="0" Command="{Binding AddToList}"/>
             </Grid>
         
 
