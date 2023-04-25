@@ -29,10 +29,11 @@ namespace EcoScanner.ViewModels
 		public Command MinusClicked { get; }
 		public Command PlusClicked { get; }
 		public Command CloseClicked { get; }
-		float weight;
-		string unit;
+		public float Weight { get; set; }
+		public string Unit { get; set; }
 		string[] colors = { "#237536", "#5bc45b", "#fce475", "#ffac3d", "#ff7a35", "#d53d3a" };
 		bool onListe;
+
 		public string ConfirmPath { get; set; }
 		public MyPopupViewModel(Product product, bool onListe) 
 		{
@@ -40,7 +41,10 @@ namespace EcoScanner.ViewModels
 			Number = "1";
 			this.product = product;
 			ProductName = product.Name;
+			ProductUnit = product.Weight + " " + product.Unit;
 			Number = "" + product.Count;
+			this.Weight = product.Weight;
+			this.Unit = product.Unit;
 
 			//commands for buttons
 			AddToList = new Command(addToList);
@@ -61,33 +65,6 @@ namespace EcoScanner.ViewModels
 				ConfirmPath = "TilfoejTilListeKnap.png";
 
 			}
-			ScalePath = path;
-			Color = colors[mappedNum];
-
-			//update other numbers on popup
-			updateNumbers();
-		}
-		public MyPopupViewModel(Product product, float weight, string unit)
-		{
-			Number = "1";
-			this.product = product;
-			ProductName = product.Name;
-			ProductUnit = weight + " " + unit;
-			this.weight = weight;
-			this.unit = unit;
-
-
-
-			//commands for buttons
-			AddToList = new Command(addToList);
-			PlusClicked = new Command(plusClicked);
-			MinusClicked = new Command(minusClicked);
-			CloseClicked = new Command(closeClicked);
-
-			//image correction for scale
-			double[] intervals = { 1.0, 2.5, 4.0, 7.5, 10.0, 1000.0 };
-			int mappedNum = Array.IndexOf(intervals, intervals.First(x => x > product.CO2));
-			string path = "SkalaKlasse" + mappedNum + ".png";
 			ScalePath = path;
 			Color = colors[mappedNum];
 
@@ -132,9 +109,10 @@ namespace EcoScanner.ViewModels
 		}
 		private void updateNumbers()
 		{
+			float totalWeight = Weight * int.Parse(Number);
 			weightOf1kg = "" + product.CO2.ToString("0.0") + " kg CO2e";
-			Description = "Udledningen af " + Number + " vare bliver:";
-			TotalWeight = (weight*int.Parse(Number) * product.CO2).ToString("0.0") + " kg CO2e";
+			Description = "Udledningen af " + totalWeight + " " + Unit + " bliver:";
+			TotalWeight = (totalWeight * product.CO2).ToString("0.0") + " kg CO2e";
 			OnPropertyChanged(null);
 		}
 	}

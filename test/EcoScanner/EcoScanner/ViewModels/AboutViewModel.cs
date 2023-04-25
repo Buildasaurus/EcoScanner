@@ -47,26 +47,23 @@ namespace EcoScanner.ViewModels
 			{
 				try
 				{
-					string[] a = Result.Text.Split(' '); //split into "number", "weight", "unit"
-					bool parsed = int.TryParse(a[0], out int number);
-					bool weightparsed = false;
-					float weight = 0;
-					weightparsed = float.TryParse(a[1], out weight);
-					if (parsed && weightparsed)
+					int number = int.Parse(Result.Text);
+					if (number < 500)
 					{
 						MyPopup.onPopup = true;
 						Product product = Databasehandler.GetProduct(number);
-						await PopupNavigation.Instance.PushAsync(new MyPopup(product, weight, a[2]));
+						await PopupNavigation.Instance.PushAsync(new MyPopup(product));
 					}
 					else
 					{
-						throw new Exception();
+						WarningPopupView.onPopup = true;
+						await PopupNavigation.Instance.PushAsync(new WarningPopupView("For stort tal - Bør være under 500", 1));
 					}
 				}
 				catch
 				{
 					WarningPopupView.onPopup = true;
-					await PopupNavigation.Instance.PushAsync(new WarningPopupView("Ikke korrekt QR code", 1));
+					await PopupNavigation.Instance.PushAsync(new WarningPopupView("Forkert formateret kode - Bør være et heltal", 1));
 					Trace.WriteLine("not a number");
 				}
 				//result.Text

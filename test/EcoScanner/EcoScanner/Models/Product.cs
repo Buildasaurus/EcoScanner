@@ -18,13 +18,17 @@ namespace EcoScanner.Models
 				return Count*CO2;
 			}
 		}
+		public string Unit { get; set; }
+		public float Weight { get; set; }
 
-		public Product(int ID, string name, float CO2, int count = 1)
+		public Product(int ID, string name, float CO2, float Weight, string Unit, int count = 1)
 		{
 			this.ID = ID;
 			this.Name = name;
 			this.CO2 = CO2;
 			this.Count = count;
+			this.Weight = Weight;
+			this.Unit = Unit;
 		}
 	}
 }

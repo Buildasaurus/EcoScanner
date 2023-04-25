@@ -29,6 +29,7 @@ namespace EcoScanner.Models
 		{
 			var result = client.Get("Madvare/" + number);
 			Product product = result.ResultAs<Product>();
+			product.Count = 1;
 			return product;
 		}
 

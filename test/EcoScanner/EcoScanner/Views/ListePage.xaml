@@ -15,11 +15,11 @@
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
     <StackLayout>
-        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" BackgroundColor="#dddddd" HeightRequest="50">
-            <Label Grid.Column="0" Margin="10" VerticalOptions="Center" FontSize="20">Navn på produkt</Label>
-            <Label Grid.Column="1"  HorizontalOptions="End"  Margin="10" VerticalOptions="Center" FontSize="20">kg CO2e i alt</Label>
+        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" HeightRequest="50">
+            <Label Grid.Column="0" Margin="10" VerticalOptions="Center" FontSize="20" >Navn på produkt</Label>
+            <Label Grid.Column="1"  HorizontalOptions="End"  Margin="10" VerticalOptions="Center" FontSize="20" >kg CO2e i alt</Label>
         </Grid>
-
+        <BoxView HeightRequest="1" Color="Gray"></BoxView>
         <RefreshView x:DataType="local:ListeViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <CollectionView x:Name="ItemsListView"
                     ItemsSource="{Binding Items}"
@@ -35,7 +35,8 @@
                                     Style="{DynamicResource ListItemTextStyle}" 
                                     FontSize="18"
                                            Grid.Column="0"
-                                           Grid.Row="0"/>
+                                           Grid.Row="0"
+                                           />
                                     <!-- + and - Buttons    -->
                                     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Grid.Row="1">
                                         <Grid.ColumnDefinitions>

@@ -157,7 +157,7 @@ namespace EcoScanner.ViewModels
 
         private async void OnAddItem(object obj)
         {
-			Liste.saveProduct(new Product(2, "hello", (float)3.14, 3));
+			Liste.saveProduct(new Product(2, "hello", 3.14f, 1.59f, "kg"));
             OnPropertyChanged(null);
 			//await Shell.Current.GoToAsync(nameof(NewItemPage));
 		}

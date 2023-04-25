@@ -25,14 +25,6 @@ namespace EcoScanner.Views
 
 			this.product = product;
 		}
-		public MyPopup(Product product, float weight, string unit)
-		{
-
-			InitializeComponent();
-			BindingContext = _viewModel = new MyPopupViewModel(product, weight, unit);
-
-			this.product = product;
-		}
 		private void backgroundClosed(object sender, EventArgs e)
 		{
 			onPopup = false;
