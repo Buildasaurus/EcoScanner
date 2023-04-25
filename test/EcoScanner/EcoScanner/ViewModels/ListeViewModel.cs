@@ -26,7 +26,7 @@ namespace EcoScanner.ViewModels
         public Command ReturnPressed { get; set; }
         public int Number { get; set; } = 0;
 		public static event EventHandler ClearList;
-
+        public static event EventHandler ListeChanged;
 		public string Total
 		{
 			get
@@ -49,6 +49,7 @@ namespace EcoScanner.ViewModels
             ReturnPressed = new Command(returnPressed);
             ClearList += (sender, e) => clearTheList();
 			SumChanged += (sender, e) => OnTotalChanged();
+			ListeChanged += (sender, e) => refreshList();
 		}
         public static void invoke()
         {
@@ -58,6 +59,16 @@ namespace EcoScanner.ViewModels
         {
             ClearList.Invoke(null, EventArgs.Empty);
         }
+        void refreshList()
+        {
+            updateItem();
+		}
+
+		public static async void invokeRefreshList()
+        {
+            ListeChanged.Invoke(null, EventArgs.Empty);
+		}
+
         void clearTheList()
         {
             Items.Clear();
@@ -72,22 +83,11 @@ namespace EcoScanner.ViewModels
 		{
 			OnPropertyChanged((nameof(Total)));
 		}
-        void updateItem(ref Product item)
+        void updateItem()
         {
-			Liste.saveProduct(item);
 
-			int count = 0;
-			//cursed way of making sure that Items realises it has been changed.
 			IsBusy = true; //this causes the refresh circle to appear - without it though, you can click fast, and it breaks the updating for some reason.
 
-			foreach (Product it in Items)
-			{
-				if (it.Name == item.Name)
-				{
-					break;
-				}
-				count++;
-			}
 			IsBusy = false;
 		}
         void plusClicked(Product item)
@@ -96,7 +96,8 @@ namespace EcoScanner.ViewModels
 				return;
 
             item.Count = 1;
-			updateItem(ref item);
+			Liste.saveProduct(item);
+			updateItem();
 		}
         void minusClicked(Product item)
         {
@@ -104,7 +105,8 @@ namespace EcoScanner.ViewModels
 				return;
 
             item.Count = -1;
-            updateItem(ref item);
+			Liste.saveProduct(item);
+			updateItem();
 		}
         async void clearList()
         {
@@ -166,8 +168,12 @@ namespace EcoScanner.ViewModels
             if (item == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.Name)}={item.Name}");
-        }
-    }
+			// This will push the ItemDetailPage onto the navigation stack
+			if (!MyPopup.onPopup)
+			{
+				MyPopup.onPopup = true;
+				await PopupNavigation.Instance.PushAsync(new MyPopup(item, true));
+			}
+		}
+	}
 }

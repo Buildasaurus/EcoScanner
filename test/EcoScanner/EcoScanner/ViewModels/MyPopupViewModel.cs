@@ -32,12 +32,15 @@ namespace EcoScanner.ViewModels
 		float weight;
 		string unit;
 		string[] colors = { "#237536", "#5bc45b", "#fce475", "#ffac3d", "#ff7a35", "#d53d3a" };
-
-		public MyPopupViewModel(Product product) 
+		bool onListe;
+		public string ConfirmPath { get; set; }
+		public MyPopupViewModel(Product product, bool onListe) 
 		{
+			this.onListe = onListe;
 			Number = "1";
 			this.product = product;
 			ProductName = product.Name;
+			Number = "" + product.Count;
 
 			//commands for buttons
 			AddToList = new Command(addToList);
@@ -49,6 +52,15 @@ namespace EcoScanner.ViewModels
 			double[] intervals = { 1.0, 2.5, 4.0, 7.5, 10.0, 1000.0 };
 			int mappedNum = Array.IndexOf(intervals, intervals.First(x => x > product.CO2));
 			string path = "SkalaKlasse" + mappedNum + ".png";
+			if(!onListe)
+			{
+				ConfirmPath = "TilfoejTilListeKnap.png";
+			}
+			else
+			{
+				ConfirmPath = "TilfoejTilListeKnap.png";
+
+			}
 			ScalePath = path;
 			Color = colors[mappedNum];
 
@@ -86,8 +98,17 @@ namespace EcoScanner.ViewModels
 
 		void addToList()
 		{
+			
 			product.Count = int.Parse(Number);
-			Liste.saveProduct(product);
+			if (!onListe)
+			{
+				Liste.saveProduct(product);
+			}
+			else
+			{
+				Liste.overrideProduct(product);
+				ListeViewModel.invokeRefreshList();
+			}
 			closeClicked();
 		}
 		void minusClicked()

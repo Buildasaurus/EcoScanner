@@ -76,6 +76,7 @@ namespace EcoScanner.ViewModels
 			if (!MyPopup.onPopup)
 			{
 				MyPopup.onPopup = true;
+				item.Count = 1;
 				await PopupNavigation.Instance.PushAsync(new MyPopup(item));
 			}
 		}
