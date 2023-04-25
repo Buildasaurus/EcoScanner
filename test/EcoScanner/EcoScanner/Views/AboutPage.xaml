@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid x:Name="abc" ColumnDefinitions="40, 2*, *" >
+    <Grid x:Name="abc" ColumnDefinitions="40, 2*, *" Padding="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*" />
@@ -22,7 +22,7 @@
 
         <Image Grid.Column="0" Grid.Row="0" Source="SoegeIkon.png" Scale="0.7" HorizontalOptions="Center"/>
 
-        <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+        <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="End">
             <Entry.Behaviors>
                 <xct:EventToCommandBehavior EventName="Focused" Command="{Binding SearchFocused}"/>
             </Entry.Behaviors>

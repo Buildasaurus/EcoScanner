@@ -81,7 +81,7 @@ namespace EcoScanner.ViewModels
 		}
 		public void OnTotalChanged()
 		{
-			OnPropertyChanged((nameof(Total)));
+			OnPropertyChanged(nameof(Total));
 		}
         void updateItem()
         {

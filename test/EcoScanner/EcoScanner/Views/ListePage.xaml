@@ -15,6 +15,10 @@
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
     <StackLayout>
+        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" BackgroundColor="#dddddd" HeightRequest="50">
+            <Label Grid.Column="0" Margin="10" VerticalOptions="Center" FontSize="20">Navn på produkt</Label>
+            <Label Grid.Column="1"  HorizontalOptions="End"  Margin="10" VerticalOptions="Center" FontSize="20">kg CO2e i alt</Label>
+        </Grid>
 
         <RefreshView x:DataType="local:ListeViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <CollectionView x:Name="ItemsListView"
@@ -22,56 +26,62 @@
                     SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="10" x:DataType="model:Product">
-                            <Grid ColumnDefinitions="*, *" RowDefinitions="30, 40">
-                                <Label Text="{Binding Name}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="18"
-                                       Grid.Column="0"
-                                       Grid.Row="0"/>
-                                <!-- + and - Buttons    -->
-                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Image Source="MinusKnap.png" Grid.Column="0"/>
-                                    <ImageButton Source="MinusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=MinusClicked}" CommandParameter="{Binding .}" Grid.Column="0" Opacity="0"/>
-
-                                    <Entry  Keyboard="Numeric" Text="{Binding Count}" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
-
-                                    <Image Source="PlusKnap.png" Grid.Column="2"/>
-                                    <ImageButton Source="PlusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=PlusClicked}" CommandParameter="{Binding .}"  Grid.Column="2" Opacity="0"/>
-                                </Grid>
-                                <Label Text="{Binding CO2, StringFormat='{}{0:F2} kg CO2e'}" 
-                                    LineBreakMode="NoWrap"
-                                    Style="{DynamicResource ListItemDetailTextStyle}"
-                                    FontSize="16" 
-                                    Grid.Column="1"
-                                       Grid.Row="1"
-                                       VerticalOptions="Center"
-                                    HorizontalOptions="End"
-                                    TextColor="Black" />
-                            </Grid>
+                        <StackLayout>
                             
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    NumberOfTapsRequired="1"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=ItemTapped}"		
-                                    CommandParameter="{Binding .}">
-                                </TapGestureRecognizer>
-                            </StackLayout.GestureRecognizers>
+                            <StackLayout Padding="10" x:DataType="model:Product">
+                                <Grid ColumnDefinitions="*, *" RowDefinitions="30, 40">
+                                    <Label Text="{Binding Name}" 
+                                    LineBreakMode="NoWrap" 
+                                    Style="{DynamicResource ListItemTextStyle}" 
+                                    FontSize="18"
+                                           Grid.Column="0"
+                                           Grid.Row="0"/>
+                                    <!-- + and - Buttons    -->
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="MinusKnap.png" Grid.Column="0"/>
+                                        <ImageButton Source="MinusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=MinusClicked}" CommandParameter="{Binding .}" Grid.Column="0" Opacity="0"/>
+
+                                        <Entry  Keyboard="Numeric" Text="{Binding Count}" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
+
+                                        <Image Source="PlusKnap.png" Grid.Column="2"/>
+                                        <ImageButton Source="PlusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=PlusClicked}" CommandParameter="{Binding .}"  Grid.Column="2" Opacity="0"/>
+                                    </Grid>
+                                    <Label Text="{Binding TotCo2, StringFormat='{}{0:F2} kg CO2e'}" 
+                                        LineBreakMode="NoWrap"
+                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                        FontSize="16" 
+                                        Grid.Column="1"
+                                           Grid.Row="1"
+                                           VerticalOptions="Center"
+                                        HorizontalOptions="End"
+                                        TextColor="Black" />
+                                </Grid>
+
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        NumberOfTapsRequired="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=ItemTapped}"		
+                                        CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <BoxView Color="LightGray" HeightRequest="1" Margin="10,0" />
                         </StackLayout>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        <Grid BackgroundColor="LightGray" RowDefinitions="30, 80, 80" ColumnDefinitions="*, *">
+        <Grid BackgroundColor="Beige" RowDefinitions="30, 80, 80" ColumnDefinitions="*, *">
             <Label HorizontalOptions="Center" FontSize="24">Total:</Label>
-            <Label Grid.Column="1" HorizontalOptions="Center" FontSize="24">4,9 kg co2e</Label>
+            <Label Grid.Column="1" HorizontalOptions="Center" FontSize="24" Text="{Binding Total,  StringFormat='{}{0}kg co2e}'}"></Label>
 
             <Image Source="TilfoejTilHistorikKnap.png" Grid.Row="1" Grid.ColumnSpan="2"/>
             <ImageButton Source="TilfoejTilHistorikKnap.png" Opacity="0" Grid.Row="1" Grid.ColumnSpan="2"/>
