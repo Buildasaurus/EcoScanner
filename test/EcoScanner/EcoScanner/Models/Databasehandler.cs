@@ -62,6 +62,7 @@ namespace EcoScanner.Models
 			}
 			List<Product> matchingProducts = new List<Product>();
 			List<Product> sortedMatchingProducts = new List<Product>();
+			text = text.ToLower();
 
 			//First find all elements that should be displayed (if they contain the searched word)
 			foreach (var element in data)
@@ -83,20 +84,20 @@ namespace EcoScanner.Models
 				string[] alfabet = {" ", "," };
 				foreach (string item in alfabet)
 				{
-					if (matchingProducts.ElementAt(i).Name.IndexOf(item + text) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().IndexOf(item + text) > -1 || matchingProducts.ElementAt(i).Name.ToLower().StartsWith(text + item))
 					{
 						suffix = true;
 					}
-					if (matchingProducts.ElementAt(i).Name.IndexOf(text + item) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().IndexOf(text + item) > -1 || matchingProducts.ElementAt(i).Name.ToLower().EndsWith(item + text))
 					{
 						prefix = true;
 					}
 
-					if (matchingProducts.ElementAt(i).Name.LastIndexOf(item + text) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().LastIndexOf(item + text) > -1)
 					{
 						suffix = true;
 					}
-					if (matchingProducts.ElementAt(i).Name.LastIndexOf(text + item) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().LastIndexOf(text + item) > -1)
 					{
 						prefix = true;
 					}
@@ -109,7 +110,7 @@ namespace EcoScanner.Models
 			}
 
 			//sort these products
-			sortedMatchingProducts = sortAfterIndex(sortedMatchingProducts, text, 0);
+			sortedMatchingProducts = sortAfterIndex(sortedMatchingProducts, text.ToLower(), 0);
 
 
 
@@ -124,20 +125,20 @@ namespace EcoScanner.Models
 				string[] alfabet = { " ", ",", null };
 				foreach (string item in alfabet)
 				{
-					if (matchingProducts.ElementAt(i).Name.IndexOf(item + text) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().IndexOf(item + text) > -1 || matchingProducts.ElementAt(i).Name.ToLower().StartsWith(text + item))
 					{
 						suffix = true;
 					}
-					if (matchingProducts.ElementAt(i).Name.IndexOf(text + item) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().IndexOf(text + item) > -1 || matchingProducts.ElementAt(i).Name.ToLower().EndsWith(item + text))
 					{
 						prefix = true;
 					}
 
-					if (matchingProducts.ElementAt(i).Name.LastIndexOf(item + text) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().LastIndexOf(item + text) > -1)
 					{
 						suffix = true;
 					}
-					if (matchingProducts.ElementAt(i).Name.LastIndexOf(text + item) > -1)
+					if (matchingProducts.ElementAt(i).Name.ToLower().LastIndexOf(text + item) > -1)
 					{
 						prefix = true;
 					}
@@ -150,7 +151,7 @@ namespace EcoScanner.Models
 			}
 
 			// now sort the rest of the elements again.
-			sortAfterIndex(sortedMatchingProducts, text, alreadySorted);
+			sortAfterIndex(sortedMatchingProducts, text.ToLower(), alreadySorted);
 
 			//add the rest, that contains the word
 			for (int i = 0; i < matchingProducts.Count; i++)
@@ -184,8 +185,8 @@ namespace EcoScanner.Models
 					{
 						Product word1 = list[j];
 						Product word2 = list[j + 1];
-						int index1 = word1.Name.IndexOf(text);
-						int index2 = word2.Name.IndexOf(text);
+						int index1 = word1.Name.ToLower().IndexOf(text);
+						int index2 = word2.Name.ToLower().IndexOf(text);
 						if (index1 > index2) //if in wrong order
 						{
 							list.RemoveAt(j);
