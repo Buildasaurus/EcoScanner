@@ -3,15 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcoScanner.Views.DishView">
   <ContentView.Content>
-        <Grid Background="White" Margin="-20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
+        <Frame CornerRadius="10" BackgroundColor="Gray" Padding="1">
+            <Frame CornerRadius="10" Padding="0">
+                <Grid Background="White" Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" x:Name="Image" Source="{Binding a}" Opacity="0.5"/>
-            <Label Grid.Row="0" x:Name="RetName" FontAttributes="Bold" Margin="10"/>
-            <Label Grid.Row="1" x:Name="CO2udledning" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-        </Grid>
+                    <Image Grid.Row="0" x:Name="Image" Source="{Binding Source}" Opacity="0.5" Aspect="AspectFill"/>
+                    <Label Grid.Row="0" x:Name="RetName" FontAttributes="Bold" Margin="10" FontSize="20"/>
+                    <BoxView HeightRequest="1" Grid.Row="0" Color="Gray"  VerticalOptions="End" HorizontalOptions="FillAndExpand"></BoxView>
+                    <Label Grid.Row="1" x:Name="CO2udledning" HorizontalTextAlignment="Center" FontSize="20"/>
+                </Grid>
+            </Frame>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding MyDish, Source=D}" />
+            </Frame.GestureRecognizers>
+        </Frame>
+        
+      
+      
     </ContentView.Content>
 </ContentView>

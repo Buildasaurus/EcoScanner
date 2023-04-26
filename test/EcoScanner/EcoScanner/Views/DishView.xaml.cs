@@ -16,17 +16,16 @@ namespace EcoScanner.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DishView : ContentView
 	{
-		Dish dish;
+		public Dish MyDish { get; set; }
 		DishViewModel dishViewModel;
 		public DishView (Dish dish)
 		{
-			InitializeComponent ();
-			this.dish = dish;
-			dishViewModel = new DishViewModel(dish.Name);
+			this.MyDish = dish;
+			dishViewModel = new DishViewModel(MyDish.Name);
 			BindingContext = dishViewModel;
-			RetName.Text = dish.Name;
-			CO2udledning.Text = dish.TotalCo2 + " kg CO2e pr. person";
-
+			InitializeComponent();
+			RetName.Text = MyDish.Name;
+			CO2udledning.Text = MyDish.TotalCo2.ToString("0.00") + " kg CO2e pr. person";
 		}
 		private void Button_Click(object sender, EventArgs e)
 		{

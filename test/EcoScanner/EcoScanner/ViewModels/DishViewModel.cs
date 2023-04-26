@@ -9,7 +9,11 @@ namespace EcoScanner.ViewModels
         public string Source { get; set; }
         public DishViewModel(string source)
         {
-            this.Source = source;
+            source = source.Replace("ø", "oe");
+			source = source.Replace("æ", "ae");
+			source = source.Replace("å", "aa");
+			source = source.Replace(" ", "_");
+            this.Source = source + ".png";
         }
     }
 }

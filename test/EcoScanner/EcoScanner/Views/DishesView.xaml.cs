@@ -3,6 +3,7 @@ using EcoScanner.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,25 +23,28 @@ namespace EcoScanner.Views
 			BindingContext = dishesViewModel;
 			setupContent();
 		}
+		int mod(int x, int m)
+		{
+			int r = x % m;
+			return r < 0 ? r + m : r;
+		}
 		async void setupContent()
 		{
 			await Databasehandler.loadDishes();
+			int modDay  = mod((DateTime.Today - new DateTime(1519, 03, 14)).Days, 3);
+
+			Dish dayDish = Databasehandler.dishes["" + modDay];
+			DayDish.Content = new DishView(dayDish);
+			int count = 0;
 			foreach (Dish dish in Databasehandler.dishes.Values)
 			{
-				Frame frame = new Frame();
-				frame.CornerRadius = 10;
-				frame.Content = new DishView(dish);
-				frame.Margin = 10;
-
-
-				var tapGestureRecognizer = new TapGestureRecognizer();
-				tapGestureRecognizer.SetBinding(TapGestureRecognizer.CommandProperty, "TapCommand");
-				tapGestureRecognizer.CommandParameter = dish;
-				frame.GestureRecognizers.Add(tapGestureRecognizer);
-
-
-				frame.BackgroundColor = Color.LightBlue;
-				stack.Children.Add(frame);
+				if (count == modDay)
+				{
+					count++;
+					continue;
+				}
+				count++;
+				stack.Children.Add(new DishView(dish));
 			}
 		}
 	}
