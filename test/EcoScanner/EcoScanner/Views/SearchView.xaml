@@ -28,7 +28,8 @@
                                     Style="{DynamicResource ListItemTextStyle}" 
                                     FontSize="16"
                                     Grid.Column="0"
-                                    TextColor="Black"  />
+                                    TextColor="Black"  
+                                    />
 
                                     <Label Text="{Binding CO2, StringFormat='{}{0:F2} kg CO2e'}" 
                                     LineBreakMode="NoWrap"
