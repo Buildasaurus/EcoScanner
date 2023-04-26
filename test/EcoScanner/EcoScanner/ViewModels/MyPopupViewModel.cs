@@ -62,7 +62,7 @@ namespace EcoScanner.ViewModels
 			}
 			else
 			{
-				ConfirmPath = "TilfoejTilListeKnap.png";
+				ConfirmPath = "GemKnap.png";
 
 			}
 			ScalePath = path;

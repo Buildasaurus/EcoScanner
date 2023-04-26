@@ -27,7 +27,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            
+
                             <StackLayout Padding="10" x:DataType="model:Product">
                                 <Grid ColumnDefinitions="*, *" RowDefinitions="30, 40">
                                     <Label Text="{Binding Name}" 
@@ -75,7 +75,6 @@
                             </StackLayout>
                             <BoxView Color="LightGray" HeightRequest="1" Margin="10,0" />
                         </StackLayout>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -87,10 +86,10 @@
             <Image Source="TilfoejTilHistorikKnap.png" Grid.Row="1" Grid.ColumnSpan="2"/>
             <ImageButton Source="TilfoejTilHistorikKnap.png" Opacity="0" Grid.Row="1" Grid.ColumnSpan="2"/>
 
-            <Image Source="TilbageKnap.png" Grid.Row="2" Grid.Column="0"/>
+            <Image Source="TilbageKnap.png" Grid.Row="2" Grid.Column="0" HorizontalOptions="End" Margin="0,0,-4,0"/>
             <ImageButton Source="TilbageKnap.png" Command="{Binding ReturnPressed}" Opacity="0" Grid.Row="2" Grid.Column="0"/>
 
-            <Image Source="RydListenKnap.png" Grid.Row="2" Grid.Column="1"/>
+            <Image Source="RydListenKnap.png" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" Margin="-4,0,0,0"/>
             <ImageButton Source="RydListenKnap.png" Command="{Binding ClearListClicked}" Opacity="0"  Grid.Row="2" Grid.Column="1"/>
         </Grid>
 
