@@ -25881,67 +25881,70 @@ namespace EcoScanner.Droid
 			public const int RydListeKnapUdenSkygge = 2131165339;
 			
 			// aapt resource value: 0x7F07009C
-			public const int RydListenKnap = 2131165340;
+			public const int RydListen = 2131165340;
 			
 			// aapt resource value: 0x7F07009D
-			public const int ScannerIkon = 2131165341;
+			public const int RydListenKnap = 2131165341;
 			
 			// aapt resource value: 0x7F07009E
-			public const int SkalaKlasse0 = 2131165342;
+			public const int ScannerIkon = 2131165342;
 			
 			// aapt resource value: 0x7F07009F
-			public const int SkalaKlasse1 = 2131165343;
+			public const int SkalaKlasse0 = 2131165343;
 			
 			// aapt resource value: 0x7F0700A0
-			public const int SkalaKlasse2 = 2131165344;
+			public const int SkalaKlasse1 = 2131165344;
 			
 			// aapt resource value: 0x7F0700A1
-			public const int SkalaKlasse3 = 2131165345;
+			public const int SkalaKlasse2 = 2131165345;
 			
 			// aapt resource value: 0x7F0700A2
-			public const int SkalaKlasse4 = 2131165346;
+			public const int SkalaKlasse3 = 2131165346;
 			
 			// aapt resource value: 0x7F0700A3
-			public const int SkalaKlasse5 = 2131165347;
+			public const int SkalaKlasse4 = 2131165347;
 			
 			// aapt resource value: 0x7F0700A4
-			public const int Skalameter = 2131165348;
+			public const int SkalaKlasse5 = 2131165348;
 			
 			// aapt resource value: 0x7F0700A5
-			public const int Skalapil = 2131165349;
+			public const int Skalameter = 2131165349;
 			
 			// aapt resource value: 0x7F0700A6
-			public const int SoegeIkon = 2131165350;
+			public const int Skalapil = 2131165350;
 			
 			// aapt resource value: 0x7F0700A7
-			public const int SoegeIkonMenu = 2131165351;
+			public const int SoegeIkon = 2131165351;
 			
 			// aapt resource value: 0x7F0700A8
-			public const int test_custom_background = 2131165352;
+			public const int SoegeIkonMenu = 2131165352;
 			
 			// aapt resource value: 0x7F0700A9
-			public const int TilbageKnap = 2131165353;
+			public const int test_custom_background = 2131165353;
 			
 			// aapt resource value: 0x7F0700AA
-			public const int TilbageTilScannerKnap = 2131165354;
+			public const int TilbageKnap = 2131165354;
 			
 			// aapt resource value: 0x7F0700AB
-			public const int TilfoejTilHistorikKnap = 2131165355;
+			public const int TilbageTilScannerKnap = 2131165355;
 			
 			// aapt resource value: 0x7F0700AC
-			public const int TilfoejTilListeKnap = 2131165356;
+			public const int TilfoejTilHistorikKnap = 2131165356;
 			
 			// aapt resource value: 0x7F0700AD
-			public const int tooltip_frame_dark = 2131165357;
+			public const int TilfoejTilListeKnap = 2131165357;
 			
 			// aapt resource value: 0x7F0700AE
-			public const int tooltip_frame_light = 2131165358;
+			public const int tooltip_frame_dark = 2131165358;
 			
 			// aapt resource value: 0x7F0700AF
-			public const int Vegetar_burger_med_kikaerteboef_og_urtedressing = 2131165359;
+			public const int tooltip_frame_light = 2131165359;
 			
 			// aapt resource value: 0x7F0700B0
-			public const int xamarin_logo = 2131165360;
+			public const int Vegetar_burger_med_kikaerteboef_og_urtedressing = 2131165360;
+			
+			// aapt resource value: 0x7F0700B1
+			public const int xamarin_logo = 2131165361;
 			
 			static Drawable()
 			{

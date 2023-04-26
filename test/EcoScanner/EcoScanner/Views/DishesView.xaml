@@ -7,7 +7,7 @@
             <StackLayout x:Name="stack" Padding="20,20" Spacing="20">
                 <Label Text="Dagens ret:" FontSize="26"  Margin="0, 0,0, -10"/>
                 <ContentView x:Name="DayDish"></ContentView>
-                <Label Text="Andre retter:" FontSize="26"  Margin="0, 0,0, -10"/>
+                <Label Text="Andre retter:" FontSize="26" Margin="0, 0,0, -10"/>
             </StackLayout>
         </ScrollView>
 

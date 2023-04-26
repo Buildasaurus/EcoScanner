@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Margin="5">
-            <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}" Text="{Binding Text,Mode=TwoWay}"/>
+            <Entry Placeholder="Søg efter varer" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}" Text="{Binding Text,Mode=TwoWay}"/>
             <Grid ColumnDefinitions="*, *" RowDefinitions="Auto">
                 <Label Grid.Column="0">Navn på produkt</Label>
                 <Label Grid.Column="1"  HorizontalOptions="End">kg CO2e pr kg produkt</Label>
