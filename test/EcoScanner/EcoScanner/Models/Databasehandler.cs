@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,7 +12,6 @@ using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 using static System.Net.Mime.MediaTypeNames;
-
 namespace EcoScanner.Models
 {
     public static class Databasehandler
@@ -262,7 +262,7 @@ namespace EcoScanner.Models
 					if (element.Value.Name == dish.CO2.Vare[count])
 					{
 						//Add the weight of the ingredient that is used timed by how much the ingredient emits.
-						totalCo2 += element.Value.CO2 * float.Parse(dish.CO2.Amount[count]);
+						totalCo2 += element.Value.CO2 * float.Parse(dish.CO2.Amount[count], System.Globalization.CultureInfo.GetCultureInfo("en-GB"));
 					}
 
 				}
