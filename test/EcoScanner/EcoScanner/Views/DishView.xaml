@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcoScanner.Views.DishView">
+  <ContentView.Content>
+        <Grid Background="White" Margin="-20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" x:Name="Image" Source="{Binding a}" Opacity="0.5"/>
+            <Label Grid.Row="0" x:Name="RetName" FontAttributes="Bold" Margin="10"/>
+            <Label Grid.Row="1" x:Name="CO2udledning" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
