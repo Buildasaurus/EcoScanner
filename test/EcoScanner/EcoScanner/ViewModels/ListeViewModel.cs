@@ -31,7 +31,7 @@ namespace EcoScanner.ViewModels
 		{
 			get
             {
-				return Liste.getSum().ToString("0.00 "); 
+				return Liste.getSum().ToString("0.00"); 
             }
 		}
 		public ListeViewModel()
@@ -71,9 +71,10 @@ namespace EcoScanner.ViewModels
 
         void clearTheList()
         {
-            Items.Clear();
+			updateItem();
+			OnPropertyChanged(null);
+			Items.Clear();
             Liste.clearFile();
-
 		}
         async void returnPressed()
         {
@@ -110,8 +111,8 @@ namespace EcoScanner.ViewModels
 		}
         async void clearList()
         {
+			
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om", 2));
-
 		}
 
 		async Task ExecuteLoadItemsCommand()
