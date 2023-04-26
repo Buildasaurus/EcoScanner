@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcoScanner.Views.DishesView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout x:Name="stack" Padding="20,20" Spacing="20">
+                <Label Text="Dagens ret:" FontSize="26"  Margin="0, 0,0, -10"/>
+                <ContentView x:Name="DayDish"></ContentView>
+                <Label Text="Andre retter:" FontSize="26"  Margin="0, 0,0, -10"/>
+            </StackLayout>
+        </ScrollView>
+
     </ContentPage.Content>
+
 </ContentPage>

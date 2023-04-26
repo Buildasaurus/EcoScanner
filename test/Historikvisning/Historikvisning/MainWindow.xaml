@@ -13,11 +13,11 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row ="1" Background="White" BorderBrush="Black" BorderThickness="2"/>
+        <Border Grid.Row ="1" Background="White" BorderBrush="Black" BorderThickness="1"/>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -38,10 +38,30 @@
         <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25">
                 Bennys bukser brændte
         </TextBlock>
-        
-        <ScrollViewer x:Name="ChartScroller" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <StackPanel x:Name="Chartdata" HorizontalAlignment="Right" Orientation="Horizontal">
-            </StackPanel>
-        </ScrollViewer>
+
+        <StackPanel x:Name="Chartdata" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+        </StackPanel>
+
+        <Grid x:Name="ChartRow"  Grid.Row="1" Margin="10,30">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <TextBlock Grid.Row="1" Text="CO2e (kg)" Margin="5, 30" FontWeight="Bold" TextAlignment="Center"/>
+        <Line X1="5" Y1="150" X2="10" Y2="150" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+        <Line X1="5" Y1="130" X2="10" Y2="130" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+        <Line X1="5" Y1="110" X2="10" Y2="110" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+        <Line X1="5" Y1="90" X2="10" Y2="90" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+        <Line X1="5" Y1="70" X2="10" Y2="70" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+        <Line X1="5" Y1="50" X2="10" Y2="50" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+
     </Grid>
 </Window>
