@@ -9,9 +9,9 @@ x:Class="EcoScanner.Views.WarningPopupView" BackgroundColor="#C0808080" Padding=
     x:DataType="vm:WarningPopupViewModel"
     android:Application.WindowSoftInputModeAdjust="Unspecified"
     BackgroundClicked="backgroundClosed">
-    <Frame CornerRadius="10"  Margin="7, 100" >
+    <Frame CornerRadius="10"  Margin="7,220" >
         <StackLayout>
-            <Label Text="{Binding Message}"></Label>
+            <Label Text="{Binding Message}" FontSize="20" HorizontalOptions="Center" HorizontalTextAlignment="Center"></Label>
             <ContentView Content="{Binding ButtonContent}"/>
         </StackLayout>
        

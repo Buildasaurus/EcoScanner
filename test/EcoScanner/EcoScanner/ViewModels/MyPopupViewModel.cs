@@ -63,7 +63,6 @@ namespace EcoScanner.ViewModels
 			else
 			{
 				ConfirmPath = "GemKnap.png";
-
 			}
 			ScalePath = path;
 			Color = colors[mappedNum];
