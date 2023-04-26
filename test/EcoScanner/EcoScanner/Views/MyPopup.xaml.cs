@@ -24,6 +24,7 @@ namespace EcoScanner.Views
 			BindingContext = _viewModel = new MyPopupViewModel(product, onListe);
 			
 			this.product = product;
+
 		}
 		private void backgroundClosed(object sender, EventArgs e)
 		{

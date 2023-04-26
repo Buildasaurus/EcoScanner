@@ -13,7 +13,7 @@ x:Class="EcoScanner.Views.MyPopup" BackgroundColor="#C0808080" Padding="20"
         <StackLayout BackgroundColor="White" >
             <Grid x:Name="abc" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="30*"/>
                     <RowDefinition Height="10*"/>
@@ -21,7 +21,7 @@ x:Class="EcoScanner.Views.MyPopup" BackgroundColor="#C0808080" Padding="20"
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="15*"/>
-                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="25*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"/>
