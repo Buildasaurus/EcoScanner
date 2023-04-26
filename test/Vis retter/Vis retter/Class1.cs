@@ -11,5 +11,6 @@ namespace Vis_retter
 			public int ID;
 			public string Name;
 			public co2 CO2;
+			public string URL;
 	}
 }
