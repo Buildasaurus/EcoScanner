@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
@@ -208,6 +210,65 @@ namespace EcoScanner.Models
 				}
 			}
 			return list;
+		}
+
+		//Handling of dishes
+		static string[] vareData;
+		static string[] amountData;
+		static string navn;
+		static int Index = 0;
+
+		public static Dictionary<string, Dish> dishes;
+
+		public static async Task loadDishes()
+		{
+			FirebaseResponse allretter = await client.GetAsync("Retter");
+			dishes = allretter.ResultAs<Dictionary<string, Dish>>();
+			if (data == null)
+			{
+				await LoadAllProducts();
+			}
+
+			List<string> keysToRemove = new List<string>();
+			foreach (var element in dishes)
+			{
+				if (element.Value == null || element.Value.CO2 == null)
+				{
+					keysToRemove.Add(element.Key);
+				}
+				else
+				{
+					element.Value.TotalCo2 = CalculateWeight(element.Value);
+				}
+			}
+			foreach (var key in keysToRemove)
+			{
+				dishes.Remove(key);
+			}
+		}
+		/// <summary>
+		/// Returns the total weight of a dish, with the dish as input.
+		/// </summary>
+		/// <param name="dish"></param>
+		/// <returns></returns>
+		public static float CalculateWeight(Dish dish)
+		{
+			int count = 0;
+			float totalCo2 = 0;
+			foreach(string ingredientweight in dish.CO2.Amount)
+			{
+				foreach (var element in data)
+				{
+					if (element.Value.Name == dish.CO2.Vare[count])
+					{
+						//Add the weight of the ingredient that is used timed by how much the ingredient emits.
+						totalCo2 += element.Value.CO2 * float.Parse(dish.CO2.Amount[count]);
+					}
+
+				}
+				count++;
+			}
+			return totalCo2;
 		}
 	}
 }
