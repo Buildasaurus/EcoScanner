@@ -26,12 +26,13 @@ namespace Historikvisning
 		
 		public MainWindow()
 		{
-			DateTime key = new DateTime(2023, 4, 24);
+			//Bare for at teste
+			DateTime key = new DateTime(2023, 3, 23);
+			boef.Add(key, 70);
+			key = new DateTime(2023, 4, 24);
 			boef.Add(key,100);
 			key = new DateTime(2023, 4, 23);
 			boef.Add(key, 60);
-			key = new DateTime(2023, 3, 23);
-			boef.Add(key, 70);
 
 
 			InitializeComponent();
@@ -157,7 +158,11 @@ namespace Historikvisning
 					}
 					float maksAkseValue = ((int)Math.Round(best / 60)) * 60;
 					float reelHeight = 120 * rectHeight / maksAkseValue;
-					rect.Height = reelHeight;
+					if (maksAkseValue == 0)
+					{
+						reelHeight = 0;
+					}
+						rect.Height = reelHeight;
 
 					combiningColGrid.Children.Add(rect);
 					combiningColGrid.Children.Add(textDay);
@@ -330,6 +335,10 @@ namespace Historikvisning
 					}
 					float maksAkseValue = ((int)Math.Round(best / 60)) * 60;
 					float reelHeight = 120 * rectHeight / maksAkseValue;
+					if (maksAkseValue == 0)
+					{
+						reelHeight = 0;
+					}
 					rect.Height = reelHeight;
 
 
@@ -496,6 +505,10 @@ namespace Historikvisning
 					}
 					float maksAkseValue = ((int)Math.Round(best / 60)) * 60;
 					float reelHeight = 120 * rectHeight / maksAkseValue;
+					if (maksAkseValue == 0)
+					{
+						reelHeight = 0;
+					}
 					rect.Height = reelHeight;
 					
 
@@ -536,12 +549,93 @@ namespace Historikvisning
 
 		}
 
+		void KalibrerGenmVDig(Dictionary<DateTime, float> historik, int Hustandstal)
+		{
+			DateTime date =historik.ElementAt(0).Key;
+
+			double DanskGenm = 57.5;
+			float SumCO2 = 0;
+			int divisor = 0;
+			while (0 > DateTime.Compare(date, DateTime.Now))
+			{
+				if (historik.ContainsKey(date.Date))
+				{
+					SumCO2 += historik[date];
+				}
+
+				divisor++;
+				date = date.AddDays(1);
+			}
+
+			double ditGenm = SumCO2 * 7 / (divisor * Hustandstal);
+			DinUdledningText.Text = ditGenm.ToString() + "kg";
+
+			if ( ditGenm < DanskGenm)
+			{
+				DinUdledningRect.Height = ditGenm / DanskGenm * 180;
+
+				DanskUdledningRect.Height = 180;
+				DanskUdledningText.Margin = new Thickness(0);
+				if (ditGenm / DanskGenm * 180 < 30)
+				{
+					DinUdledningText.Margin = new Thickness(0, 0, 0, ditGenm / DanskGenm * 180);
+					DinUdledningText.VerticalAlignment = VerticalAlignment.Bottom;
+					DinUdledningText.Foreground = Brushes.Black;
+				}
+				else
+				{
+					DinUdledningText.Margin = new Thickness(0, 180 - ditGenm / DanskGenm * 180, 0, 0);
+					DinUdledningText.VerticalAlignment = VerticalAlignment.Center;
+					DinUdledningText.Foreground = Brushes.White;
+				}
+			} 
+			else if (ditGenm > DanskGenm)
+			{
+				DinUdledningRect.Height = 180;
+				DinUdledningText.Margin = new Thickness(0);
+				DanskUdledningRect.Height = DanskGenm / ditGenm * 180;
+				if (DanskGenm / ditGenm * 180 < 30)
+				{
+					DanskUdledningText.Margin = new Thickness(0, 0, 0, DanskGenm / ditGenm * 180);
+					DanskUdledningText.VerticalAlignment = VerticalAlignment.Bottom;
+					DanskUdledningText.Foreground = Brushes.Black;
+				}
+				else
+				{
+					DanskUdledningText.Margin = new Thickness(0, 180 - DanskGenm / ditGenm * 180, 0, 0);
+					DanskUdledningText.VerticalAlignment = VerticalAlignment.Center;
+					DanskUdledningText.Foreground = Brushes.White;
+				}
+			}
+			else
+			{
+				DinUdledningRect.Height = 180;
+				DinUdledningText.Margin = new Thickness(0);
+				DinUdledningText.VerticalAlignment = VerticalAlignment.Center;
+				DinUdledningText.Foreground = Brushes.White;
+				DanskUdledningRect.Height = 180;
+				DanskUdledningText.Margin = new Thickness(0);
+				DanskUdledningText.VerticalAlignment = VerticalAlignment.Center;
+				DanskUdledningText.Foreground = Brushes.White;
+			}
+
+		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			Chartdata.Children.Clear();
 			ChartRow.Children.Clear();
 			MakeWeekBarGraph(boef);
+
+			SelectedButtonLine.SetValue(Grid.ColumnProperty, 0);
+			SelectedButtonRect.SetValue(Grid.ColumnProperty, 0);
+			ButtonName0.FontWeight = FontWeights.Bold;
+			ButtonName1.FontWeight = FontWeights.Normal;
+			ButtonName2.FontWeight = FontWeights.Normal;
+			ButtonName0.Foreground = Brushes.White;
+			ButtonName1.Foreground = Brushes.Black;
+			ButtonName2.Foreground = Brushes.Black;
+
 		}
 
 		private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -549,6 +643,15 @@ namespace Historikvisning
 			Chartdata.Children.Clear();
 			ChartRow.Children.Clear();
 			MakeMonthBarGraph(boef);
+
+			SelectedButtonLine.SetValue(Grid.ColumnProperty,1);
+			SelectedButtonRect.SetValue(Grid.ColumnProperty, 1);
+			ButtonName0.FontWeight = FontWeights.Normal;
+			ButtonName1.FontWeight = FontWeights.Bold;
+			ButtonName2.FontWeight = FontWeights.Normal;
+			ButtonName0.Foreground = Brushes.Black;
+			ButtonName1.Foreground = Brushes.White;
+			ButtonName2.Foreground = Brushes.Black;
 		}
 
 		private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -556,6 +659,18 @@ namespace Historikvisning
 			Chartdata.Children.Clear();
 			ChartRow.Children.Clear();
 			MakeYearBarGraph(boef);
+
+			SelectedButtonLine.SetValue(Grid.ColumnProperty, 2);
+			SelectedButtonRect.SetValue(Grid.ColumnProperty, 2);
+			ButtonName0.FontWeight = FontWeights.Normal;
+			ButtonName1.FontWeight = FontWeights.Normal;
+			ButtonName2.FontWeight = FontWeights.Bold;
+			ButtonName0.Foreground = Brushes.Black;
+			ButtonName1.Foreground = Brushes.Black;
+			ButtonName2.Foreground = Brushes.White;
+
+			//Bare for at teste det
+			KalibrerGenmVDig(boef, 1);
 		}
 
 

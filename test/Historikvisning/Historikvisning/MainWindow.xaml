@@ -6,62 +6,106 @@
         xmlns:local="clr-namespace:Historikvisning"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="400">
-    <Grid Background="Beige">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer>
+    <StackPanel Background="Beige">
 
-        <Border Grid.Row ="1" Background="White" BorderBrush="Black" BorderThickness="1"/>
-        <Grid Grid.Row="0">
+        
+        <Grid Grid.Row="0" Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Click="Button_Click">
+            <Rectangle x:Name="SelectedButtonRect" Height="45" Fill="Gray" VerticalAlignment="Top" Grid.Column="0"/>
+            <Line x:Name="SelectedButtonLine" X1="0"  Y1="43" X2="200" Y2="43" Stroke="#01ABC9" StrokeThickness="5" Grid.Column="0"/>
+            <TextBlock x:Name="ButtonName0" Margin="0,0,0,5" FontWeight="Bold" Foreground="White" Text="Uge" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="ButtonName1" Margin="0,0,0,5" FontWeight="Normal" Foreground="Black" Text="Måned" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="ButtonName2" Margin="0,0,0,5" FontWeight="Normal" Foreground="Black" Text="År" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Button Grid.Column="0" Click="Button_Click" Opacity="0">
                 Uge
             </Button>
-
-            <Button Grid.Column="1" Click="Button_Click_1">
+            <Button Grid.Column="1" Click="Button_Click_1" Opacity="0">
                 Måned
             </Button>
-
-            <Button Grid.Column="2" Click="Button_Click_2">
+            <Button Grid.Column="2" Click="Button_Click_2" Opacity="0">
                 År
             </Button>
-
+            
         </Grid>
 
-        <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25">
-                Bennys bukser brændte
+        <Grid>
+                <Border Background="White" BorderBrush="Black" BorderThickness="1"/>
+            <StackPanel x:Name="Chartdata" Height="200" HorizontalAlignment="Right" Orientation="Horizontal">
+            </StackPanel>
+
+            <Grid x:Name="ChartRow" Margin="10,30">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            
+            <TextBlock Grid.Row="1" Text="CO2e (kg)" Margin="5, 30" FontWeight="Bold" TextAlignment="Center"/>
+            <Line X1="5" Y1="150" X2="10" Y2="150" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+            <Line X1="5" Y1="130" X2="10" Y2="130" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+            <Line X1="5" Y1="110" X2="10" Y2="110" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+            <Line X1="5" Y1="90" X2="10" Y2="90" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+            <Line X1="5" Y1="70" X2="10" Y2="70" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+            <Line X1="5" Y1="50" X2="10" Y2="50" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
+        </Grid>
+
+        <TextBlock Margin="20,60,20,0" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="25">
+                Dit indkøb i forhold til den gennemsnitlige dansker
+        </TextBlock>
+        <TextBlock Margin="5" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="20">
+            Hvor mange personer brødfødes med dit indkøb:
         </TextBlock>
 
-        <StackPanel x:Name="Chartdata" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+        <Grid Height="260" Background="White">
+            <Grid Margin="10,20,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+
+                    <Rectangle x:Name="DinUdledningRect"  Height="180" Fill="#01ABC9"  Margin="40,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom">
+
+                    </Rectangle>
+                    <TextBlock x:Name="DinUdledningText" Margin="40,0" Grid.Column="0" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Foreground="White" VerticalAlignment="Center">
+                        xx kg
+                    </TextBlock>
+                    <Rectangle x:Name="DanskUdledningRect"  Height="180" Fill="#01ABC9"  Margin="40,0" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom">
+                        
+                    </Rectangle>
+                    <TextBlock x:Name="DanskUdledningText" Margin="40,0" Grid.Column="1" Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Foreground="White" VerticalAlignment="Center">
+                        57,5 kg
+                    </TextBlock>
+                    <TextBlock Foreground="Black" Grid.Column="0" Grid.Row="1" TextAlignment="Center" FontSize="20" TextWrapping="Wrap">
+                        Din uge (pr. person)
+                    </TextBlock>
+                    <TextBlock Foreground="Black" Grid.Column="1" Grid.Row="1" TextAlignment="Center" FontSize="20" TextWrapping="Wrap">
+                        Genm. danskers uge
+                    </TextBlock>
+
+
+                </Grid>
+                <Border BorderBrush="Black" BorderThickness="1"/>
+            </Grid>
+
+        <Grid Height="50"/>
+
         </StackPanel>
-
-        <Grid x:Name="ChartRow"  Grid.Row="1" Margin="10,30">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="10"/>
-            </Grid.RowDefinitions>
-        </Grid>
-
-        <TextBlock Grid.Row="1" Text="CO2e (kg)" Margin="5, 30" FontWeight="Bold" TextAlignment="Center"/>
-        <Line X1="5" Y1="150" X2="10" Y2="150" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
-        <Line X1="5" Y1="130" X2="10" Y2="130" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
-        <Line X1="5" Y1="110" X2="10" Y2="110" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
-        <Line X1="5" Y1="90" X2="10" Y2="90" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
-        <Line X1="5" Y1="70" X2="10" Y2="70" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
-        <Line X1="5" Y1="50" X2="10" Y2="50" StrokeThickness="1" Grid.Row="1" Stroke="Black"/>
-
-    </Grid>
+    </ScrollViewer>
 </Window>
