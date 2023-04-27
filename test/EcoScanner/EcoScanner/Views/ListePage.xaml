@@ -84,7 +84,7 @@
             <Label Grid.Column="1" HorizontalOptions="Center" FontSize="24" Text="{Binding Total,  StringFormat='{}{0}kg co2e}'}"></Label>
 
             <Image Source="TilfoejTilHistorikKnap.png" Grid.Row="1" Grid.ColumnSpan="2"/>
-            <ImageButton Source="TilfoejTilHistorikKnap.png" Opacity="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <ImageButton Source="TilfoejTilHistorikKnap.png" Command="{Binding AddToHistory}" Opacity="0" Grid.Row="1" Grid.ColumnSpan="2"/>
 
             <Image Source="TilbageKnap.png" Grid.Row="2" Grid.Column="0" HorizontalOptions="End" Margin="0,0,-4,0"/>
             <ImageButton Source="TilbageKnap.png" Command="{Binding ReturnPressed}" Opacity="0" Grid.Row="2" Grid.Column="0"/>

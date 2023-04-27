@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
 
 namespace EcoScanner.ViewModels
 {
@@ -24,6 +25,7 @@ namespace EcoScanner.ViewModels
         public Command ClearListClicked { get; set; }
         public Command PlusClicked { get; set; }
         public Command ReturnPressed { get; set; }
+        public Command AddToHistory { get; set; }
         public int Number { get; set; } = 0;
 		public static event EventHandler ClearList;
         public static event EventHandler ListeChanged;
@@ -47,9 +49,11 @@ namespace EcoScanner.ViewModels
 			MinusClicked = new Command<Product>(minusClicked);
             ClearListClicked = new Command(clearList);
             ReturnPressed = new Command(returnPressed);
-            ClearList += (sender, e) => clearTheList();
+            AddToHistory = new Command(historyPressed);
+			ClearList += (sender, e) => clearTheList();
 			SumChanged += (sender, e) => OnTotalChanged();
 			ListeChanged += (sender, e) => refreshList();
+
 		}
         public static void invoke()
         {
@@ -91,7 +95,14 @@ namespace EcoScanner.ViewModels
 
 			IsBusy = false;
 		}
-        void plusClicked(Product item)
+        void historyPressed()
+        {
+            History.addToHistory();
+            HistoryView.refreshView();
+
+		}
+
+		void plusClicked(Product item)
         {
 			if (item == null)
 				return;

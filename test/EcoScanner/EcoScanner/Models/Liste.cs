@@ -177,7 +177,6 @@ namespace EcoScanner.Models
 			{
 				Trace.WriteLine("--- No file to remove ---");
 			}
-				
 		}
 
 

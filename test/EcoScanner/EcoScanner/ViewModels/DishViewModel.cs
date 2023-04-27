@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EcoScanner.ViewModels
 {
-    public class DishViewModel
+    public class DishViewModel : BaseViewModel
     {
         public string Source { get; set; }
         public DishViewModel(string source)
