@@ -12,13 +12,13 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" x:Name="Image" Source="{Binding Source}" Opacity="0.5" Aspect="AspectFill"/>
-                    <Label Grid.Row="0" x:Name="RetName" FontAttributes="Bold" Margin="10" FontSize="20"/>
+                    <Label Grid.Row="0" x:Name="RetName" Text="{Binding DishName}" FontAttributes="Bold" Margin="10" FontSize="20"/>
                     <BoxView HeightRequest="1" Grid.Row="0" Color="Gray"  VerticalOptions="End" HorizontalOptions="FillAndExpand"></BoxView>
-                    <Label Grid.Row="1" x:Name="CO2udledning" HorizontalTextAlignment="Center" FontSize="20"/>
+                    <Label Grid.Row="1" x:Name="CO2udledning" Text="{Binding CO2udledning}"  HorizontalTextAlignment="Center" FontSize="20"/>
                 </Grid>
             </Frame>
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding MyDish, Source=D}" />
+                <TapGestureRecognizer Command="{Binding TapCommand}" CommandParameter="{Binding MyDish}" />
             </Frame.GestureRecognizers>
         </Frame>
         
