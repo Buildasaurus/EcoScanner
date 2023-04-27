@@ -27,6 +27,7 @@
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
 
+
             <!--
             Default Styles for all Flyout Items
             https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
@@ -87,7 +88,7 @@
     <FlyoutItem Title="Søg efter varer" Icon="SoegeIkonMenu.png">
         <ShellContent Route="SearchView" ContentTemplate="{DataTemplate local:SearchView}" />
     </FlyoutItem>
-    <FlyoutItem Title="Retter" Icon="RetterIkon.png">
+    <FlyoutItem Title="Inspiration til retter" Icon="RetterIkon.png">
         <ShellContent Route="DishesView" ContentTemplate="{DataTemplate local:DishesView}" />
     </FlyoutItem>
     <FlyoutItem Title="Historik" Icon="HistorikIkon.png">
