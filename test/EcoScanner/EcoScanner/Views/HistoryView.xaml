@@ -29,12 +29,8 @@
 
                 </Grid>
 
-                <Grid>
-                    <ScrollView Orientation="Horizontal" HeightRequest="200" HorizontalOptions="End" HorizontalScrollBarVisibility="Never">
-                        <StackLayout x:Name="Chartdata" HeightRequest="200" HorizontalOptions="End" Orientation="Horizontal">
-                        </StackLayout>
-                    </ScrollView>
-                    <Grid x:Name="ChartRow" Margin="10,30">
+                <Grid ColumnDefinitions="100, *">
+                    <Grid x:Name="ChartRow" Margin="10,30" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="20"/>
@@ -46,11 +42,16 @@
                             <RowDefinition Height="10"/>
                         </Grid.RowDefinitions>
                     </Grid>
+                    <ScrollView Orientation="Horizontal" HeightRequest="200" HorizontalOptions="End" HorizontalScrollBarVisibility="Never" Grid.Column="1">
+                        <StackLayout x:Name="Chartdata" HeightRequest="200" HorizontalOptions="End" Orientation="Horizontal" Grid.Column="1">
+                        </StackLayout>
+                    </ScrollView>
+                    
 
-                    <Label Grid.Row="0" TextType="Html" Margin="0, 30" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                    <Label Grid.Row="0" Grid.Column="1" TextType="Html" Margin="0, 30" FontAttributes="Bold" HorizontalTextAlignment="Center">
                         <![CDATA[CO<sub><small>2</small></sub>e (kg)]]>
                     </Label>
-            </Grid>
+                </Grid>
                 
                 
 
