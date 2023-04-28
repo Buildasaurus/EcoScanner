@@ -8,9 +8,11 @@ namespace EcoScanner.ViewModels
 	public class HistoryViewModel : BaseViewModel
 	{
 		public static event EventHandler RefreshEventhandler;
+		public string Title { get; set; }
 
 		public HistoryViewModel()
 		{
+			Title = "Historik";
 			RefreshEventhandler += (sender, e) => localRefresh();
 
 		}
