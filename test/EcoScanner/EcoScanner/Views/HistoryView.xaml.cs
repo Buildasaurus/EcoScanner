@@ -141,13 +141,14 @@ namespace EcoScanner.Views
 				string weekDay = d1.DayOfWeek.ToString();
 				int weekNum = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d1, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 				int graphheight = 140;
+				int margin = 15;
 
 				Grid weekCategory = new Grid();
 				RowDefinition wGridRow1 = new RowDefinition();
 				RowDefinition wGridRow2 = new RowDefinition();
 
 				wGridRow1.Height = new GridLength(30);
-				wGridRow2.Height = new GridLength(graphheight + 30 + 10);
+				wGridRow2.Height = new GridLength(graphheight + 30 + margin);
 				weekCategory.RowDefinitions.Add(wGridRow1);
 				weekCategory.RowDefinitions.Add(wGridRow2);
 				//var myBorder = new Border();
@@ -169,7 +170,7 @@ namespace EcoScanner.Views
 				Grid weekGrid = new Grid();
 				weekGrid.SetValue(Grid.RowProperty, 1);
 				weekGrid.VerticalOptions = LayoutOptions.Start;
-				weekGrid.Margin = new Thickness(0, 10, 0 ,0);
+				weekGrid.Margin = new Thickness(0, margin, 0 ,0);
 				for (int i = 0; i < 7; i++)
 				{
 					ColumnDefinition gridCol = new ColumnDefinition();
@@ -293,12 +294,12 @@ namespace EcoScanner.Views
 			{
 				string weekDay = d1.DayOfWeek.ToString();
 				int weekNum = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d1, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-
+				int margin = 15;
 				Grid monthCategory = new Grid();
 				RowDefinition mGridRow1 = new RowDefinition();
 				RowDefinition mGridRow2 = new RowDefinition();
 				mGridRow1.Height = new GridLength(30);
-				mGridRow2.Height = new GridLength(graphHeight + 30 + 10); //30 for week names at buttom, and 10 for margin
+				mGridRow2.Height = new GridLength(graphHeight + 30 + margin); //30 for week names at buttom, and 10 for margin
 
 				monthCategory.RowDefinitions.Add(mGridRow1);
 				monthCategory.RowDefinitions.Add(mGridRow2);
@@ -335,7 +336,7 @@ namespace EcoScanner.Views
 				Grid monthGrid = new Grid();
 				monthGrid.VerticalOptions = LayoutOptions.End;
 				monthGrid.SetValue(Grid.RowProperty, 1);
-				monthGrid.Margin = new Thickness(0, 10, 0, 0);
+				monthGrid.Margin = new Thickness(0, margin, 0, 0);
 
 				for (int i = 0; i < weeksInMonth; i++)
 				{
@@ -468,7 +469,7 @@ namespace EcoScanner.Views
 				RowDefinition yGridRow1 = new RowDefinition();
 				RowDefinition yGridRow2 = new RowDefinition();
 				yGridRow1.Height= new GridLength(30);
-				yGridRow2.Height = new GridLength(graphHeight + 30 + 10);
+				yGridRow2.Height = new GridLength(graphHeight + 30 + 15);
 
 				yearCategory.RowDefinitions.Add(yGridRow1);
 				yearCategory.RowDefinitions.Add(yGridRow2);
@@ -490,7 +491,7 @@ namespace EcoScanner.Views
 				Grid yearGrid = new Grid();
 				yearGrid.VerticalOptions = LayoutOptions.End;
 				yearGrid.SetValue(Grid.RowProperty, 1);
-				yearGrid.Margin = new Thickness(0, 10, 0, 0);
+				yearGrid.Margin = new Thickness(0, 15, 0, 0);
 
 				for (int i = 0; i < 12; i++)
 				{

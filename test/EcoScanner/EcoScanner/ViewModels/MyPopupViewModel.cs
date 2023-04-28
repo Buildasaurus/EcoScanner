@@ -18,9 +18,25 @@ namespace EcoScanner.ViewModels
 	public class MyPopupViewModel : BaseViewModel
 	{
 		public string ProductName { get; set; }
-		public string ProductUnit { get; set; }
+		public string ProductUnit { get 
+			{
+				if (product.Weight < 1 && product.Unit == "kg")
+				{
+					return (product.Weight*1000).ToString("0.0") + " g";
+				}
+				else
+				{
+					return product.Weight + " " + product.Unit;
+				}
+			}
+		}
 		public string ScalePath { get; set; }
-		public string weightOf1kg { get; set; }
+		public string weightOf1kg { get 
+			{
+				string a = "" + product.CO2.ToString("0.0") + " kg CO2e";
+				return a;
+			}
+		}
 		public string Description { get; set; }
 		public string TotalWeight { get; set; }
 		public string Color { get; set; }
@@ -41,7 +57,6 @@ namespace EcoScanner.ViewModels
 			Number = "1";
 			this.product = product;
 			ProductName = product.Name;
-			ProductUnit = product.Weight + " " + product.Unit;
 			Number = "" + product.Count;
 			this.Weight = product.Weight;
 			this.Unit = product.Unit;
@@ -109,9 +124,16 @@ namespace EcoScanner.ViewModels
 		private void updateNumbers()
 		{
 			float totalWeight = Weight * int.Parse(Number);
-			weightOf1kg = "" + product.CO2.ToString("0.0") + " kg CO2e";
-			Description = "Udledningen af " + totalWeight + " " + Unit + " bliver:";
+			if (totalWeight < 1 && Unit == "kg") 
+			{
+				Description = "Udledningen af " + (totalWeight*1000).ToString("0.0") + " g bliver:";
+			}
+			else
+			{
+				Description = "Udledningen af " + totalWeight + " " + Unit + " bliver:";
+			}
 			TotalWeight = (totalWeight * product.CO2).ToString("0.0") + " kg CO2e";
+
 			OnPropertyChanged(null);
 		}
 	}

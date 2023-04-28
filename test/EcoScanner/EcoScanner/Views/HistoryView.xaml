@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EcoScanner.Views.HistoryView">
+             x:Class="EcoScanner.Views.HistoryView"
+             Title="{Binding Title}">
     <RefreshView  IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <ScrollView>
             <StackLayout BackgroundColor="Beige">
@@ -30,7 +31,7 @@
                 </Grid>
 
                 <Grid ColumnDefinitions="75, *">
-                    <Grid x:Name="ChartRow" Margin="10,30" Grid.Column="0">
+                    <Grid x:Name="ChartRow" Margin="10,35" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition Height="20"/>
