@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcoScanner.Views.InformationView"
+             Title="{Binding Title}">
+    <ScrollView>
+        <StackLayout Margin="20">
+            <Label Text="Hvad er CO&#8322;e?" FontSize="24" FontAttributes="Bold" Margin="0,10,0,0" />
+            <Label Text="CO&#8322;e står for CO&#8322;-ækvivalens og er en betegnelse for udledningen af drivhusgasser til hvad det svare til i CO2. Det kunne f.eks. være metan som der faktisk blev udledt. Når det skrives som CO&#8322;e betyder det at de andre drivhusgasser ganget op med det tal de svarer til i CO2. Så CO&#8322;&#x2019;s CO&#8322;e er sat til 1 og metans CO&#8322;e er f.eks. 25. Så det vil sige at 1 kg metan altså svarer til 25 kg CO&#8322;." FontSize="17"/>
+            <Label Text="Hvad dækker varernes udledning over?" FontSize="24" FontAttributes="Bold" Margin="0,10,0,0" />
+            <Label Text="Når CO&#8322;e pr. kg for en madvare udregnes, er det udledningen for Landbrug, ILUC (indirekte arealanvendelse), forarbejdning, Emballage, Transport og Detail sammenlagt." FontSize="17"/>
+            <Label Text="Hvor kommer CO&#8322;e dataene fra?" FontSize="24" FontAttributes="Bold" Margin="0,10,0,0" />
+            <Label Text="Dataene om varernes CO&#8322;e er taget fra den store klimadatabase, som er udarbejdet af CONCITO i samarbejde med 2.-0 LCA consultants og med støtte fra Salling Fondene." FontSize="17"/>
+            <Label Text="Dataene om danskernes gennemsnitlige udledning af drivhusgasser er for mad og drikke til privatforbrug er fra en rapport ved navn Klimavenlig kost af CONCITO og politikken fra 2014." FontSize="17"/>
+            <Label Text="Hvordan er skalaen inddelt?" FontSize="24" FontAttributes="Bold" Margin="0,10,0,0" />
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label FontSize="16" Grid.Row="0" Grid.Column="0" Text="Kategoriernes kg CO&#8322;e pr kg." FontAttributes="Bold" />
+                <Label FontSize="16" Grid.Row="0" Grid.Column="1" Text="Kategoriernes mærkning" FontAttributes="Bold" />
+                <BoxView  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="2" />
+                <Label FontSize="16" Grid.Row="2" Grid.Column="0" Text="[0;1[" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label FontSize="16" Grid.Row="2" Grid.Column="1" Text="A" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <BoxView  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="2" />
+                <Label FontSize="16" Grid.Row="4" Grid.Column="0" Text="[1;2,5[" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label FontSize="16" Grid.Row="4" Grid.Column="1" Text="B" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <BoxView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="2" />
+                <Label FontSize="16" Grid.Row="6" Grid.Column="0" Text="[2,5;4,5[" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label FontSize="16" Grid.Row="6" Grid.Column="1" Text="C" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <BoxView Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="2" />
+                <Label FontSize="16" Grid.Row="8" Grid.Column="0" Text="[4,5;7[" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label FontSize="16" Grid.Row="8" Grid.Column="1" Text="D" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <BoxView Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="2" />
+                <Label FontSize="16" Grid.Row="10" Grid.Column="0" Text="[7;10[" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label FontSize="16" Grid.Row="10" Grid.Column="1" Text="E" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <BoxView Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="2" />
+                <Label FontSize="16" Grid.Row="12" Grid.Column="0" Text="10+" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <Label FontSize="16" Grid.Row="12" Grid.Column="1" Text="F" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                <BoxView Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightGray" HeightRequest="2" />
+                <BoxView Grid.Column="0" HorizontalOptions="End" Color="LightGray" Grid.RowSpan="14" WidthRequest="2" Grid.Row="0"/>
+
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

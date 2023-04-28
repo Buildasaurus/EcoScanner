@@ -94,6 +94,9 @@
     <FlyoutItem Title="Historik" Icon="HistorikIkon.png">
         <ShellContent Route="HistoryView" ContentTemplate="{DataTemplate local:HistoryView}" />
     </FlyoutItem>
+    <FlyoutItem Title="Information" Icon="ScannerIkon.png" >
+        <ShellContent Route="InformationView" ContentTemplate="{DataTemplate local:InformationView}" />
+    </FlyoutItem>
 
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  
