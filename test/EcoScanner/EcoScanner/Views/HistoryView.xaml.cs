@@ -25,18 +25,11 @@ namespace EcoScanner.Views
 		{
 			BindingContext = new HistoryViewModel();
 			boef = History.getHistory();
-			//Bare for at teste
-			DateTime key = new DateTime(2023, 3, 23);
-			boef.Add(key, 70);
-			key = new DateTime(2023, 4, 24);
-			boef.Add(key, 100);
-			key = new DateTime(2023, 4, 23);
-			boef.Add(key, 60);
 			RefreshEventhandler += (sender, e) => localRefresh();
-
 
 			InitializeComponent();
 			MakeWeekBarGraph(boef);
+			Plus_Clicked(null, EventArgs.Empty);
 		}
 		public static void refreshView()
 		{
@@ -64,6 +57,7 @@ namespace EcoScanner.Views
 			line.Color = Color.DarkSlateGray;
 			line.WidthRequest = 1;
 			line.SetValue(Grid.RowProperty, 0);
+			line.HorizontalOptions = LayoutOptions.End;
 			return line;
 		}
 		BoxView createHorizontalLine()
@@ -74,6 +68,14 @@ namespace EcoScanner.Views
 			line.WidthRequest = 5;
 			line.VerticalOptions = LayoutOptions.Center;
 			line.HorizontalOptions = LayoutOptions.Start;
+			return line;
+		}
+		BoxView createBlueBackground()
+		{
+			BoxView line = new BoxView();
+			line.HeightRequest = 30;
+			line.Color = Color.FromHex("#01ABC9");
+			line.SetValue(Grid.RowProperty, 0);
 			return line;
 		}
 		/// <summary>
@@ -141,6 +143,8 @@ namespace EcoScanner.Views
 				Grid weekCategory = new Grid();
 				RowDefinition wGridRow1 = new RowDefinition();
 				RowDefinition wGridRow2 = new RowDefinition();
+				weekCategory.Padding = 0;
+				weekCategory.ColumnSpacing = 0;
 
 				wGridRow1.Height = new GridLength(30);
 				weekCategory.RowDefinitions.Add(wGridRow1);
@@ -151,10 +155,11 @@ namespace EcoScanner.Views
 				//weekCategory.Children.Add(myBorder);
 
 				BoxView line = createLine();
+				BoxView boxbehind = createBlueBackground();
 
 				Label textWeek = new Label();
 				textWeek.Text = "Uge " + weekNum;
-				textWeek.TextColor = Color.White;
+				textWeek.TextColor = Color.Black;
 				textWeek.VerticalOptions = LayoutOptions.End;
 				textWeek.HorizontalOptions = LayoutOptions.Center;
 				textWeek.VerticalOptions = LayoutOptions.Center;
@@ -215,8 +220,9 @@ namespace EcoScanner.Views
 					d1 = d1.AddDays(1);
 				}
 
-				weekCategory.Children.Add(textWeek);
+				weekCategory.Children.Add(boxbehind);
 				weekCategory.Children.Add(line);
+				weekCategory.Children.Add(textWeek);
 				weekCategory.Children.Add(weekGrid);
 				Chartdata.Children.Add(weekCategory);
 
@@ -298,6 +304,7 @@ namespace EcoScanner.Views
 				//monthCategory.Children.Add(myBorder);
 
 				BoxView line = createLine();
+				BoxView boxbehind = createBlueBackground();
 
 				Label textMonth = new Label();
 				textMonth.Text = d1.ToString("MMMM");
@@ -379,9 +386,9 @@ namespace EcoScanner.Views
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
 					monthGrid.Children.Add(combiningColGrid);
 				}
-
-				monthCategory.Children.Add(textMonth);
+				monthCategory.Children.Add(boxbehind);
 				monthCategory.Children.Add(line);
+				monthCategory.Children.Add(textMonth);
 				monthCategory.Children.Add(monthGrid);
 				Chartdata.Children.Add(monthCategory);
 
@@ -462,10 +469,11 @@ namespace EcoScanner.Views
 				//yearCategory.Children.Add(myBorder);
 
 				BoxView line = createLine();
+				BoxView boxbehind = createBlueBackground();
 
 				Label textYear = new Label();
 				textYear.Text = d1.ToString("yyyy");
-				textYear.TextColor = Color.White;
+				textYear.TextColor = Color.Black;
 				textYear.VerticalOptions = LayoutOptions.End;
 				textYear.HorizontalOptions = LayoutOptions.Center;
 				textYear.VerticalOptions = LayoutOptions.Center;
@@ -539,8 +547,9 @@ namespace EcoScanner.Views
 					d1 = d1.AddDays(1);
 				}
 
-				yearCategory.Children.Add(textYear);
+				yearCategory.Children.Add(boxbehind);
 				yearCategory.Children.Add(line);
+				yearCategory.Children.Add(textYear);
 				yearCategory.Children.Add(yearGrid);
 				Chartdata.Children.Add(yearCategory);
 

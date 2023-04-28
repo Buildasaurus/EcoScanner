@@ -29,7 +29,7 @@
 
                 </Grid>
 
-                <Grid ColumnDefinitions="100, *">
+                <Grid ColumnDefinitions="75, *">
                     <Grid x:Name="ChartRow" Margin="10,30" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -46,7 +46,7 @@
                         <![CDATA[CO<sub><small>2</small></sub>e (kg)]]>
                     </Label>
                     <ScrollView Orientation="Horizontal" HeightRequest="200" HorizontalOptions="End" HorizontalScrollBarVisibility="Never" Grid.Column="1">
-                        <StackLayout x:Name="Chartdata" HeightRequest="200" HorizontalOptions="End" Orientation="Horizontal" Grid.Column="1">
+                        <StackLayout x:Name="Chartdata" HeightRequest="200" HorizontalOptions="End" Orientation="Horizontal" Grid.Column="1" Padding="0" Spacing="0">
                         </StackLayout>
                     </ScrollView>
                     
@@ -73,7 +73,7 @@
                         <Image Source="MinusKnap.png" Grid.Column="0"/>
                         <ImageButton Source="MinusKnap.png" Clicked="Minus_Clicked" x:Name="Minus"  Grid.Column="0" Opacity="0"/>
 
-                        <Entry Keyboard="Numeric" Text="0" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="EntryNumber" IsReadOnly="True" TextColor="Black"/>
+                        <Entry Keyboard="Numeric" Text="1" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="EntryNumber" IsReadOnly="True" TextColor="Black"/>
 
                         <Image Source="PlusKnap.png" Grid.Column="2"/>
                         <ImageButton Source="PlusKnap.png" Clicked="Plus_Clicked" x:Name="Plus"  Grid.Column="2" Opacity="0"/>
