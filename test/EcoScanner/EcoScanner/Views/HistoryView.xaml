@@ -62,7 +62,24 @@
                 <Label Margin="5" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="WordWrap" FontSize="20">
             Hvor mange personer brødfødes med dit indkøb:
                 </Label>
+                <Grid ColumnDefinitions="*, *, *" HeightRequest="50" >
+                    <Grid x:Name="inner" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <Image Source="MinusKnap.png" Grid.Column="0"/>
+                        <ImageButton Source="MinusKnap.png" Clicked="Minus_Clicked" x:Name="Minus"  Grid.Column="0" Opacity="0"/>
+
+                        <Entry Keyboard="Numeric" Text="0" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="EntryNumber" IsReadOnly="True" TextColor="Black"/>
+
+                        <Image Source="PlusKnap.png" Grid.Column="2"/>
+                        <ImageButton Source="PlusKnap.png" Clicked="Plus_Clicked" x:Name="Plus"  Grid.Column="2" Opacity="0"/>
+                    </Grid>
+                </Grid>
+                
                 <Grid HeightRequest="260" BackgroundColor="White">
                     <Grid Margin="10,20,10,0">
                         <Grid.ColumnDefinitions>

@@ -6,21 +6,14 @@ using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
-	public class WarningPopupViewModel : BaseViewModel
+	public class WarningPopupViewModel : BaseViewModel, IWarningPopup
 	{
 		public string Message { get; set; }
 		public ContentView ButtonContent { get; set; }
-		public WarningPopupViewModel(string message, int buttons)
+		public WarningPopupViewModel(string message, ContentView content)
 		{
 			Message = message;
-			if(buttons == 1) 
-			{
-				ButtonContent = new SingleButtonView();
-			}
-			else if(buttons == 2)
-			{
-				ButtonContent = new TwoButtonWarningView();
-			}
+			ButtonContent = content;
 		}
 
 	}

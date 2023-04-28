@@ -17,7 +17,7 @@ namespace EcoScanner.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryView : ContentPage
 	{
-
+		public int houseMemberCount { get; set; }
 		Dictionary<DateTime, float> boef = new Dictionary<DateTime, float>();
 		public static event EventHandler RefreshEventhandler;
 
@@ -572,7 +572,6 @@ namespace EcoScanner.Views
 				ChartRow.Children.Add(a);
 
 			}
-
 		}
 
 		void KalibrerGenmVDig(Dictionary<DateTime, float> historik, int Hustandstal)
@@ -594,7 +593,7 @@ namespace EcoScanner.Views
 			}
 
 			double ditGenm = SumCO2 * 7 / (divisor * Hustandstal);
-			DinUdledningText.Text = ditGenm.ToString() + "kg";
+			DinUdledningText.Text = ditGenm.ToString("0.00") + " kg";
 
 			if (ditGenm < DanskGenm)
 			{
@@ -695,8 +694,22 @@ namespace EcoScanner.Views
 			ButtonName1.TextColor = Color.Black;
 			ButtonName2.TextColor = Color.White;
 
-			//Bare for at teste det
-			KalibrerGenmVDig(boef, 1);
+		}
+		public void Plus_Clicked(object sender, EventArgs e)
+		{
+			int number = int.Parse(EntryNumber.Text) + 1;
+			EntryNumber.Text = number.ToString();
+			KalibrerGenmVDig(boef, number);
+		}
+
+		private void Minus_Clicked(object sender, EventArgs e)
+		{
+			int number = int.Parse(EntryNumber.Text) - 1;
+			if (number > 0)
+			{
+				EntryNumber.Text = number.ToString();
+				KalibrerGenmVDig(boef, number);
+			}
 		}
 	}
 }

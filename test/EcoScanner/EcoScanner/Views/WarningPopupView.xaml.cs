@@ -13,12 +13,11 @@ namespace EcoScanner.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class WarningPopupView : Rg.Plugins.Popup.Pages.PopupPage
 	{
-		WarningPopupViewModel viewModel;
+		BaseViewModel viewModel;
 		public static bool onPopup = false;
-		public WarningPopupView(string message, int buttons)
+		public WarningPopupView(BaseViewModel viewModel)
 		{
 			InitializeComponent();
-			viewModel = new WarningPopupViewModel(message, buttons);
 			BindingContext = viewModel;
 		}
 		private void backgroundClosed(object sender, EventArgs e)
