@@ -1,4 +1,6 @@
 ﻿using EcoScanner.Models;
+using EcoScanner.Views;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,10 +31,10 @@ namespace EcoScanner.ViewModels
             this.Source = source + ".png";
 			TapCommand = new Command<Dish>(tapCommand);
 		}
-		public void tapCommand(Dish dish)
+		public async void tapCommand(Dish dish)
 		{
-			Trace.WriteLine(dish.Name);
-			Browser.OpenAsync(dish.URL).Wait();
+			WarningPopupViewModel viewmodel = new WarningPopupViewModel("Dette vil føre dig til COOPs hjemmeside", new AcceptDeclinePopupView(dish));
+			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 		}
 	}
 }

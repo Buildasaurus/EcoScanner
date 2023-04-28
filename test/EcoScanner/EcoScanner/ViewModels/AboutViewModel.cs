@@ -57,13 +57,15 @@ namespace EcoScanner.ViewModels
 					else
 					{
 						WarningPopupView.onPopup = true;
-						await PopupNavigation.Instance.PushAsync(new WarningPopupView("For stort tal - Bør være under 500", 1));
+						WarningPopupViewModel viewmodel = new WarningPopupViewModel("For stort tal - Bør være under 500", new SingleButtonView());
+						await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 					}
 				}
 				catch
 				{
 					WarningPopupView.onPopup = true;
-					await PopupNavigation.Instance.PushAsync(new WarningPopupView("Forkert formateret kode - Bør være et heltal", 1));
+					WarningPopupViewModel viewmodel = new WarningPopupViewModel("Forkert formateret kode - Bør være et heltal", new SingleButtonView());
+					await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 					Trace.WriteLine("not a number");
 				}
 				//result.Text

@@ -31,7 +31,7 @@ x:Class="EcoScanner.Views.MyPopup" BackgroundColor="#C0808080" Padding="20"
                 <Label Text = "{Binding ProductUnit}" Grid.Row="1" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="17" TextColor="Black"/>
                 
                 <Image Source="{Binding ScalePath}"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Transparent" x:Name="scale"/>
-                <Label  Grid.Row="3" Grid.Column="0"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center">
+                <Label  Grid.Row="3" Grid.Column="0"  TextColor="Black" HorizontalTextAlignment="Center" FontSize="20" Grid.ColumnSpan="2" VerticalTextAlignment="Center">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="1 " />
@@ -43,7 +43,7 @@ x:Class="EcoScanner.Views.MyPopup" BackgroundColor="#C0808080" Padding="20"
 
 
                 <Label Text="{Binding weightOf1kg}" Grid.Row="4" Grid.ColumnSpan="2"  HorizontalTextAlignment="Center" FontSize="28"  TextColor="{Binding Color}" FontAttributes="Bold" VerticalTextAlignment="Start" x:Name="single"/>
-                <Label Text="Antal " TextColor="Black" Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Start" FontSize="21" VerticalTextAlignment="Center"/>
+                <Label Text="Antal " TextColor="Black" Grid.Row="5" Grid.Column="0" HorizontalTextAlignment="Start" FontSize="20" VerticalTextAlignment="Center"/>
 
                 <Grid x:Name="inner" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="5" Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -61,7 +61,7 @@ x:Class="EcoScanner.Views.MyPopup" BackgroundColor="#C0808080" Padding="20"
                     <ImageButton Source="PlusKnap.png" Command="{Binding PlusClicked}" x:Name="Plus"  Grid.Column="2" Opacity="0"/>
                 </Grid>
 
-                <Label Text="{Binding Description}" Grid.Row="6" TextColor="Black" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="21" Grid.ColumnSpan="2" VerticalTextAlignment="Center" x:Name="description"/>
+                <Label Text="{Binding Description}" Grid.Row="6" TextColor="Black" Grid.Column="0" LineBreakMode="WordWrap" HorizontalTextAlignment="Center" FontSize="20" Grid.ColumnSpan="2" VerticalTextAlignment="Center" x:Name="description"/>
                 <Label Text="{Binding TotalWeight}" Grid.Row="7" Grid.Column="0" HorizontalTextAlignment="Center" FontSize="28" Grid.ColumnSpan="2" TextColor="#01ABC9" FontAttributes="Bold" x:Name="tot"/>
                 <Image Source="TilbageKnap.png" Grid.Row="8" Grid.Column="0"/>
                 <ImageButton Source="TilbageKnap.png" Command="{Binding CloseClicked}" x:Name="Close"  Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand"  Opacity="0"/>

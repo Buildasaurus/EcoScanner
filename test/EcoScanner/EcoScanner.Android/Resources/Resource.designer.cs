@@ -25920,31 +25920,40 @@ namespace EcoScanner.Droid
 			public const int SoegeIkonMenu = 2131165352;
 			
 			// aapt resource value: 0x7F0700A9
-			public const int test_custom_background = 2131165353;
+			public const int StorTilbageKnap = 2131165353;
 			
 			// aapt resource value: 0x7F0700AA
-			public const int TilbageKnap = 2131165354;
+			public const int test_custom_background = 2131165354;
 			
 			// aapt resource value: 0x7F0700AB
-			public const int TilbageTilScannerKnap = 2131165355;
+			public const int TilbageKnap = 2131165355;
 			
 			// aapt resource value: 0x7F0700AC
-			public const int TilfoejTilHistorikKnap = 2131165356;
+			public const int TilbageTilScannerKnap = 2131165356;
 			
 			// aapt resource value: 0x7F0700AD
-			public const int TilfoejTilListeKnap = 2131165357;
+			public const int TilfoejTilHistorikKnap = 2131165357;
 			
 			// aapt resource value: 0x7F0700AE
-			public const int tooltip_frame_dark = 2131165358;
+			public const int TilfoejTilListeKnap = 2131165358;
 			
 			// aapt resource value: 0x7F0700AF
-			public const int tooltip_frame_light = 2131165359;
+			public const int TilHjemmeside = 2131165359;
 			
 			// aapt resource value: 0x7F0700B0
-			public const int Vegetar_burger_med_kikaerteboef_og_urtedressing = 2131165360;
+			public const int tooltip_frame_dark = 2131165360;
 			
 			// aapt resource value: 0x7F0700B1
-			public const int xamarin_logo = 2131165361;
+			public const int tooltip_frame_light = 2131165361;
+			
+			// aapt resource value: 0x7F0700B2
+			public const int Vegetar_burger_med_kikaerteboef_og_urtedressing = 2131165362;
+			
+			// aapt resource value: 0x7F0700B3
+			public const int xamarin_logo = 2131165363;
+			
+			// aapt resource value: 0x7F0700B4
+			public const int XKnap = 2131165364;
 			
 			static Drawable()
 			{

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
 
 namespace EcoScanner.ViewModels
@@ -120,10 +121,10 @@ namespace EcoScanner.ViewModels
 			Liste.saveProduct(item);
 			updateItem();
 		}
-        async void clearList()
+		async void clearList()
         {
-			
-			await PopupNavigation.Instance.PushAsync(new WarningPopupView("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om", 2));
+			WarningPopupViewModel viewModel = new WarningPopupViewModel("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om", new TwoButtonWarningView());
+			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewModel));
 		}
 
 		async Task ExecuteLoadItemsCommand()
