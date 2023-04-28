@@ -10,7 +10,7 @@
     
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
-
+    
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -73,7 +73,7 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
-
+    
     <!-- 
         When the Flyout is visible this defines the content to display in the flyout.
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
@@ -94,7 +94,7 @@
     <FlyoutItem Title="Historik" Icon="HistorikIkon.png">
         <ShellContent Route="HistoryView" ContentTemplate="{DataTemplate local:HistoryView}" />
     </FlyoutItem>
-    <FlyoutItem Title="Information" Icon="ScannerIkon.png" >
+    <FlyoutItem Title="Information" Icon="InfoIkon.png" >
         <ShellContent Route="InformationView" ContentTemplate="{DataTemplate local:InformationView}" />
     </FlyoutItem>
 
@@ -111,9 +111,6 @@
         content you can do so by calling 
         await Shell.Current.GoToAsync("//LoginPage");
     -->
-    <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    </TabBar>
 
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.
@@ -147,5 +144,4 @@
     </Shell.MenuItemTemplate>
 
     -->
-
 </Shell>
