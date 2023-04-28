@@ -15,7 +15,7 @@ namespace EcoScanner.Models
 		public int Count { get; set; }
 		public float TotCo2 { get
 			{
-				return Count*CO2;
+				return Count*CO2*Weight;
 			}
 		}
 		public string Unit { get; set; }

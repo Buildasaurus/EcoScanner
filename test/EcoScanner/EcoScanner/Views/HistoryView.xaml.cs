@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Behaviors;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Xamarin.Forms.Internals.Profile;
 
 namespace EcoScanner.Views
 {
@@ -600,8 +601,8 @@ namespace EcoScanner.Views
 				divisor++;
 				date = date.AddDays(1);
 			}
-
-			double ditGenm = SumCO2 * 7 / (divisor * Hustandstal);
+			double weeksSinceStart = Math.Ceiling((date - DateTime.Today).TotalDays / 7);
+			double ditGenm = SumCO2  / (weeksSinceStart * Hustandstal);
 			DinUdledningText.Text = ditGenm.ToString("0.00") + " kg";
 
 			if (ditGenm < DanskGenm)
@@ -708,6 +709,7 @@ namespace EcoScanner.Views
 		{
 			int number = int.Parse(EntryNumber.Text) + 1;
 			EntryNumber.Text = number.ToString();
+			boef = History.getHistory();
 			KalibrerGenmVDig(boef, number);
 		}
 
@@ -716,6 +718,7 @@ namespace EcoScanner.Views
 			int number = int.Parse(EntryNumber.Text) - 1;
 			if (number > 0)
 			{
+				boef = History.getHistory();
 				EntryNumber.Text = number.ToString();
 				KalibrerGenmVDig(boef, number);
 			}
