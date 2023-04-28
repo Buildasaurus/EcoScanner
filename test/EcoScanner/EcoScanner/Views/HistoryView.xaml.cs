@@ -101,7 +101,7 @@ namespace EcoScanner.Views
 			DateTime d2 = DateTime.Now;
 
 			List<float> testForBest = new List<float>();
-
+			//figuring out which date has most emission
 			while (0 > DateTime.Compare(d1, d2))
 			{
 				string weekDay = d1.DayOfWeek.ToString();
@@ -140,14 +140,14 @@ namespace EcoScanner.Views
 			{
 				string weekDay = d1.DayOfWeek.ToString();
 				int weekNum = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d1, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+				int graphheight = 140;
 
 				Grid weekCategory = new Grid();
 				RowDefinition wGridRow1 = new RowDefinition();
 				RowDefinition wGridRow2 = new RowDefinition();
-				weekCategory.Padding = 0;
-				weekCategory.ColumnSpacing = 0;
 
 				wGridRow1.Height = new GridLength(30);
+				wGridRow2.Height = new GridLength(graphheight + 30 + 10);
 				weekCategory.RowDefinitions.Add(wGridRow1);
 				weekCategory.RowDefinitions.Add(wGridRow2);
 				//var myBorder = new Border();
@@ -168,7 +168,8 @@ namespace EcoScanner.Views
 
 				Grid weekGrid = new Grid();
 				weekGrid.SetValue(Grid.RowProperty, 1);
-				weekGrid.VerticalOptions = LayoutOptions.End;
+				weekGrid.VerticalOptions = LayoutOptions.Start;
+				weekGrid.Margin = new Thickness(0, 10, 0 ,0);
 				for (int i = 0; i < 7; i++)
 				{
 					ColumnDefinition gridCol = new ColumnDefinition();
@@ -180,9 +181,8 @@ namespace EcoScanner.Views
 					Grid combiningColGrid = new Grid();
 					RowDefinition gridRow1 = new RowDefinition();
 					RowDefinition gridRow2 = new RowDefinition();
-					gridRow1.Height= new GridLength(120);
+					gridRow1.Height= new GridLength(graphheight);
 					gridRow2.Height= new GridLength(30);
-
 					combiningColGrid.RowDefinitions.Add(gridRow1);
 					combiningColGrid.RowDefinitions.Add(gridRow2);
 
@@ -204,8 +204,8 @@ namespace EcoScanner.Views
 					{
 						rectHeight = historik[d1.Date];
 					}
-					float maksAkseValue = ((int)Math.Round(best / 60)) * 60;
-					float reelHeight = 120 * rectHeight / maksAkseValue;
+					float maksAkseValue = ((int)Math.Ceiling(best / 60)) * 60;
+					float reelHeight = graphheight * rectHeight / maksAkseValue;
 					if (maksAkseValue == 0)
 					{
 						reelHeight = 0;
@@ -237,7 +237,7 @@ namespace EcoScanner.Views
 		{
 			DateTime d1 = new DateTime(2023, 3, 6);
 			DateTime d2 = DateTime.Now;
-
+			int graphHeight = 140;
 			List<float> testForBest = new List<float>();
 
 			while (0 > DateTime.Compare(d1, d2))
@@ -298,6 +298,8 @@ namespace EcoScanner.Views
 				RowDefinition mGridRow1 = new RowDefinition();
 				RowDefinition mGridRow2 = new RowDefinition();
 				mGridRow1.Height = new GridLength(30);
+				mGridRow2.Height = new GridLength(graphHeight + 30 + 10); //30 for week names at buttom, and 10 for margin
+
 				monthCategory.RowDefinitions.Add(mGridRow1);
 				monthCategory.RowDefinitions.Add(mGridRow2);
 				//var myBorder = new Border();
@@ -319,6 +321,7 @@ namespace EcoScanner.Views
 				DateTime d1Keeper = d1;
 				d1 = d1.AddDays(-d1.Day + 1);
 				DateTime dCompare = d1.AddMonths(1);
+
 				while (0 > DateTime.Compare(d1, dCompare))
 				{
 					if (d1.DayOfWeek.ToString() == "Monday")
@@ -332,6 +335,7 @@ namespace EcoScanner.Views
 				Grid monthGrid = new Grid();
 				monthGrid.VerticalOptions = LayoutOptions.End;
 				monthGrid.SetValue(Grid.RowProperty, 1);
+				monthGrid.Margin = new Thickness(0, 10, 0, 0);
 
 				for (int i = 0; i < weeksInMonth; i++)
 				{
@@ -344,7 +348,7 @@ namespace EcoScanner.Views
 					Grid combiningColGrid = new Grid();
 					RowDefinition gridRow1 = new RowDefinition();
 					RowDefinition gridRow2 = new RowDefinition();
-					gridRow1.Height= new GridLength(120);
+					gridRow1.Height= new GridLength(graphHeight);
 					gridRow2.Height= new GridLength(30);
 
 					combiningColGrid.RowDefinitions.Add(gridRow1);
@@ -372,8 +376,8 @@ namespace EcoScanner.Views
 						}
 						d1 = d1.AddDays(1);
 					}
-					float maksAkseValue = ((int)Math.Round(best / 60)) * 60;
-					float reelHeight = 120 * rectHeight / maksAkseValue;
+					float maksAkseValue = ((int)Math.Ceiling(best / 60)) * 60;
+					float reelHeight = graphHeight * rectHeight / maksAkseValue;
 					if (maksAkseValue == 0)
 					{
 						reelHeight = 0;
@@ -401,6 +405,7 @@ namespace EcoScanner.Views
 
 		void MakeYearBarGraph(Dictionary<DateTime, float> historik)
 		{
+			int graphHeight = 140;
 			DateTime d1 = new DateTime(2023, 1, 20);
 			DateTime d2 = DateTime.Now;
 
@@ -463,6 +468,8 @@ namespace EcoScanner.Views
 				RowDefinition yGridRow1 = new RowDefinition();
 				RowDefinition yGridRow2 = new RowDefinition();
 				yGridRow1.Height= new GridLength(30);
+				yGridRow2.Height = new GridLength(graphHeight + 30 + 10);
+
 				yearCategory.RowDefinitions.Add(yGridRow1);
 				yearCategory.RowDefinitions.Add(yGridRow2);
 				//var myBorder = new Border();
@@ -483,6 +490,8 @@ namespace EcoScanner.Views
 				Grid yearGrid = new Grid();
 				yearGrid.VerticalOptions = LayoutOptions.End;
 				yearGrid.SetValue(Grid.RowProperty, 1);
+				yearGrid.Margin = new Thickness(0, 10, 0, 0);
+
 				for (int i = 0; i < 12; i++)
 				{
 					ColumnDefinition gridCol = new ColumnDefinition();
@@ -494,7 +503,7 @@ namespace EcoScanner.Views
 					Grid combiningColGrid = new Grid();
 					RowDefinition gridRow1 = new RowDefinition();
 					RowDefinition gridRow2 = new RowDefinition();
-					gridRow1.Height= new GridLength(120);
+					gridRow1.Height= new GridLength(graphHeight);
 					gridRow2.Height= new GridLength(30);
 
 					combiningColGrid.RowDefinitions.Add(gridRow1);
@@ -531,8 +540,8 @@ namespace EcoScanner.Views
 						}
 						d1 = d1.AddDays(1);
 					}
-					float maksAkseValue = ((int)Math.Round(best / 60)) * 60;
-					float reelHeight = 120 * rectHeight / maksAkseValue;
+					float maksAkseValue = ((int)Math.Ceiling(best / 60)) * 60;
+					float reelHeight = graphHeight * rectHeight / maksAkseValue;
 					if (maksAkseValue == 0)
 					{
 						reelHeight = 0;

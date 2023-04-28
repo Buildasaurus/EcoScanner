@@ -49,9 +49,9 @@
                         <StackLayout x:Name="Chartdata" HeightRequest="200" HorizontalOptions="End" Orientation="Horizontal" Grid.Column="1" Padding="0" Spacing="0">
                         </StackLayout>
                     </ScrollView>
-                    
 
                     
+
                 </Grid>
                 
                 
