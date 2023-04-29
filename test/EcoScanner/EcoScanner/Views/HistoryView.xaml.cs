@@ -21,6 +21,7 @@ namespace EcoScanner.Views
 		public int houseMemberCount { get; set; }
 		Dictionary<DateTime, float> boef = new Dictionary<DateTime, float>();
 		public static event EventHandler RefreshEventhandler;
+		DateTime startDate = new DateTime(2023, 03, 20);
 
 		public HistoryView()
 		{
@@ -44,6 +45,7 @@ namespace EcoScanner.Views
 		void localRefresh()
 		{
 			boef = History.getHistory();
+			KalibrerGenmVDig(boef, int.Parse(EntryNumber.Text));
 			Button_Click(null, EventArgs.Empty);
 			OnPropertyChanged(null);
 			IsBusy = true; //this causes the refresh circle to appear - without it though, you can click fast, and it breaks the updating for some reason.
@@ -573,7 +575,7 @@ namespace EcoScanner.Views
 		void JusterAkse(float topValue)
 		{
 			float maksAkseValue = topValue / 6;
-			int akseValue = ((int)Math.Round(maksAkseValue / 10)) * 10;
+			int akseValue = ((int)Math.Ceiling(maksAkseValue / 10)) * 10;
 
 			for (int i = 0; i < 6; i++)
 			{
@@ -596,7 +598,19 @@ namespace EcoScanner.Views
 
 		void KalibrerGenmVDig(Dictionary<DateTime, float> historik, int Hustandstal)
 		{
-			DateTime date = historik.ElementAt(0).Key;
+			if (historik.Count == 0)
+			{
+				return;
+			}
+			DateTime date = DateTime.Now;
+			foreach (var a in historik)
+			{
+				if (DateTime.Compare(a.Key, date) < 0)
+				{
+					date = a.Key;
+				}
+
+			}
 
 			double DanskGenm = 57.5;
 			float SumCO2 = 0;
@@ -733,5 +747,10 @@ namespace EcoScanner.Views
 				KalibrerGenmVDig(boef, number);
 			}
 		}
-	}
+
+		private void Button_Clicked(object sender, EventArgs e)
+		{
+			History.cheatadd();
+        }
+    }
 }

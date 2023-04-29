@@ -1,6 +1,7 @@
 ﻿using EcoScanner.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -50,6 +51,44 @@ namespace EcoScanner.Models
 			else
 			{
 				oldData.Add(DateTime.Today, sum);
+			}
+			historyData = oldData;
+			string json = JsonSerializer.Serialize(oldData);
+			File.WriteAllText(filePath, json);
+			ListeViewModel.invokeClearList();
+		}
+		public static void clearHistory()
+		{
+
+			if (File.Exists(filePath))
+			{
+				File.Delete(filePath);
+				Trace.WriteLine("---- Removed file -----");
+			}
+			else
+			{
+				Trace.WriteLine("--- No file to remove ---");
+			}
+
+		}
+		public static void cheatadd()
+		{
+			setup();
+			float sum = 10;
+			if (sum == 0)
+			{
+				return;
+			}
+
+			//read file, then add to end of file.
+			Dictionary<DateTime, float> oldData = JsonSerializer.Deserialize<Dictionary<DateTime, float>>(File.ReadAllText(filePath));
+			if (oldData.ContainsKey(new DateTime(2023, 4, 27)))
+			{
+				oldData[new DateTime(2023, 4, 27)] += sum;
+			}
+			else
+			{
+				oldData.Add(new DateTime(2023, 4, 27), sum);
 			}
 			historyData = oldData;
 			string json = JsonSerializer.Serialize(oldData);

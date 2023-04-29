@@ -29,6 +29,7 @@
                 </Button>
 
                 </Grid>
+                <!--<Button Clicked="Button_Clicked"></Button> this is for debug button that adds 10 10 specific date-->
 
                 <Grid ColumnDefinitions="75, *">
                     <Grid x:Name="ChartRow" Margin="10,35" Grid.Column="0">
