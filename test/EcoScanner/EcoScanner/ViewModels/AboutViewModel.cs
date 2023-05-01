@@ -88,6 +88,11 @@ namespace EcoScanner.ViewModels
 			await Shell.Current.GoToAsync("//ListePage");
 
 		}
+		public static async void Close_clicked()
+		{
+			Trace.WriteLine(Shell.Current.CurrentState);
+			await Shell.Current.GoToAsync("//AboutPage");
+		}
 	}
 
 
