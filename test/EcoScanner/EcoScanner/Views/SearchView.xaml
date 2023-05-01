@@ -5,12 +5,24 @@
              Title="{Binding Title}"
              xmlns:vm="clr-namespace:EcoScanner.ViewModels"
              xmlns:model="clr-namespace:EcoScanner.Models" x:DataType="vm:SearchViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AboutViewModel x:Key="AboutViewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="XKnap.png"
+            x:DataType="vm:AboutViewModel"
+            BindingContext="{StaticResource AboutViewModel}"
+            Command="{Binding CloseClicked}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.BindingContext>
         <vm:SearchViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Margin="5">
-            <Entry Placeholder="Søg efter varer" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}" Text="{Binding Text,Mode=TwoWay}"/>
+            <Entry Placeholder="Søg efter varer" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}" Text="{Binding Text,Mode=TwoWay}" TextColor="Black"/>
             <Grid ColumnDefinitions="*, *" RowDefinitions="Auto">
                 <Label Grid.Column="0">Navn på produkt</Label>
                 <Label Grid.Column="1"  HorizontalOptions="End">kg CO2e pr kg produkt</Label>

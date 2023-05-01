@@ -2,10 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcoScanner.Views.HistoryView"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             xmlns:vm="clr-namespace:EcoScanner.ViewModels">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AboutViewModel x:Key="AboutViewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="XKnap.png"
+            x:DataType="vm:AboutViewModel"
+            BindingContext="{StaticResource AboutViewModel}"
+            Command="{Binding CloseClicked}" />
+    </ContentPage.ToolbarItems>
     <RefreshView  IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <ScrollView>
-            <StackLayout BackgroundColor="Beige">
+            <StackLayout BackgroundColor="#FFFEF2">
 
 
                 <Grid Grid.Row="0" HeightRequest="50">
@@ -30,33 +43,35 @@
 
                 </Grid>
                 <!--<Button Clicked="Button_Clicked"></Button> this is for debug button that adds 10 10 specific date-->
-
-                <Grid ColumnDefinitions="75, *">
-                    <Grid x:Name="ChartRow" Margin="10,35" Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="10"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                    <Label Grid.Row="0" Grid.Column="1" TextType="Html" Margin="0, 30" FontAttributes="Bold" HorizontalTextAlignment="Center">
-                        <![CDATA[CO<sub><small>2</small></sub>e (kg)]]>
-                    </Label>
-                    <ScrollView Orientation="Horizontal" HeightRequest="200" HorizontalOptions="End" HorizontalScrollBarVisibility="Never" Grid.Column="1">
-                        <StackLayout x:Name="Chartdata" HeightRequest="200" HorizontalOptions="End" Orientation="Horizontal" Grid.Column="1" Padding="0" Spacing="0">
-                        </StackLayout>
-                    </ScrollView>
+                <Grid BackgroundColor="Gray" Padding="2">
+                
+                    <Grid ColumnDefinitions="75, *"  BackgroundColor="White">
+                        <Grid x:Name="ChartRow" Margin="10,35" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="10"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                        <Label Grid.Row="0" Grid.Column="1" TextType="Html" Margin="0, 30" FontAttributes="Bold" HorizontalTextAlignment="Center">
+                            <![CDATA[CO<sub><small>2</small></sub>e (kg)]]>
+                        </Label>
+                        <ScrollView Orientation="Horizontal" HeightRequest="200" HorizontalOptions="End" HorizontalScrollBarVisibility="Never" Grid.Column="1">
+                            <StackLayout x:Name="Chartdata" HeightRequest="200" HorizontalOptions="End" Orientation="Horizontal" Grid.Column="1" Padding="0" Spacing="0">
+                            </StackLayout>
+                        </ScrollView>
 
                     
 
+                    </Grid>
+
                 </Grid>
-                
-                
+
 
                 <Label Margin="20,60,20,0" Grid.Row="2" VerticalOptions="Center" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="Center" LineBreakMode="WordWrap" FontSize="25">
                 Dit indkøb i forhold til den gennemsnitlige dansker

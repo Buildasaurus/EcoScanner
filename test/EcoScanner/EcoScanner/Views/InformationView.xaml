@@ -2,7 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcoScanner.Views.InformationView"
-             Title="{Binding Title}">
+             Title="{Binding Title}"     
+             xmlns:vm="clr-namespace:EcoScanner.ViewModels">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AboutViewModel x:Key="AboutViewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="XKnap.png"
+            x:DataType="vm:AboutViewModel"
+            BindingContext="{StaticResource AboutViewModel}"
+            Command="{Binding CloseClicked}" />
+    </ContentPage.ToolbarItems>
+
     <ScrollView>
         <StackLayout Margin="20">
             <Label Text="Hvad er CO&#8322;e?" FontSize="24" FontAttributes="Bold" Margin="0,10,0,0" />

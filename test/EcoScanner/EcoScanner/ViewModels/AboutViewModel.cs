@@ -25,10 +25,12 @@ namespace EcoScanner.ViewModels
 
 			ScanCommand = new Command(OnScanResultCommand);
 			MyPopup.onPopup = false;
+			CloseClicked = new Command(Close_clicked);
 			ListeClicked = new Command(Liste_clicked);
 			SearchFocused = new Command(searchClicked);
 		}
 		public bool IsScanning { get; set; }
+		public Command CloseClicked { get; }
 		public Command ListeClicked { get; }
 		public Command SearchFocused { get; set; }
 

@@ -3,10 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcoScanner.Views.ListePage"
              Title="{Binding Title}"
-             xmlns:local="clr-namespace:EcoScanner.ViewModels"  
-             xmlns:model="clr-namespace:EcoScanner.Models" x:DataType="local:ListeViewModel"
+             xmlns:vm="clr-namespace:EcoScanner.ViewModels"  
+             xmlns:model="clr-namespace:EcoScanner.Models" x:DataType="vm:ListeViewModel"
              x:Name="showListePage">
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AboutViewModel x:Key="AboutViewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="XKnap.png"
+            x:DataType="vm:AboutViewModel"
+            BindingContext="{StaticResource AboutViewModel}"
+            Command="{Binding CloseClicked}" />
+    </ContentPage.ToolbarItems>
     <!--
       x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
@@ -17,7 +28,7 @@
             <Label Grid.Column="1"  HorizontalOptions="End"  Margin="10" VerticalOptions="Center" FontSize="20" >kg CO2e i alt</Label>
         </Grid>
         <BoxView HeightRequest="1" Color="Gray"></BoxView>
-        <RefreshView x:DataType="local:ListeViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <RefreshView x:DataType="vm:ListeViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <CollectionView x:Name="ItemsListView"
                     ItemsSource="{Binding Items}"
                     SelectionMode="None">
@@ -43,12 +54,12 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Image Source="MinusKnap.png" Grid.Column="0"/>
-                                        <ImageButton Source="MinusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=MinusClicked}" CommandParameter="{Binding .}" Grid.Column="0" Opacity="0"/>
+                                        <ImageButton Source="MinusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ListeViewModel}}, Path=MinusClicked}" CommandParameter="{Binding .}" Grid.Column="0" Opacity="0"/>
 
                                         <Entry  Keyboard="Numeric" Text="{Binding Count}" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
 
                                         <Image Source="PlusKnap.png" Grid.Column="2"/>
-                                        <ImageButton Source="PlusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=PlusClicked}" CommandParameter="{Binding .}"  Grid.Column="2" Opacity="0"/>
+                                        <ImageButton Source="PlusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ListeViewModel}}, Path=PlusClicked}" CommandParameter="{Binding .}"  Grid.Column="2" Opacity="0"/>
                                     </Grid>
                                     <Label Text="{Binding TotCo2, StringFormat='{}{0:F2} kg CO2e'}" 
                                         LineBreakMode="NoWrap"
@@ -65,7 +76,7 @@
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         NumberOfTapsRequired="1"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type local:ListeViewModel}}, Path=ItemTapped}"		
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ListeViewModel}}, Path=ItemTapped}"		
                                         CommandParameter="{Binding .}">
                                     </TapGestureRecognizer>
                                 </StackLayout.GestureRecognizers>
@@ -76,18 +87,20 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        <Grid BackgroundColor="Beige" RowDefinitions="30, 80, 80" ColumnDefinitions="*, *">
-            <Label HorizontalOptions="Center" FontSize="24">Total:</Label>
-            <Label Grid.Column="1" HorizontalOptions="Center" FontSize="24" Text="{Binding Total,  StringFormat='{}{0}kg co2e}'}"></Label>
+        <Grid BackgroundColor="#FFFEF2" RowDefinitions="10,30, 80, 80" ColumnDefinitions="*, *">
+            <BoxView BackgroundColor="Gray" HeightRequest="1" VerticalOptions="Start" Grid.ColumnSpan="2" Grid.Row="0"/>
+    
+            <Label HorizontalOptions="Center" FontSize="24" Grid.Row="1">Total:</Label>
+            <Label Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" FontSize="24" Text="{Binding Total,  StringFormat='{}{0}kg co2e}'}"></Label>
 
-            <Image Source="TilfoejTilHistorikKnap.png" Grid.Row="1" Grid.ColumnSpan="2"/>
-            <ImageButton Source="TilfoejTilHistorikKnap.png" Command="{Binding AddToHistory}" Opacity="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Image Source="TilfoejTilHistorikKnap.png" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <ImageButton Source="TilfoejTilHistorikKnap.png" Command="{Binding AddToHistory}" Opacity="0" Grid.Row="2" Grid.ColumnSpan="2"/>
 
-            <Image Source="TilbageKnap.png" Grid.Row="2" Grid.Column="0" HorizontalOptions="End" Margin="0,0,-4,0"/>
-            <ImageButton Source="TilbageKnap.png" Command="{Binding ReturnPressed}" Opacity="0" Grid.Row="2" Grid.Column="0"/>
+            <Image Source="TilbageKnap.png" Grid.Row="3" Grid.Column="0" HorizontalOptions="End" Margin="0,0,-4,0"/>
+            <ImageButton Source="TilbageKnap.png" Command="{Binding ReturnPressed}" Opacity="0" Grid.Row="3" Grid.Column="0"/>
 
-            <Image Source="RydListenKnap.png" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" Margin="-4,0,0,0"/>
-            <ImageButton Source="RydListenKnap.png" Command="{Binding ClearListClicked}" Opacity="0"  Grid.Row="2" Grid.Column="1"/>
+            <Image Source="RydListenKnap.png" Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" Margin="-4,0,0,0"/>
+            <ImageButton Source="RydListenKnap.png" Command="{Binding ClearListClicked}" Opacity="0"  Grid.Row="3" Grid.Column="1"/>
         </Grid>
 
     </StackLayout>

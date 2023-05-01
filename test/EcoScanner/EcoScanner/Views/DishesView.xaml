@@ -5,13 +5,16 @@
              Title="{Binding Title}"
              xmlns:vm="clr-namespace:EcoScanner.ViewModels">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AboutViewModel x:Key="AboutViewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-                IconImageSource="XKnap.png"
-                Order="Primary"
-                Priority="0" 
-            StyleClass="myActionButtonStyle"
-                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AboutViewModel}}}"/>
+            IconImageSource="XKnap.png"
+            BindingContext="{StaticResource AboutViewModel}"
+            Command="{Binding CloseClicked}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
