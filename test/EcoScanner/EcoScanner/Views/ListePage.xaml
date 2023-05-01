@@ -91,7 +91,7 @@
             <BoxView BackgroundColor="Gray" HeightRequest="1" VerticalOptions="Start" Grid.ColumnSpan="2" Grid.Row="0"/>
     
             <Label HorizontalOptions="Center" FontSize="24" Grid.Row="1">Total:</Label>
-            <Label Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" FontSize="24" Text="{Binding Total,  StringFormat='{}{0}kg co2e}'}"></Label>
+            <Label Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" FontSize="24" Text="{Binding Total, StringFormat='{}{0:F2} kg CO&#8322;e'}"></Label>
 
             <Image Source="TilfoejTilHistorikKnap.png" Grid.Row="2" Grid.ColumnSpan="2"/>
             <ImageButton Source="TilfoejTilHistorikKnap.png" Command="{Binding AddToHistory}" Opacity="0" Grid.Row="2" Grid.ColumnSpan="2"/>

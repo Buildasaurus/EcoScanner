@@ -56,12 +56,51 @@ namespace EcoScanner.Views
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
-			scroll();
+			scroll(0);
 		}
-		async void scroll()
+		static int GetWeekNumberOfMonth(DateTime date)
 		{
+			date = date.Date;
+			DateTime firstMonthDay = new DateTime(date.Year, date.Month, 1);
+			DateTime firstMonthMonday = firstMonthDay.AddDays((DayOfWeek.Monday + 7 - firstMonthDay.DayOfWeek) % 7);
+			if (firstMonthMonday > date)
+			{
+				firstMonthDay = firstMonthDay.AddMonths(-1);
+				firstMonthMonday = firstMonthDay.AddDays((DayOfWeek.Monday + 7 - firstMonthDay.DayOfWeek) % 7);
+			}
+			return (date - firstMonthMonday).Days / 7 + 1;
+		}
+		/// <summary>
+		/// scrolls the most right until the current date
+		/// Takes int as input, where 0 is day, 1 is week, and 2 is year.
+		/// </summary>
+		async void scroll(int a)
+		{
+			//width of rectangles in graph, including right margin
+			int boxwidth = 30 + 5;
+
+			//calculate scrolllength
+			int extraColumns = 0;
+			DateTime date = DateTime.Now;
+			if (a == 0)
+			{
+				extraColumns = 7 - (int)date.DayOfWeek;
+			}
+			if(a == 1)
+			{
+				extraColumns = 4 - GetWeekNumberOfMonth(DateTime.Today);
+
+			}
+			else
+			{
+				extraColumns = 12 - DateTime.Now.Month;
+
+			}
+
 			await Task.Delay(100);
-			await scroller.ScrollToAsync(scroller.ContentSize.Width, 0, true);
+			double scrollLength = scroller.ContentSize.Width - boxwidth * extraColumns - (graphGrid.Width - 75);
+
+			await scroller.ScrollToAsync(scrollLength, 0, true);
 		}
 
 		BoxView createLine()
@@ -165,17 +204,14 @@ namespace EcoScanner.Views
 				wGridRow2.Height = new GridLength(graphheight + 30 + margin);
 				weekCategory.RowDefinitions.Add(wGridRow1);
 				weekCategory.RowDefinitions.Add(wGridRow2);
-				//var myBorder = new Border();
-				//myBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#01ABC9"));
-				//myBorder.Margin = new Thickness(2,0,2,0);
-				//weekCategory.Children.Add(myBorder);
+
 
 				BoxView line = createLine();
 				BoxView boxbehind = createBlueBackground();
 
 				Label textWeek = new Label();
 				textWeek.Text = "Uge " + weekNum;
-				textWeek.TextColor = Color.Black;
+				textWeek.TextColor = Color.White;
 				textWeek.VerticalOptions = LayoutOptions.End;
 				textWeek.HorizontalOptions = LayoutOptions.Center;
 				textWeek.VerticalOptions = LayoutOptions.Center;
@@ -316,9 +352,6 @@ namespace EcoScanner.Views
 
 				monthCategory.RowDefinitions.Add(mGridRow1);
 				monthCategory.RowDefinitions.Add(mGridRow2);
-				//var myBorder = new Border();
-				//yBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#01ABC9"));
-				//monthCategory.Children.Add(myBorder);
 
 				BoxView line = createLine();
 				BoxView boxbehind = createBlueBackground();
@@ -486,16 +519,14 @@ namespace EcoScanner.Views
 
 				yearCategory.RowDefinitions.Add(yGridRow1);
 				yearCategory.RowDefinitions.Add(yGridRow2);
-				//var myBorder = new Border();
-				//myBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#01ABC9"));
-				//yearCategory.Children.Add(myBorder);
+
 
 				BoxView line = createLine();
 				BoxView boxbehind = createBlueBackground();
 
 				Label textYear = new Label();
 				textYear.Text = d1.ToString("yyyy");
-				textYear.TextColor = Color.Black;
+				textYear.TextColor = Color.White;
 				textYear.VerticalOptions = LayoutOptions.End;
 				textYear.HorizontalOptions = LayoutOptions.Center;
 				textYear.VerticalOptions = LayoutOptions.Center;
@@ -705,7 +736,7 @@ namespace EcoScanner.Views
 			ButtonName0.TextColor = Color.White;
 			ButtonName1.TextColor = Color.Black;
 			ButtonName2.TextColor = Color.Black;
-			scroll();
+			scroll(0);
 
 		}
 
@@ -723,7 +754,7 @@ namespace EcoScanner.Views
 			ButtonName0.TextColor = Color.Black;
 			ButtonName1.TextColor = Color.White;
 			ButtonName2.TextColor = Color.Black;
-			scroll();
+			scroll(1);
 
 		}
 
@@ -741,7 +772,7 @@ namespace EcoScanner.Views
 			ButtonName0.TextColor = Color.Black;
 			ButtonName1.TextColor = Color.Black;
 			ButtonName2.TextColor = Color.White;
-			scroll();
+			scroll(2);
 
 
 		}

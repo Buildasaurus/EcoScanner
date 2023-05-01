@@ -12,15 +12,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid x:Name="abc" ColumnDefinitions="40, *, 85" Padding="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="75"/>
-        </Grid.RowDefinitions>
+    <Grid x:Name="abc" ColumnDefinitions="40, *, 85" Padding="0" Margin="0" RowSpacing="0" RowDefinitions="40, *, 85">
 
 
         <Image Grid.Column="0" Grid.Row="0" Source="SoegeIkon.png" Scale="0.7" HorizontalOptions="Center"/>
+        <ImageButton Grid.Column="0" Grid.Row="0" Opacity="0" Source="SoegeIkon.png" Scale="0.7" HorizontalOptions="Center" Command="{Binding SearchFocused}"/>
 
         <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="End" PlaceholderColor="Gray">
             <Entry.Behaviors>
@@ -30,19 +26,21 @@
 
 
         <zxing:ZXingScannerView Result="{Binding Result, Mode=TwoWay} " ScanResultCommand="{Binding ScanCommand }" IsScanning="{Binding IsScanning}"
-                                x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3"/>
-        
-        <Label  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalOptions="Center" FontSize ="20" LineBreakMode="CharacterWrap" TextColor="Black" MaxLines="1" Margin="10,0,0,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="Total CO&#8322;e: "  />
-                    <Span BindingContext="{vm:ListeViewModel}" Text="{Binding Total}" FontAttributes="Bold" TextColor="#01ABC9" FontSize="32"/>
-                    <Span Text=" kg" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-        <Image Source="ListeKnap.png" Grid.Column="2" Grid.Row="2" HorizontalOptions="Start"/>
-        <ImageButton Source="ListeKnap.png" x:Name="Minus"  Grid.Column="2" Grid.Row="2" Opacity="0" HorizontalOptions="Start" Command="{Binding Path=ListeClicked}" />
+                                x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3" Margin="0"/>
+        <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="40, *, 85" BackgroundColor="#FFFEF2">
+            
+            <Label  Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" FontSize ="20" LineBreakMode="CharacterWrap" TextColor="Black" MaxLines="1" Margin="10,0,0,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Total CO&#8322;e: "  />
+                        <Span BindingContext="{vm:ListeViewModel}" Text="{Binding Total}" FontAttributes="Bold" TextColor="#01ABC9" FontSize="32"/>
+                        <Span Text=" kg" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Image Source="ListeKnap.png" Grid.Column="2" HorizontalOptions="Start" Margin="3"/>
+            <ImageButton Source="ListeKnap.png" x:Name="Minus"  Grid.Column="2" Opacity="0" HorizontalOptions="Start" Command="{Binding Path=ListeClicked}" Margin="3"/>
+        </Grid>
 
     </Grid>
 

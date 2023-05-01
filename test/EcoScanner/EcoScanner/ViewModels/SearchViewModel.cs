@@ -52,7 +52,7 @@ namespace EcoScanner.ViewModels
 			else
 			{
 				LabelVisible = true;
-				NoResultLabel = "No result";
+				NoResultLabel = "Intet resultat";
 				//do stuff TODO
 			}
 			
