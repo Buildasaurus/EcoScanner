@@ -25,7 +25,7 @@
     <StackLayout>
         <Grid ColumnDefinitions="*, *" RowDefinitions="Auto" HeightRequest="50">
             <Label Grid.Column="0" Margin="10" VerticalOptions="Center" FontSize="20" >Navn på produkt</Label>
-            <Label Grid.Column="1"  HorizontalOptions="End"  Margin="10" VerticalOptions="Center" FontSize="20" >kg CO2e i alt</Label>
+            <Label Grid.Column="1"  HorizontalOptions="End"  Margin="10" VerticalOptions="Center" FontSize="20" >kg CO2&#8322;e i alt</Label>
         </Grid>
         <BoxView HeightRequest="1" Color="Gray"></BoxView>
         <RefreshView x:DataType="vm:ListeViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
@@ -61,7 +61,7 @@
                                         <Image Source="PlusKnap.png" Grid.Column="2"/>
                                         <ImageButton Source="PlusKnap.png"  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ListeViewModel}}, Path=PlusClicked}" CommandParameter="{Binding .}"  Grid.Column="2" Opacity="0"/>
                                     </Grid>
-                                    <Label Text="{Binding TotCo2, StringFormat='{}{0:F2} kg CO2e'}" 
+                                    <Label Text="{Binding TotCo2, StringFormat='{}{0:F2} kg CO&#8322;e'}" 
                                         LineBreakMode="NoWrap"
                                         Style="{DynamicResource ListItemDetailTextStyle}"
                                         FontSize="16" 

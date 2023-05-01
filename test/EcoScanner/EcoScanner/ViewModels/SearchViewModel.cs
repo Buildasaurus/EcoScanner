@@ -30,6 +30,8 @@ namespace EcoScanner.ViewModels
 		public Command SearchInitilized { get; set; }
 		public string Text { get; set; }
 		public string Info { get; set; }
+		public string NoResultLabel { get; set; }
+		public bool LabelVisible { get; set; }
 		public async void search()
 		{
 			IsBusy = true;
@@ -38,10 +40,22 @@ namespace EcoScanner.ViewModels
 			List<Product> products = Databasehandler.Search(Text);
 			string builder = "";
 			Items.Clear();
-			foreach (var item in products)
+			if (products.Count != 0)
 			{
-				Items.Add(item);
+				foreach (var item in products)
+				{
+					Items.Add(item);
+				}
+				NoResultLabel = string.Empty;
+				LabelVisible = false;
 			}
+			else
+			{
+				LabelVisible = true;
+				NoResultLabel = "No result";
+				//do stuff TODO
+			}
+			
 			OnPropertyChanged(null);
 			IsBusy = false;
 		}

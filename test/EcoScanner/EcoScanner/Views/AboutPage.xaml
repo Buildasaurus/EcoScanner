@@ -22,7 +22,7 @@
 
         <Image Grid.Column="0" Grid.Row="0" Source="SoegeIkon.png" Scale="0.7" HorizontalOptions="Center"/>
 
-        <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="End">
+        <Entry Placeholder="Søg efter produkter" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="End" PlaceholderColor="Gray">
             <Entry.Behaviors>
                 <xct:EventToCommandBehavior EventName="Focused" Command="{Binding SearchFocused}"/>
             </Entry.Behaviors>
@@ -35,7 +35,7 @@
         <Label  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalOptions="Center" FontSize ="20" LineBreakMode="CharacterWrap" TextColor="Black" MaxLines="1" Margin="10,0,0,0">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="Total CO2e: "  />
+                    <Span Text="Total CO&#8322;e: "  />
                     <Span BindingContext="{vm:ListeViewModel}" Text="{Binding Total}" FontAttributes="Bold" TextColor="#01ABC9" FontSize="32"/>
                     <Span Text=" kg" />
                 </FormattedString>

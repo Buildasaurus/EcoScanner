@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Behaviors;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using static Xamarin.Forms.Internals.Profile;
 
@@ -51,6 +52,16 @@ namespace EcoScanner.Views
 			IsBusy = true; //this causes the refresh circle to appear - without it though, you can click fast, and it breaks the updating for some reason.
 
 			IsBusy = false;
+		}
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
+			scroll();
+		}
+		async void scroll()
+		{
+			await Task.Delay(100);
+			await scroller.ScrollToAsync(scroller.ContentSize.Width, 0, true);
 		}
 
 		BoxView createLine()
@@ -97,7 +108,7 @@ namespace EcoScanner.Views
 			rect.BackgroundColor = Color.FromHex("#01ABC9");
 			return rect;
 		}
-		void MakeWeekBarGraph(Dictionary<DateTime, float> historik)
+		async void MakeWeekBarGraph(Dictionary<DateTime, float> historik)
 		{
 			DateTime d1 = new DateTime(2023, 3, 20);
 			DateTime d2 = DateTime.Now;
@@ -126,6 +137,7 @@ namespace EcoScanner.Views
 					testForBest.Add(dayValue);
 				}
 			}
+
 
 			d1 = new DateTime(2023, 3, 20);
 			float best = 0;
@@ -233,7 +245,6 @@ namespace EcoScanner.Views
 			}
 
 			JusterAkse(best);
-
 		}
 
 		void MakeMonthBarGraph(Dictionary<DateTime, float> historik)
@@ -694,6 +705,7 @@ namespace EcoScanner.Views
 			ButtonName0.TextColor = Color.White;
 			ButtonName1.TextColor = Color.Black;
 			ButtonName2.TextColor = Color.Black;
+			scroll();
 
 		}
 
@@ -711,6 +723,8 @@ namespace EcoScanner.Views
 			ButtonName0.TextColor = Color.Black;
 			ButtonName1.TextColor = Color.White;
 			ButtonName2.TextColor = Color.Black;
+			scroll();
+
 		}
 
 		private void Button_Click_2(object sender, EventArgs e)
@@ -727,6 +741,8 @@ namespace EcoScanner.Views
 			ButtonName0.TextColor = Color.Black;
 			ButtonName1.TextColor = Color.Black;
 			ButtonName2.TextColor = Color.White;
+			scroll();
+
 
 		}
 		public void Plus_Clicked(object sender, EventArgs e)

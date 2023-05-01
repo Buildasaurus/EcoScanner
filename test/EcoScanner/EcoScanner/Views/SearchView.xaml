@@ -24,9 +24,10 @@
         <StackLayout Margin="5">
             <Entry Placeholder="Søg efter varer" x:Name="søgebar"  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ReturnCommand="{Binding SearchInitilized}" Text="{Binding Text,Mode=TwoWay}" TextColor="Black"/>
             <Grid ColumnDefinitions="*, *" RowDefinitions="Auto">
-                <Label Grid.Column="0">Navn på produkt</Label>
-                <Label Grid.Column="1"  HorizontalOptions="End">kg CO2e pr kg produkt</Label>
+                <Label Grid.Column="0" FontAttributes="Bold" FontSize="16">Navn på produkt</Label>
+                <Label Grid.Column="1"  HorizontalOptions="End" FontAttributes="Bold" FontSize="16">kg CO2e pr kg produkt</Label>
             </Grid>
+            <Label Text="{Binding NoResultLabel}" IsVisible="{Binding LabelVisible}" HorizontalOptions="Center" FontSize="16"/>
             <RefreshView x:DataType="vm:SearchViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                 <CollectionView x:Name="ItemsListView"
                     ItemsSource="{Binding Items, Mode=TwoWay}"
