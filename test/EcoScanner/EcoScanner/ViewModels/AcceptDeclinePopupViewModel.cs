@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
-	public class AcceptDeclinePopupViewModel
+	public class AcceptDeclinePopupViewModel : BaseViewModel
 	{
 		public Command BackPressed { get; set; }
 		public Command ClearListPressed { get; set; }
