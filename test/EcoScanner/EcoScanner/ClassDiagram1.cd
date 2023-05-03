@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EcoScanner.ViewModels.AboutViewModel">
+    <Position X="1.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACACBAAAAAAAAAAAAQQAAAAAABAQAiAEBAAgAAA=</HashCode>
+      <FileName>ViewModels\AboutViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.AcceptDeclinePopupViewModel">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IABAAAAAAAAAAAAAAAAAACAAAAAgAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AcceptDeclinePopupViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.BaseViewModel">
+    <Position X="8.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAEAAIEAAAABAgAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EcoScanner.ViewModels.ButtonViewModel">
+    <Position X="21.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAACAAAAAgAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ButtonViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.DishesViewModel">
+    <Position X="10.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\DishesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.DishViewModel" Collapsed="true">
+    <Position X="4.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAgAgCAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>ViewModels\DishViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.HistoryViewModel" Collapsed="true">
+    <Position X="7.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAQAAAAIAAAAAAAAAI=</HashCode>
+      <FileName>ViewModels\HistoryViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.InformationViewModel" Collapsed="true">
+    <Position X="16.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\InformationViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.ItemDetailViewModel" Collapsed="true">
+    <Position X="13.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAgAAAAAAAAAQAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ItemDetailViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.ListeViewModel" Collapsed="true">
+    <Position X="3.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hAABAIAAIAgACDASCEICSAAEJQAERAAQQBCYgAAAAEA=</HashCode>
+      <FileName>ViewModels\ListeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.LoginViewModel" Collapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAACAAAA=</HashCode>
+      <FileName>ViewModels\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.MyPopupViewModel" Collapsed="true">
+    <Position X="9.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAIQAJgAgACQAIEBAAAAAQCANAACAEAAEiAAIAAA=</HashCode>
+      <FileName>ViewModels\MyPopupViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.NewItemViewModel" Collapsed="true">
+    <Position X="12.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAACAAAAEAgAAAAAAAAAQAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>ViewModels\NewItemViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.SearchViewModel" Collapsed="true">
+    <Position X="15" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAACAAIAAIAAAAAAQAEAEAEADAACEAAAEA=</HashCode>
+      <FileName>ViewModels\SearchViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.ViewModels.WarningPopupViewModel" Collapsed="true">
+    <Position X="17.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>ViewModels\WarningPopupViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

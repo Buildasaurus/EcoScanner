@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace EcoScanner.ViewModels
 {
-	public class DishesViewModel
+	public class DishesViewModel : BaseViewModel
 	{
 		public string Title { get;set; }
 		public DishesViewModel() 
