@@ -13,10 +13,10 @@ namespace EcoScanner.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TwoButtonWarningView : ContentView
 	{
-		ButtonViewModel viewModel;
-		public TwoButtonWarningView()
+		BaseViewModel ViewModel;
+		public TwoButtonWarningView(BaseViewModel viewModel)
 		{
-			viewModel = new ButtonViewModel();
+			ViewModel = viewModel;
 			BindingContext = viewModel;
 			InitializeComponent();
 		}

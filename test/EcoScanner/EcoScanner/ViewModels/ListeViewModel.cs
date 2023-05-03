@@ -96,10 +96,29 @@ namespace EcoScanner.ViewModels
 
 			IsBusy = false;
 		}
-        void historyPressed()
+        async void historyPressed()
         {
-            History.addToHistory();
-            HistoryView.refreshView();
+			WarningPopupViewModel viewModel = new WarningPopupViewModel("Vil du rydde listen og gemme din udledning i historikken?\nDette kan ikke gøres om",
+                new TwoButtonWarningView(new StandardTwoButtonViewModel(() => backPressed(), () => goToHistory(), "TilbageKnap.png", "TilfoejTilHistorikKnap.png")));
+			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewModel));
+			
+		}
+		async void backPressed()
+		{
+			//close popup
+			Trace.WriteLine("close popup");
+			WarningPopupView.onPopup = false;
+			await PopupNavigation.Instance.PopAsync();
+
+		}
+		async void goToHistory()
+		{
+			Trace.WriteLine("Go TO History");
+			History.addToHistory();
+			HistoryView.refreshView(); 
+            WarningPopupView.onPopup = false;
+			await PopupNavigation.Instance.PopAsync();
+			await Shell.Current.GoToAsync("//HistoryView");
 
 		}
 
@@ -123,7 +142,23 @@ namespace EcoScanner.ViewModels
 		}
 		async void clearList()
         {
-			WarningPopupViewModel viewModel = new WarningPopupViewModel("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om", new TwoButtonWarningView());
+			WarningPopupViewModel viewModel = new WarningPopupViewModel("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om",
+							new TwoButtonWarningView(new StandardTwoButtonViewModel(
+                                async () => 
+                                {
+                                    //close popup
+								    Trace.WriteLine("close popup");
+								    WarningPopupView.onPopup = false;
+								    await PopupNavigation.Instance.PopAsync();
+							    }, 
+                                async () => 
+                                {
+								    Trace.WriteLine("clear pressd");
+								    ListeViewModel.invokeClearList();
+								    WarningPopupView.onPopup = false;
+								    await PopupNavigation.Instance.PopAsync();
+							    }, 
+                                "TilbageKnap.png", "RydListenKnap.png")));
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewModel));
 		}
 

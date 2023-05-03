@@ -142,6 +142,7 @@ namespace EcoScanner.Views
 				Margin = new Thickness(5, 0, 5, 0),
 				WidthRequest = 30
 			};
+			rect.HorizontalOptions = LayoutOptions.Center;
 			rect.SetValue(Grid.RowProperty, 0);
 			rect.BackgroundColor = Color.FromHex("#01ABC9");
 			return rect;
@@ -737,19 +738,20 @@ namespace EcoScanner.Views
 				return null;
 			}
 			Label label = new Label();
+			float ythickness;
 			if (currentHeight > 30) //if the box is high enough
 			{
-				label.Margin = new Thickness(0, graphheight - currentHeight, 0, 0);
+				ythickness = graphheight - currentHeight;
 				label.VerticalOptions = LayoutOptions.Center;
 				label.TextColor = Color.White;
 			}
 			else // if its not
 			{
-				label.Margin = new Thickness(0, currentHeight + 5, 0, 0);
+				ythickness = currentHeight + 10;
 				label.VerticalOptions = LayoutOptions.End;
 				label.TextColor = Color.Black;
 			}
-			label.HorizontalOptions = LayoutOptions.Center;
+			label.WidthRequest = 30;
 			if (emission < 1000)
 			{
 				label.Text = emission.ToString("0.0");
@@ -759,9 +761,29 @@ namespace EcoScanner.Views
 				label.Text = emission.ToString("0");
 			}
 
-			label.WidthRequest= 30;
+			//manual centering...
+			if (emission < 100 && emission > 0)
+			{
+				if (emission < 10)
+				{
+					label.Margin = new Thickness(13, ythickness, 0, 0);
+
+				}
+				else
+				{
+					label.Margin = new Thickness(9, ythickness, 0, 0);
+				}
+			}
+			else
+			{
+				label.Margin = new Thickness(5, ythickness, 0, 0);
+
+			}
+
 			label.FontSize = 11;
 			label.LineBreakMode = LineBreakMode.WordWrap;
+			label.HorizontalOptions = LayoutOptions.Start;
+
 			return label;
 		}
 

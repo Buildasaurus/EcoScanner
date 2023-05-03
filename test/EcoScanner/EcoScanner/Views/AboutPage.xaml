@@ -28,7 +28,7 @@
         <zxing:ZXingScannerView Result="{Binding Result, Mode=TwoWay} " ScanResultCommand="{Binding ScanCommand }" IsScanning="{Binding IsScanning}"
                                 x:Name="zxing" VerticalOptions="FillAndExpand"  Grid.Row="1"  Grid.ColumnSpan="3" Margin="0"/>
 
-        <Image Source="ScannerIkon.png" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="60,0" Opacity="2"></Image>
+        <Image Source="ScannerKamera.png" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="80,0" Opacity="2"></Image>
 
         <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="40, *, 85" BackgroundColor="#FFFEF2">
             

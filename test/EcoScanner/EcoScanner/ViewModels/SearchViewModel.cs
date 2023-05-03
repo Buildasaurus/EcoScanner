@@ -20,7 +20,6 @@ namespace EcoScanner.ViewModels
 			ItemTapped = new Command<Product>(OnItemSelected);
 			Items = new ObservableCollection<Product>();
 			Title = "Søg efter Produkter";
-
 		}
 		private Product _selectedItem;
 		public ObservableCollection<Product> Items { get; }
