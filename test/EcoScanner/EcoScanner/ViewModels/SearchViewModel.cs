@@ -37,7 +37,7 @@ namespace EcoScanner.ViewModels
 			IsBusy = true;
 
 			await Databasehandler.LoadAllProducts();
-			List<Product> products = Databasehandler.Search(Text);
+			List<Product> products = Databasehandler.Search(Text.Trim());
 			string builder = "";
 			Items.Clear();
 			if (products.Count != 0)

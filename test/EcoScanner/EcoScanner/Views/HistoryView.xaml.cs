@@ -86,10 +86,9 @@ namespace EcoScanner.Views
 			{
 				extraColumns = 7 - (int)date.DayOfWeek;
 			}
-			if(a == 1)
+			else if(a == 1)
 			{
 				extraColumns = 4 - GetWeekNumberOfMonth(DateTime.Today);
-
 			}
 			else
 			{
@@ -243,7 +242,6 @@ namespace EcoScanner.Views
 					Label textDay = new Label();
 					textDay.Text = weekDay[0].ToString() + weekNum;
 					textDay.TextColor = Color.Black;
-					textDay.VerticalOptions = LayoutOptions.End;
 					textDay.HorizontalOptions = LayoutOptions.Center;
 					textDay.VerticalOptions = LayoutOptions.Center;
 					textDay.SetValue(Grid.RowProperty, 1);
@@ -263,7 +261,12 @@ namespace EcoScanner.Views
 					}
 					rect.HeightRequest = reelHeight;
 
+					Label emission = createText(reelHeight, graphheight, rectHeight);
 					combiningColGrid.Children.Add(rect);
+					if (emission != null)
+					{
+						combiningColGrid.Children.Add(emission);
+					}
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -431,8 +434,12 @@ namespace EcoScanner.Views
 					}
 					rect.HeightRequest = reelHeight;
 
-
+					Label emission = createText(reelHeight, graphHeight, rectHeight);
 					combiningColGrid.Children.Add(rect);
+					if (emission != null)
+					{
+						combiningColGrid.Children.Add(emission);
+					}
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -592,9 +599,12 @@ namespace EcoScanner.Views
 						reelHeight = 0;
 					}
 					rect.HeightRequest = reelHeight;
-
-
+					Label emission = createText(reelHeight, graphHeight, rectHeight);
 					combiningColGrid.Children.Add(rect);
+					if(emission != null)
+					{
+						combiningColGrid.Children.Add(emission);
+					}
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -607,11 +617,8 @@ namespace EcoScanner.Views
 				yearCategory.Children.Add(textYear);
 				yearCategory.Children.Add(yearGrid);
 				Chartdata.Children.Add(yearCategory);
-
 			}
-
 			JusterAkse(best);
-
 		}
 
 		void JusterAkse(float topValue)
@@ -644,29 +651,28 @@ namespace EcoScanner.Views
 			{
 				return;
 			}
-			DateTime date = DateTime.Now;
+			DateTime date = DateTime.Now; //find earliest entry
 			foreach (var a in historik)
 			{
 				if (DateTime.Compare(a.Key, date) < 0)
 				{
 					date = a.Key;
 				}
-
 			}
 
 			double DanskGenm = 57.5;
 			float SumCO2 = 0;
-			int divisor = 0;
+			//Go through all days, and find the sum of the co2 emitted.
 			while (0 > DateTime.Compare(date, DateTime.Now))
 			{
-				if (historik.ContainsKey(date.Date))
+				if (historik.ContainsKey(date.Date)) 
 				{
 					SumCO2 += historik[date];
 				}
 
-				divisor++;
 				date = date.AddDays(1);
 			}
+
 			double weeksSinceStart = Math.Ceiling((date - DateTime.Today).TotalDays / 7);
 			double ditGenm = SumCO2  / (weeksSinceStart * Hustandstal);
 			DinUdledningText.Text = ditGenm.ToString("0.00") + " kg";
@@ -708,7 +714,7 @@ namespace EcoScanner.Views
 					DanskUdledningText.TextColor = Color.White;
 				}
 			}
-			else
+			else //if you are exactly at average
 			{
 				DinUdledningRect.HeightRequest = 180;
 				DinUdledningText.Margin = new Thickness(0);
@@ -721,6 +727,44 @@ namespace EcoScanner.Views
 			}
 
 		}
+		/// <summary>
+		/// creates a text, with a margin, depending on the height of a box, that is given as parameter
+		/// </summary>
+		Label createText(float currentHeight, float graphheight, float emission)
+		{
+			if (currentHeight == 0) 
+			{
+				return null;
+			}
+			Label label = new Label();
+			if (currentHeight > 30) //if the box is high enough
+			{
+				label.Margin = new Thickness(0, graphheight - currentHeight, 0, 0);
+				label.VerticalOptions = LayoutOptions.Center;
+				label.TextColor = Color.White;
+			}
+			else // if its not
+			{
+				label.Margin = new Thickness(0, currentHeight + 5, 0, 0);
+				label.VerticalOptions = LayoutOptions.End;
+				label.TextColor = Color.Black;
+			}
+			label.HorizontalOptions = LayoutOptions.Center;
+			if (emission < 1000)
+			{
+				label.Text = emission.ToString("0.0");
+			}
+			else
+			{
+				label.Text = emission.ToString("0");
+			}
+
+			label.WidthRequest= 30;
+			label.FontSize = 11;
+			label.LineBreakMode = LineBreakMode.WordWrap;
+			return label;
+		}
+
 
 		private void Button_Click(object sender, EventArgs e)
 		{
