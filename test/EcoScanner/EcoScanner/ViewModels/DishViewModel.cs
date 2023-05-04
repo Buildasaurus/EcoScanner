@@ -23,7 +23,7 @@ namespace EcoScanner.ViewModels
 			this.MyDish = dish;
 			string source = MyDish.Name;
 			this.DishName = dish.Name;
-			this.CO2udledning = dish.TotalCo2.ToString("0.00") + " kg CO2e pr. person";
+			this.CO2udledning = dish.TotalCo2.ToString("0.00") + " kg CO₂e pr. person";
 			source = source.Replace("ø", "oe");
 			source = source.Replace("æ", "ae");
 			source = source.Replace("å", "aa");

@@ -19,18 +19,11 @@ namespace EcoScanner.ViewModels
 		}
 		async void backPressed()
 		{
-			//close popup
-			Trace.WriteLine("close popup");
-			WarningPopupView.onPopup = false;
-			await PopupNavigation.Instance.PopAsync();
+			
 
 		}
 		async void clearListPressed()
 		{
-			Trace.WriteLine("clear pressd");
-			ListeViewModel.invokeClearList();
-			WarningPopupView.onPopup = false;
-			await PopupNavigation.Instance.PopAsync();
 
 		}
 	}

@@ -21,7 +21,6 @@ namespace EcoScanner.ViewModels
 			ItemTapped = new Command<Product>(OnItemSelected);
 			Items = new ObservableCollection<Product>();
 			Title = "Søg efter Produkter";
-
 		}
 		private Product _selectedItem;
 		public ObservableCollection<Product> Items { get; }
@@ -38,7 +37,7 @@ namespace EcoScanner.ViewModels
 			IsBusy = true;
 
 			await Databasehandler.LoadAllProducts();
-			List<Product> products = Databasehandler.Search(Text);
+			List<Product> products = Databasehandler.Search(Text.Trim());
 			string builder = "";
 			Items.Clear();
 			if (products.Count != 0)

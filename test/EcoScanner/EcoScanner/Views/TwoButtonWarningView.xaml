@@ -5,10 +5,10 @@
   <ContentView.Content>
         <StackLayout>
             <Grid RowDefinitions="*" ColumnDefinitions="*, *">
-                <Image Source="TilbageKnap.png" Grid.Row="0" Grid.Column="0"/>
-                <ImageButton Command="{Binding BackPressed}" Source="TilbageKnap.png" Opacity="0" Grid.Row="0" Grid.Column="0"/>
-                <Image Source="RydListenKnap.png" Grid.Row="0" Grid.Column="1"/>
-                <ImageButton Command="{Binding ClearListPressed}" Source="RydListenKnap.png" Opacity="0" Grid.Row="0" Grid.Column="1"/>
+                <Image  Source="{Binding LeftImage}" Grid.Row="0" Grid.Column="0"/>
+                <ImageButton Command="{Binding BackPressed}" Source="{Binding LeftImage}" Opacity="0" Grid.Row="0" Grid.Column="0"/>
+                <Image  Source="{Binding RightImage}" Grid.Row="0" Grid.Column="1"/>
+                <ImageButton Command="{Binding ClearListPressed}" Source="{Binding RightImage}" Opacity="0" Grid.Row="0" Grid.Column="1"/>
             </Grid>
         </StackLayout>
     </ContentView.Content>
