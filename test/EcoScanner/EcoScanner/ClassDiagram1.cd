@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="EcoScanner.ViewModels.AboutViewModel">
-    <Position X="1.25" Y="6.75" Width="1.5" />
+    <Position X="0.5" Y="5.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAACACBAAAAAAAAAAAAQQAAAAAABAQAiAEBAAgAAA=</HashCode>
       <FileName>ViewModels\AboutViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.AcceptDeclinePopupViewModel">
-    <Position X="7.75" Y="4.75" Width="1.5" />
+    <Position X="7.75" Y="4.75" Width="3" />
     <TypeIdentifier>
       <HashCode>IABAAAAAAAAAAAAAAAAAACAAAAAgAEAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\AcceptDeclinePopupViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.BaseViewModel">
-    <Position X="8.75" Y="0.75" Width="1.5" />
+    <Position X="8.75" Y="0.75" Width="6.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAAEAAIEAAAABAgAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\BaseViewModel.cs</FileName>
@@ -23,49 +23,49 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="EcoScanner.ViewModels.ButtonViewModel">
-    <Position X="21.5" Y="5.25" Width="1.5" />
+    <Position X="21.5" Y="5.25" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAAAAAAACAAAAAgAEAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ButtonViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.DishesViewModel">
-    <Position X="10.75" Y="6.5" Width="1.5" />
+    <Position X="10.75" Y="6.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\DishesViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EcoScanner.ViewModels.DishViewModel" Collapsed="true">
-    <Position X="4.5" Y="9" Width="1.5" />
+  <Class Name="EcoScanner.ViewModels.DishViewModel">
+    <Position X="4.5" Y="9" Width="3.25" />
     <TypeIdentifier>
       <HashCode>ACAAAAAgAgCAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>ViewModels\DishViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.HistoryViewModel" Collapsed="true">
-    <Position X="7.25" Y="9" Width="1.5" />
+    <Position X="8" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAQAAAAIAAAAAAAAAI=</HashCode>
       <FileName>ViewModels\HistoryViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.InformationViewModel" Collapsed="true">
-    <Position X="16.25" Y="5.75" Width="1.5" />
+    <Position X="16.25" Y="5.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\InformationViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.ItemDetailViewModel" Collapsed="true">
-    <Position X="13.75" Y="7" Width="1.5" />
+    <Position X="13.75" Y="7" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAgAAAAAAAAAQAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ItemDetailViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.ListeViewModel" Collapsed="true">
-    <Position X="3.5" Y="7.25" Width="1.5" />
+    <Position X="3.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>hAABAIAAIAgACDASCEICSAAEJQAERAAQQBCYgAAAAEA=</HashCode>
       <FileName>ViewModels\ListeViewModel.cs</FileName>
@@ -79,14 +79,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.MyPopupViewModel" Collapsed="true">
-    <Position X="9.25" Y="8.5" Width="1.5" />
+    <Position X="9.25" Y="8.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gAAAAIQAJgAgACQAIEBAAAAAQCANAACAEAAEiAAIAAA=</HashCode>
       <FileName>ViewModels\MyPopupViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.NewItemViewModel" Collapsed="true">
-    <Position X="12.25" Y="8.5" Width="1.5" />
+    <Position X="12.25" Y="8.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>QAAAACAAAAEAgAAAAAAAAAQAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>ViewModels\NewItemViewModel.cs</FileName>
@@ -100,12 +100,43 @@
     </TypeIdentifier>
   </Class>
   <Class Name="EcoScanner.ViewModels.WarningPopupViewModel" Collapsed="true">
-    <Position X="17.75" Y="7.5" Width="1.5" />
+    <Position X="17.75" Y="7.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>ViewModels\WarningPopupViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="EcoScanner.Models.Dish">
+    <Position X="10.25" Y="13" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAEAgAAAAAAAAAQAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Dish.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CO2" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EcoScanner.Models.Ingredients">
+    <Position X="6.5" Y="13" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Ingredients.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.Models.Product">
+    <Position X="5.25" Y="15.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAgAAAIAAAAAQAACAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="EcoScanner.ViewModels.IWarningPopup" Collapsed="true">
+    <Position X="1.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\IWarningPopup.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

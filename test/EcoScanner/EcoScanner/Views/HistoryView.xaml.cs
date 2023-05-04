@@ -1,4 +1,4 @@
-﻿using EcoScanner.Models;
+﻿using EcoScanner.Services;
 using EcoScanner.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ using static Xamarin.Forms.Internals.Profile;
 
 namespace EcoScanner.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryView : ContentPage
 	{
 		public int houseMemberCount { get; set; }
