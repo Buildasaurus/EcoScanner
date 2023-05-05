@@ -145,7 +145,20 @@ namespace EcoScanner.Views
 			rect.HorizontalOptions = LayoutOptions.Center;
 			rect.SetValue(Grid.RowProperty, 0);
 			rect.BackgroundColor = Color.FromHex("#01ABC9");
+			// Add a TapGestureRecognizer to the BoxView
+			/*
+			var tapGestureRecognizer = new TapGestureRecognizer();
+			tapGestureRecognizer.Tapped += async (s, e) => {
+				await rectClickedAsync();
+			};
+			rect.GestureRecognizers.Add(tapGestureRecognizer);*/
+
 			return rect;
+		}
+
+		async Task rectClickedAsync()
+		{
+
 		}
 		async void MakeWeekBarGraph(Dictionary<DateTime, float> historik)
 		{

@@ -5,6 +5,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,8 +65,7 @@ namespace EcoScanner.Models
 				{
 					if(product != null)
 					{
-						float singleweight = float.Parse(ingredient.Weight);
-						product.Count = (int)Math.Ceiling(float.Parse(ingredient.Weight) / product.Weight);
+						product.Count = (int)Math.Ceiling(float.Parse(ingredient.Weight, CultureInfo.GetCultureInfo("en-GB")) / product.Weight);
 						Liste.saveProduct(product);
 					}
 					else
