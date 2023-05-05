@@ -4,12 +4,12 @@
              x:Class="EcoScanner.Views.ThreeButtonView">
     <ContentView.Content>
         <StackLayout>
-            <Grid RowDefinitions="*" ColumnDefinitions="*, *, *">
-                <Image  Source="{Binding LeftImage}" Grid.Row="0" Grid.Column="0"/>
+            <Grid RowDefinitions="*,*" ColumnDefinitions="*, *">
+                <Image  Source="{Binding LeftImage}" Grid.Row="1" Grid.Column="0"/>
                 <ImageButton Command="{Binding LeftPressed}" Source="{Binding LeftImage}" Opacity="0" Grid.Row="0" Grid.Column="0"/>
-                <Image  Source="{Binding MiddleImage}" Grid.Row="0" Grid.Column="1"/>
+                <Image  Source="{Binding MiddleImage}" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
                 <ImageButton Command="{Binding MiddlePressed}" Source="{Binding MiddleImage}" Opacity="0" Grid.Row="0" Grid.Column="1"/>
-                <Image  Source="{Binding RightImage}" Grid.Row="0" Grid.Column="2"/>
+                <Image  Source="{Binding RightImage}" Grid.Row="1" Grid.Column="1"/>
                 <ImageButton Command="{Binding RightPressed}" Source="{Binding RightImage}" Opacity="0" Grid.Row="0" Grid.Column="2"/>
                 
             </Grid>
