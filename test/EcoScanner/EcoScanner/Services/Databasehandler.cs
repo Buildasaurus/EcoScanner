@@ -17,7 +17,8 @@ namespace EcoScanner.Services
 {
     public static class Databasehandler
     {
-        static IFirebaseConfig ifc = new FirebaseConfig()
+
+		static IFirebaseConfig ifc = new FirebaseConfig()
         {
             AuthSecret = "TlXCyZsxp3gJw2IXUP3266N6xvk95GWsUMXZLzdh",
             BasePath = "https://foedevareklimabelastning-default-rtdb.europe-west1.firebasedatabase.app/"
@@ -26,19 +27,44 @@ namespace EcoScanner.Services
         static IFirebaseClient client = new FirebaseClient(ifc);
         static bool allProductsLoaded = false;
         static Dictionary<string, Product> data;
+        /// <summary>
+        /// Makes certain that products are loaded
+        /// </summary>
+		static async void CheckProducts()
+		{
+			if (data == null)
+			{
+				await LoadAllProducts();
+			}
+		}
 
-
-        static public Product GetProduct(int number)
+		static public Product GetProduct(int number)
         {
-            var result = client.Get("Madvare/" + number);
+            CheckProducts();
+			var result = client.Get("Madvare/" + number);
             Product product = result.ResultAs<Product>();
             product.Count = 1;
             return product;
         }
-
+        /// <summary>
+        /// Returns a product by a given name. 
+        /// </summary>
+        /// <param name="productName"></param>
+        /// <returns></returns>
+        static public Product GetProductByName(string productName)
+        {
+			CheckProducts();
+			foreach (Product product in data.Values)
+            {
+                if(product.Name == productName)
+                {
+                    return product;
+                }
+            }
+            return null;
+        }
         public async static Task LoadAllProducts()
         {
-
             FirebaseResponse response = await client.GetAsync("Madvare");
             data = response.ResultAs<Dictionary<string, Product>>();
             //There are some data in the database that aren't products, that must be removed.
@@ -50,7 +76,11 @@ namespace EcoScanner.Services
                 {
                     keysToRemove.Add(element.Key);
                 }
-            }
+                else
+                {
+					element.Value.Count = 1;
+				}
+			}
             foreach (var key in keysToRemove)
             {
                 data.Remove(key);
@@ -212,7 +242,7 @@ namespace EcoScanner.Services
             }
             return list;
         }
-
+        
         //Handling of dishes
         static string[] vareData;
         static string[] amountData;

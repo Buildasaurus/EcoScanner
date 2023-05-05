@@ -45,6 +45,7 @@ namespace EcoScanner.Services
 
         /// <summary>
         /// saves a product to the list. If the product already exists in the list, it simply adds to the count.
+        /// Also alerts the ListeViewModel
         /// </summary>
         /// <param name="product"></param>
         public static void saveProduct(Product product)

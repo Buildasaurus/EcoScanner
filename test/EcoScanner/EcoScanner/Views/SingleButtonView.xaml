@@ -5,8 +5,8 @@
   <ContentView.Content>
       <StackLayout>
             <Grid RowDefinitions="*" ColumnDefinitions="*">
-                <Image Source="TilbageKnap.png" Grid.Row="0" Grid.Column="0"></Image>
-                <ImageButton Command="{Binding BackPressed}" Source="TilbageKnap.png" Opacity="0" Grid.Row="0" Grid.Column="0"></ImageButton>
+                <Image Source="{Binding LeftImage}" Grid.Row="0" Grid.Column="0"></Image>
+                <ImageButton Command="{Binding LeftPressed}" Source="{Binding LeftImage}" Opacity="0" Grid.Row="0" Grid.Column="0"></ImageButton>
             </Grid>
         </StackLayout>
   </ContentView.Content>

@@ -33,7 +33,13 @@ namespace EcoScanner.ViewModels
 		}
 		public async void tapCommand(Dish dish)
 		{
-			WarningPopupViewModel viewmodel = new WarningPopupViewModel("Dette vil føre dig til COOPs hjemmeside", new AcceptDeclinePopupView(dish));
+			WarningPopupViewModel viewmodel = new WarningPopupViewModel("Dette vil føre dig til COOPs hjemmeside", 
+				new ThreeButtonView( new ThreeButtonViewModel(
+					() => ButtonCommands.ClosePopup(),
+					() => ButtonCommands.AddDishToListAsync(dish),
+					() => ButtonCommands.GoToUrlAsync(dish),
+					"TilbageKnap.png", "TilfoejTilListeKnap.png", "TilHjemmeside.png"
+					)));
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 		}
 	}
