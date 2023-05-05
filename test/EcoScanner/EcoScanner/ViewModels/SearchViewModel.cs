@@ -1,4 +1,5 @@
 ﻿using EcoScanner.Models;
+using EcoScanner.Services;
 using EcoScanner.Views;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -12,7 +13,7 @@ using ZXing;
 
 namespace EcoScanner.ViewModels
 {
-	public class SearchViewModel : BaseViewModel
+    public class SearchViewModel : BaseViewModel
 	{
 		public SearchViewModel() 
 		{

@@ -1,4 +1,5 @@
 ﻿using EcoScanner.Models;
+using EcoScanner.Services;
 using EcoScanner.Views;
 using Rg.Plugins.Popup.Services;
 using System;

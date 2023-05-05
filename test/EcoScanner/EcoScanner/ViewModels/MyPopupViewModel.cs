@@ -12,10 +12,11 @@ using Xamarin.Forms;
 using ZXing;
 using ZXing.Mobile;
 using EcoScanner.Views;
+using EcoScanner.Services;
 
 namespace EcoScanner.ViewModels
 {
-	public class MyPopupViewModel : BaseViewModel
+    public class MyPopupViewModel : BaseViewModel
 	{
 		public string ProductName { get; set; }
 		public string ProductUnit { get 
