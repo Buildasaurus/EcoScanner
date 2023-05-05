@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -17,7 +18,7 @@ namespace EcoScanner.Models
 		/// <summary>
 		/// Closes current popup
 		/// </summary>
-		public static async void ClosePopup()
+		public static async Task ClosePopup()
 		{
 			WarningPopupView.onPopup = false;
 			await PopupNavigation.Instance.PopAsync();
@@ -26,33 +27,33 @@ namespace EcoScanner.Models
 		/// <summary>
 		/// Goes to the history page, and closes the current popup.
 		/// </summary>
-		public static async void GoToHistoryAsync()
+		public static async Task GoToHistoryAsync()
 		{
 			History.addToHistory();
 			HistoryView.refreshView();
-			ClosePopup();
+			await ClosePopup();
 			await Shell.Current.GoToAsync("//HistoryView");
 
 		}
 		/// <summary>
 		/// Clears the list, and closes the current popup
 		/// </summary>
-		public static async void ClearListAsync()
+		public static async Task ClearListAsync()
 		{
 			ListeViewModel.invokeClearList();
-			ClosePopup();
+			await ClosePopup();
 		}
 		/// <summary>
 		/// Goes to Url of dish, and closes the current popup.
 		/// </summary>
 		/// <param name="dish"></param>
-		public static async void GoToUrlAsync(Dish dish)
+		public static async Task GoToUrlAsync(Dish dish)
 		{
 			Trace.WriteLine("acceptdeclineViewmodel");
-			ClosePopup();
+			await ClosePopup();
 			Browser.OpenAsync(dish.URL).Wait();
 		}
-		public static async void AddDishToListAsync(Dish dish)
+		public static async Task AddDishToListAsync(Dish dish)
 		{
 			var numbersAndWords = dish.CO2.Amount.Zip(dish.CO2.Vare, (n, w) => new { Name = n, Weight = w });
 			// inefficient O(n^2), since i don't have the keys, but just the names of the individual dishes. Could be O(n) if i saved id with name
@@ -76,7 +77,7 @@ namespace EcoScanner.Models
 					Trace.WriteLine("Couldn't read weight as float");
 				}
 			}
-			ClosePopup();
+			await ClosePopup();
 		}
 	}
 }

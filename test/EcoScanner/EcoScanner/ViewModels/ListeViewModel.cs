@@ -42,7 +42,7 @@ namespace EcoScanner.ViewModels
         {
             Title = "Liste";
             Items = new ObservableCollection<Product>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command(() => ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Product>(OnItemSelected);
 
@@ -132,7 +132,7 @@ namespace EcoScanner.ViewModels
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewModel));
 		}
 
-		async Task ExecuteLoadItemsCommand()
+		void ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 

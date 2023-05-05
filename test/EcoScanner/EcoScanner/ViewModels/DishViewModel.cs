@@ -35,9 +35,9 @@ namespace EcoScanner.ViewModels
 		{
 			WarningPopupViewModel viewmodel = new WarningPopupViewModel("Dette vil føre dig til COOPs hjemmeside", 
 				new ThreeButtonView( new ThreeButtonViewModel(
-					() => ButtonCommands.ClosePopup(),
-					() => ButtonCommands.AddDishToListAsync(dish),
-					() => ButtonCommands.GoToUrlAsync(dish),
+					async () => await ButtonCommands.ClosePopup(),
+					async () => await ButtonCommands.AddDishToListAsync(dish),
+					async () => await ButtonCommands.GoToUrlAsync(dish),
 					"TilbageKnap.png", "TilfoejTilListeKnap.png", "TilHjemmeside.png"
 					)));
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
