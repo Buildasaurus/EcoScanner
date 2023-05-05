@@ -1,4 +1,5 @@
 ﻿using EcoScanner.Models;
+using EcoScanner.Services;
 using EcoScanner.Views;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -12,7 +13,7 @@ using ZXing;
 
 namespace EcoScanner.ViewModels
 {
-	public class SearchViewModel : BaseViewModel
+    public class SearchViewModel : BaseViewModel
 	{
 		public SearchViewModel() 
 		{
@@ -20,7 +21,6 @@ namespace EcoScanner.ViewModels
 			ItemTapped = new Command<Product>(OnItemSelected);
 			Items = new ObservableCollection<Product>();
 			Title = "Søg efter Produkter";
-
 		}
 		private Product _selectedItem;
 		public ObservableCollection<Product> Items { get; }
@@ -37,7 +37,7 @@ namespace EcoScanner.ViewModels
 			IsBusy = true;
 
 			await Databasehandler.LoadAllProducts();
-			List<Product> products = Databasehandler.Search(Text);
+			List<Product> products = Databasehandler.Search(Text.Trim());
 			string builder = "";
 			Items.Clear();
 			if (products.Count != 0)

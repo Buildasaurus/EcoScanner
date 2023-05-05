@@ -1,4 +1,5 @@
 ﻿using EcoScanner.Models;
+using EcoScanner.Services;
 using EcoScanner.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using Xamarin.Forms.Xaml;
 
 namespace EcoScanner.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DishesView : ContentPage
 	{
 		DishesViewModel dishesViewModel;

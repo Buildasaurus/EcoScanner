@@ -1,5 +1,4 @@
-﻿using EcoScanner.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +10,10 @@ using Xamarin.Forms.Xaml;
 namespace EcoScanner.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TwoButtonWarningView : ContentView
+	public partial class ThreeButtonView : ContentView
 	{
-		BaseViewModel ViewModel;
-		public TwoButtonWarningView(BaseViewModel viewModel)
+		public ThreeButtonView()
 		{
-			ViewModel = viewModel;
-			BindingContext = viewModel;
 			InitializeComponent();
 		}
 	}

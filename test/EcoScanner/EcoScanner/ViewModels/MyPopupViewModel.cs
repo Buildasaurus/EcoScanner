@@ -12,10 +12,11 @@ using Xamarin.Forms;
 using ZXing;
 using ZXing.Mobile;
 using EcoScanner.Views;
+using EcoScanner.Services;
 
 namespace EcoScanner.ViewModels
 {
-	public class MyPopupViewModel : BaseViewModel
+    public class MyPopupViewModel : BaseViewModel
 	{
 		public string ProductName { get; set; }
 		public string ProductUnit { get 
@@ -33,7 +34,7 @@ namespace EcoScanner.ViewModels
 		public string ScalePath { get; set; }
 		public string weightOf1kg { get 
 			{
-				string a = "" + product.CO2.ToString("0.0") + " kg CO2e";
+				string a = "" + product.CO2.ToString("0.0") + " kg CO\u2082e";
 				return a;
 			}
 		}
@@ -132,7 +133,7 @@ namespace EcoScanner.ViewModels
 			{
 				Description = "Udledningen af " + totalWeight + " " + Unit + " bliver:";
 			}
-			TotalWeight = (totalWeight * product.CO2).ToString("0.0") + " kg CO2e";
+			TotalWeight = (totalWeight * product.CO2).ToString("0.0") + " kg CO₂e";
 
 			OnPropertyChanged(null);
 		}

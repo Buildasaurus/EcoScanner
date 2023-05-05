@@ -19,7 +19,8 @@
     <RefreshView  IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <ScrollView>
             <StackLayout BackgroundColor="#FFFEF2">
-
+                <Label Text="Historik" FontSize="25" HorizontalOptions="Center" FontAttributes="Bold" />
+                <Label Text="Her kan du se din CO&#8322;e udledning over tid" FontSize="20" Margin="5,0,5,20" HorizontalOptions="Center"/>
 
                 <Grid Grid.Row="0" HeightRequest="50">
                     <Grid.ColumnDefinitions>

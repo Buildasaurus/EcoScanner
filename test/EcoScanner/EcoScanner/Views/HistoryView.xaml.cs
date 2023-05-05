@@ -1,4 +1,4 @@
-﻿using EcoScanner.Models;
+﻿using EcoScanner.Services;
 using EcoScanner.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ using static Xamarin.Forms.Internals.Profile;
 
 namespace EcoScanner.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryView : ContentPage
 	{
 		public int houseMemberCount { get; set; }
@@ -86,10 +86,9 @@ namespace EcoScanner.Views
 			{
 				extraColumns = 7 - (int)date.DayOfWeek;
 			}
-			if(a == 1)
+			else if(a == 1)
 			{
 				extraColumns = 4 - GetWeekNumberOfMonth(DateTime.Today);
-
 			}
 			else
 			{
@@ -143,6 +142,7 @@ namespace EcoScanner.Views
 				Margin = new Thickness(5, 0, 5, 0),
 				WidthRequest = 30
 			};
+			rect.HorizontalOptions = LayoutOptions.Center;
 			rect.SetValue(Grid.RowProperty, 0);
 			rect.BackgroundColor = Color.FromHex("#01ABC9");
 			return rect;
@@ -243,7 +243,6 @@ namespace EcoScanner.Views
 					Label textDay = new Label();
 					textDay.Text = weekDay[0].ToString() + weekNum;
 					textDay.TextColor = Color.Black;
-					textDay.VerticalOptions = LayoutOptions.End;
 					textDay.HorizontalOptions = LayoutOptions.Center;
 					textDay.VerticalOptions = LayoutOptions.Center;
 					textDay.SetValue(Grid.RowProperty, 1);
@@ -263,7 +262,12 @@ namespace EcoScanner.Views
 					}
 					rect.HeightRequest = reelHeight;
 
+					Label emission = createText(reelHeight, graphheight, rectHeight);
 					combiningColGrid.Children.Add(rect);
+					if (emission != null)
+					{
+						combiningColGrid.Children.Add(emission);
+					}
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -431,8 +435,12 @@ namespace EcoScanner.Views
 					}
 					rect.HeightRequest = reelHeight;
 
-
+					Label emission = createText(reelHeight, graphHeight, rectHeight);
 					combiningColGrid.Children.Add(rect);
+					if (emission != null)
+					{
+						combiningColGrid.Children.Add(emission);
+					}
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -592,9 +600,12 @@ namespace EcoScanner.Views
 						reelHeight = 0;
 					}
 					rect.HeightRequest = reelHeight;
-
-
+					Label emission = createText(reelHeight, graphHeight, rectHeight);
 					combiningColGrid.Children.Add(rect);
+					if(emission != null)
+					{
+						combiningColGrid.Children.Add(emission);
+					}
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -607,11 +618,8 @@ namespace EcoScanner.Views
 				yearCategory.Children.Add(textYear);
 				yearCategory.Children.Add(yearGrid);
 				Chartdata.Children.Add(yearCategory);
-
 			}
-
 			JusterAkse(best);
-
 		}
 
 		void JusterAkse(float topValue)
@@ -644,29 +652,28 @@ namespace EcoScanner.Views
 			{
 				return;
 			}
-			DateTime date = DateTime.Now;
+			DateTime date = DateTime.Now; //find earliest entry
 			foreach (var a in historik)
 			{
 				if (DateTime.Compare(a.Key, date) < 0)
 				{
 					date = a.Key;
 				}
-
 			}
 
 			double DanskGenm = 57.5;
 			float SumCO2 = 0;
-			int divisor = 0;
+			//Go through all days, and find the sum of the co2 emitted.
 			while (0 > DateTime.Compare(date, DateTime.Now))
 			{
-				if (historik.ContainsKey(date.Date))
+				if (historik.ContainsKey(date.Date)) 
 				{
 					SumCO2 += historik[date];
 				}
 
-				divisor++;
 				date = date.AddDays(1);
 			}
+
 			double weeksSinceStart = Math.Ceiling((date - DateTime.Today).TotalDays / 7);
 			double ditGenm = SumCO2  / (weeksSinceStart * Hustandstal);
 			DinUdledningText.Text = ditGenm.ToString("0.00") + " kg";
@@ -708,7 +715,7 @@ namespace EcoScanner.Views
 					DanskUdledningText.TextColor = Color.White;
 				}
 			}
-			else
+			else //if you are exactly at average
 			{
 				DinUdledningRect.HeightRequest = 180;
 				DinUdledningText.Margin = new Thickness(0);
@@ -721,6 +728,65 @@ namespace EcoScanner.Views
 			}
 
 		}
+		/// <summary>
+		/// creates a text, with a margin, depending on the height of a box, that is given as parameter
+		/// </summary>
+		Label createText(float currentHeight, float graphheight, float emission)
+		{
+			if (currentHeight == 0) 
+			{
+				return null;
+			}
+			Label label = new Label();
+			float ythickness;
+			if (currentHeight > 30) //if the box is high enough
+			{
+				ythickness = graphheight - currentHeight;
+				label.VerticalOptions = LayoutOptions.Center;
+				label.TextColor = Color.White;
+			}
+			else // if its not
+			{
+				ythickness = currentHeight + 10;
+				label.VerticalOptions = LayoutOptions.End;
+				label.TextColor = Color.Black;
+			}
+			label.WidthRequest = 30;
+			if (emission < 1000)
+			{
+				label.Text = emission.ToString("0.0");
+			}
+			else
+			{
+				label.Text = emission.ToString("0");
+			}
+
+			//manual centering...
+			if (emission < 100 && emission > 0)
+			{
+				if (emission < 10)
+				{
+					label.Margin = new Thickness(13, ythickness, 0, 0);
+
+				}
+				else
+				{
+					label.Margin = new Thickness(9, ythickness, 0, 0);
+				}
+			}
+			else
+			{
+				label.Margin = new Thickness(5, ythickness, 0, 0);
+
+			}
+
+			label.FontSize = 11;
+			label.LineBreakMode = LineBreakMode.WordWrap;
+			label.HorizontalOptions = LayoutOptions.Start;
+
+			return label;
+		}
+
 
 		private void Button_Click(object sender, EventArgs e)
 		{
