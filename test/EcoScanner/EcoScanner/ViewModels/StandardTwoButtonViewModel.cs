@@ -13,8 +13,6 @@ namespace EcoScanner.ViewModels
 	{
 		public Command BackPressed { get; set; }
 		public Command ClearListPressed { get; set; }
-		public string Message { get; set; }
-		public ContentView ButtonContent { get; set; }
 		public string LeftImage { get; set; }
 		public string RightImage { get; set; }
 		public StandardTwoButtonViewModel(Action leftButton, Action rightButton, string leftImageSource, string rightImageSource)

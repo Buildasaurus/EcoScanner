@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcoScanner.Views.ThreeButtonView">
+    <ContentView.Content>
+        <StackLayout>
+            <Grid RowDefinitions="*" ColumnDefinitions="*, *, *">
+                <Image  Source="{Binding LeftImage}" Grid.Row="0" Grid.Column="0"/>
+                <ImageButton Command="{Binding LeftPressed}" Source="{Binding LeftImage}" Opacity="0" Grid.Row="0" Grid.Column="0"/>
+                <Image  Source="{Binding MiddleImage}" Grid.Row="0" Grid.Column="1"/>
+                <ImageButton Command="{Binding MiddlePressed}" Source="{Binding MiddleImage}" Opacity="0" Grid.Row="0" Grid.Column="1"/>
+                <Image  Source="{Binding RightImage}" Grid.Row="0" Grid.Column="2"/>
+                <ImageButton Command="{Binding RightPressed}" Source="{Binding RightImage}" Opacity="0" Grid.Row="0" Grid.Column="2"/>
+                
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
