@@ -55,7 +55,7 @@ namespace EcoScanner.Models
 		}
 		public static async Task AddDishToListAsync(Dish dish)
 		{
-			var numbersAndWords = dish.CO2.Amount.Zip(dish.CO2.Vare, (n, w) => new { Name = n, Weight = w });
+			var numbersAndWords = dish.CO2.Amount.Zip(dish.CO2.Vare, (n, w) => new { Weight = n, Name = w });
 			// inefficient O(n^2), since i don't have the keys, but just the names of the individual dishes. Could be O(n) if i saved id with name
 			foreach (var ingredient in numbersAndWords)
 			{
@@ -64,7 +64,8 @@ namespace EcoScanner.Models
 				{
 					if(product != null)
 					{
-						product.Count = (int)Math.Ceiling(product.Weight * float.Parse(ingredient.Weight));
+						float singleweight = float.Parse(ingredient.Weight);
+						product.Count = (int)Math.Ceiling(float.Parse(ingredient.Weight) / product.Weight);
 						Liste.saveProduct(product);
 					}
 					else
