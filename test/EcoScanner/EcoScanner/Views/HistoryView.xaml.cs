@@ -136,7 +136,7 @@ namespace EcoScanner.Views
 		/// Creates special rectangle
 		/// </summary>
 		/// <returns></returns>
-		BoxView createRect(DateTime date)
+		BoxView createRect(DateTime startdate, DateTime endDate)
 		{
 			BoxView rect = new BoxView
 			{
@@ -150,23 +150,23 @@ namespace EcoScanner.Views
 			// Add a TapGestureRecognizer to the BoxView
 			var tapGestureRecognizer = new TapGestureRecognizer();
 			tapGestureRecognizer.Tapped += async (s, e) => {
-				await rectClickedAsync(date);
+				await rectClickedAsync(startdate, endDate);
 			};
 			rect.GestureRecognizers.Add(tapGestureRecognizer);
 
 			return rect;
 		}
 
-		async Task rectClickedAsync(DateTime date)
+		async Task rectClickedAsync(DateTime startdate, DateTime endDate)
 		{
 			WarningPopupView.onPopup = true;
-			boef = History.getHistory();
+			List<Product> products = History.GetProductsInInterval(startdate, endDate);
 			WarningPopupViewModel viewmodel = new WarningPopupViewModel(
 				"I denne tidsperiode har du købt følgende:",
 				new SingleButtonView(new StandardTwoButtonViewModel(
 					async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(),
 					"TilbageKnap.png", "")),
-				new ListOfItemsView( new ListOfItemsViewModel(boef[date]))
+				new ListOfItemsView( new ListOfItemsViewModel(products))
 				);
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 		}
@@ -272,7 +272,7 @@ namespace EcoScanner.Views
 
 					float rectHeight = 0;
 
-					BoxView rect = createRect(d1);
+					BoxView rect = createRect(d1, d1);
 					if (historik.ContainsKey(d1.Date))
 					{
 						rectHeight = historik[d1.Date].Sum(p => p.TotCo2);
@@ -285,12 +285,12 @@ namespace EcoScanner.Views
 					}
 					rect.HeightRequest = reelHeight;
 
-					Label emission = createText(reelHeight, graphheight, rectHeight);
+					//Label emission = createText(reelHeight, graphheight, rectHeight);
 					combiningColGrid.Children.Add(rect);
-					if (emission != null)
+					/*if (emission != null)
 					{
 						combiningColGrid.Children.Add(emission);
-					}
+					}*/
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -440,7 +440,7 @@ namespace EcoScanner.Views
 
 					float rectHeight = 0;
 
-					BoxView rect = createRect(d1);
+					BoxView rect = createRect(d1, d1.AddDays(7));
 					for (int j = 0; j < 7; j++)
 					{
 						rect.SetValue(Grid.RowProperty, 0);
@@ -458,12 +458,12 @@ namespace EcoScanner.Views
 					}
 					rect.HeightRequest = reelHeight;
 
-					Label emission = createText(reelHeight, graphHeight, rectHeight);
+					// emission = createText(reelHeight, graphHeight, rectHeight);
 					combiningColGrid.Children.Add(rect);
-					if (emission != null)
+					/*if (emission != null)
 					{
 						combiningColGrid.Children.Add(emission);
-					}
+					}*/
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
@@ -606,7 +606,7 @@ namespace EcoScanner.Views
 
 					float rectHeight = 0;
 
-					BoxView rect = createRect(d1);
+					BoxView rect = createRect(d1, d1.AddDays(daysInMonth));
 					for (int j = 0; j < daysInMonth; j++)
 					{
 						rect.SetValue(Grid.RowProperty, 0);
@@ -623,12 +623,12 @@ namespace EcoScanner.Views
 						reelHeight = 0;
 					}
 					rect.HeightRequest = reelHeight;
-					Label emission = createText(reelHeight, graphHeight, rectHeight);
+					//Label emission = createText(reelHeight, graphHeight, rectHeight);
 					combiningColGrid.Children.Add(rect);
-					if(emission != null)
+					/*if(emission != null)
 					{
 						combiningColGrid.Children.Add(emission);
-					}
+					}*/
 					combiningColGrid.Children.Add(textDay);
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);

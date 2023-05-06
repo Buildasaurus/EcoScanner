@@ -14,7 +14,7 @@ namespace EcoScanner.Services
     {
         public static Dictionary<DateTime, List<Product>> historyData = new Dictionary<DateTime, List<Product>>();
         static string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/Liste";
-        static string filePath = path + "/History";
+        static string filePath = path + "/newHistory";
         public static Dictionary<DateTime, List<Product>> getHistory()
         {
             //read file
@@ -38,14 +38,40 @@ namespace EcoScanner.Services
 					File.WriteAllText(filePath, json);
 				}
 			}
-            catch (Exception e)//if it couldn't succesfully read the data, it just removed it all.
+            catch (Exception e)//if it couldn't succesfully read the data, it just removes it all.
             {
 				clearHistory();
             }
             
         }
-        public static void addToHistory()
+
+        /// <summary>
+        /// Loops through historyData and returns all products in given interval in a compact list.
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+		public static List<Product> GetProductsInInterval(DateTime start, DateTime end)
+		{
+			var productsInInterval = historyData
+		        .Where(entry => entry.Key >= start && entry.Key <= end)
+		        .SelectMany(entry => entry.Value)
+		        .GroupBy(product => product.ID)
+		        .Select(group => new Product(
+			        group.Key,
+			        group.First().Name,
+			        group.First().CO2,
+			        group.First().Weight,
+			        group.First().Unit,
+			        group.Sum(product => product.Count)))
+		        .ToList();
+
+			return productsInInterval;
+		}
+
+		public static void addToHistory()
         {
+            setup();
 			List<Product> products = Liste.getProducts();
 			if (products.Count == 0)
 			{
@@ -122,6 +148,7 @@ namespace EcoScanner.Services
             Dictionary<DateTime, List<Product>> oldData = JsonSerializer.Deserialize<Dictionary<DateTime, List<Product>>>(File.ReadAllText(filePath));
             if (oldData.ContainsKey(new DateTime(2023, 4, 27)))
             {
+
             }
             else
             {

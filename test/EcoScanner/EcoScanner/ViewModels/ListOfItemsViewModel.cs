@@ -1,6 +1,7 @@
 ﻿using EcoScanner.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EcoScanner.ViewModels
@@ -11,7 +12,7 @@ namespace EcoScanner.ViewModels
 		public float Total { get; set; }
 		public ListOfItemsViewModel(List<Product> _items) 
 		{
-			Total = 3.1415926535f;
+			Total = _items.Sum(p => p.TotCo2);
 			Items = _items;
 		}
 	}

@@ -100,7 +100,8 @@ namespace EcoScanner.ViewModels
         async void historyPressed()
         {
 			WarningPopupViewModel viewModel = new WarningPopupViewModel("Vil du rydde listen og gemme din udledning i historikken?\nDette kan ikke gøres om",
-                new TwoButtonWarningView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.GoToHistoryAsync(), "TilbageKnap.png", "TilfoejTilHistorikKnap.png")));
+                new TwoButtonWarningView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.GoToHistoryAsync(), 
+                "TilbageKnap.png", "LilleGemTilHistorikKnap.png")));
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewModel));
 			
 		}

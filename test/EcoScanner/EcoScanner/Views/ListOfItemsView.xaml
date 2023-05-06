@@ -6,9 +6,9 @@
              xmlns:model="clr-namespace:EcoScanner.Models">
     <ContentView.Content>
         <StackLayout>
-            <Grid>
-                <Label Text="Total"/>
-                <Label Text="{Binding Total}"/>
+            <Grid ColumnDefinitions="Auto, *" HeightRequest="50">
+                <Label Text="Total:" Grid.Column="0" FontSize="16"/>
+                <Label Text="{Binding Total, StringFormat='{}{0:F2} kg CO&#8322;e'}" Grid.Column="1" HorizontalOptions="End" FontSize="16"/>
             </Grid>
             <CollectionView x:Name="ItemsListView"
                     ItemsSource="{Binding Items}"
@@ -17,7 +17,7 @@
                     <DataTemplate>
                         <StackLayout>
                             <StackLayout Padding="10" x:DataType="model:Product">
-                                <Grid ColumnDefinitions="*, *" RowDefinitions="30, 40">
+                                <Grid ColumnDefinitions="*, Auto" RowDefinitions="30, 40">
                                     <!-- title -->
                                     <Label Text="{Binding Name}" 
                                     LineBreakMode="NoWrap" 
@@ -29,13 +29,11 @@
                                     <!-- count-->
                                     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Grid.Row="1">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-
-                                        <Entry  Keyboard="Numeric" Text="{Binding Count}" Grid.Column="1" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
+                                        <Entry  Keyboard="Numeric" Text="{Binding Count}" Grid.Column="0" HorizontalTextAlignment="Center" x:Name="number" IsReadOnly="True" TextColor="Black"/>
 
                                     </Grid>
                                     <!-- emission -->
