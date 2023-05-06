@@ -31,10 +31,10 @@ namespace EcoScanner.Models
 		public static async Task GoToHistoryAsync()
 		{
 			History.addToHistory();
+			ListeViewModel.invokeClearList();
 			HistoryView.refreshView();
 			await ClosePopup();
 			await Shell.Current.GoToAsync("//HistoryView");
-
 		}
 		/// <summary>
 		/// Clears the list, and closes the current popup

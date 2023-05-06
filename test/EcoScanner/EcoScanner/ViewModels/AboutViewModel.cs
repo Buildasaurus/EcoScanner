@@ -62,7 +62,7 @@ namespace EcoScanner.ViewModels
 					{
 						WarningPopupView.onPopup = true;
 						WarningPopupViewModel viewmodel = new WarningPopupViewModel("For stort tal - Bør være under 500", 
-							new SingleButtonView(new StandardTwoButtonViewModel(() => ButtonCommands.ClosePopup(), () => ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
+							new SingleButtonView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
 						await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 					}
 				}
@@ -70,7 +70,7 @@ namespace EcoScanner.ViewModels
 				{
 					WarningPopupView.onPopup = true;
 					WarningPopupViewModel viewmodel = new WarningPopupViewModel("Forkert formateret kode - Bør være et heltal",
-						new SingleButtonView(new StandardTwoButtonViewModel(() => ButtonCommands.ClosePopup(), () => ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
+						new SingleButtonView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
 					await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 					Trace.WriteLine("not a number");
 				}

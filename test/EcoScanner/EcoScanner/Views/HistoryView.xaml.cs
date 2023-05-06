@@ -1,5 +1,7 @@
-﻿using EcoScanner.Services;
+﻿using EcoScanner.Models;
+using EcoScanner.Services;
 using EcoScanner.ViewModels;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +22,7 @@ namespace EcoScanner.Views
 	public partial class HistoryView : ContentPage
 	{
 		public int houseMemberCount { get; set; }
-		Dictionary<DateTime, float> boef = new Dictionary<DateTime, float>();
+		Dictionary<DateTime, List<Product>> boef = new Dictionary<DateTime, List<Product>>();
 		public static event EventHandler RefreshEventhandler;
 		DateTime startDate = new DateTime(2023, 03, 20);
 
@@ -134,7 +136,7 @@ namespace EcoScanner.Views
 		/// Creates special rectangle
 		/// </summary>
 		/// <returns></returns>
-		BoxView createRect()
+		BoxView createRect(DateTime date)
 		{
 			BoxView rect = new BoxView
 			{
@@ -146,21 +148,29 @@ namespace EcoScanner.Views
 			rect.SetValue(Grid.RowProperty, 0);
 			rect.BackgroundColor = Color.FromHex("#01ABC9");
 			// Add a TapGestureRecognizer to the BoxView
-			/*
 			var tapGestureRecognizer = new TapGestureRecognizer();
 			tapGestureRecognizer.Tapped += async (s, e) => {
-				await rectClickedAsync();
+				await rectClickedAsync(date);
 			};
-			rect.GestureRecognizers.Add(tapGestureRecognizer);*/
+			rect.GestureRecognizers.Add(tapGestureRecognizer);
 
 			return rect;
 		}
 
-		async Task rectClickedAsync()
+		async Task rectClickedAsync(DateTime date)
 		{
-
+			WarningPopupView.onPopup = true;
+			boef = History.getHistory();
+			WarningPopupViewModel viewmodel = new WarningPopupViewModel(
+				"I denne tidsperiode har du købt følgende:",
+				new SingleButtonView(new StandardTwoButtonViewModel(
+					async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(),
+					"TilbageKnap.png", "")),
+				new ListOfItemsView( new ListOfItemsViewModel(boef[date]))
+				);
+			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 		}
-		async void MakeWeekBarGraph(Dictionary<DateTime, float> historik)
+		async void MakeWeekBarGraph(Dictionary<DateTime, List<Product>> historik)
 		{
 			DateTime d1 = new DateTime(2023, 3, 20);
 			DateTime d2 = DateTime.Now;
@@ -182,7 +192,7 @@ namespace EcoScanner.Views
 
 					if (historik.ContainsKey(d1.Date))
 					{
-						dayValue = historik[d1.Date];
+						dayValue = historik[d1.Date].Sum(p => p.TotCo2);
 					}
 					d1 = d1.AddDays(1);
 
@@ -262,10 +272,10 @@ namespace EcoScanner.Views
 
 					float rectHeight = 0;
 
-					BoxView rect = createRect();
+					BoxView rect = createRect(d1);
 					if (historik.ContainsKey(d1.Date))
 					{
-						rectHeight = historik[d1.Date];
+						rectHeight = historik[d1.Date].Sum(p => p.TotCo2);
 					}
 					float maksAkseValue = ((int)Math.Ceiling(best / 60)) * 60;
 					float reelHeight = graphheight * rectHeight / maksAkseValue;
@@ -300,7 +310,7 @@ namespace EcoScanner.Views
 			JusterAkse(best);
 		}
 
-		void MakeMonthBarGraph(Dictionary<DateTime, float> historik)
+		void MakeMonthBarGraph(Dictionary<DateTime, List<Product>> historik)
 		{
 			DateTime d1 = new DateTime(2023, 3, 6);
 			DateTime d2 = DateTime.Now;
@@ -335,7 +345,7 @@ namespace EcoScanner.Views
 					{
 						if (historik.ContainsKey(d1.Date))
 						{
-							weekValue += historik[d1];
+							weekValue += historik[d1].Sum(p => p.TotCo2);
 						}
 						d1 = d1.AddDays(1);
 					}
@@ -430,13 +440,13 @@ namespace EcoScanner.Views
 
 					float rectHeight = 0;
 
-					BoxView rect = createRect();
+					BoxView rect = createRect(d1);
 					for (int j = 0; j < 7; j++)
 					{
 						rect.SetValue(Grid.RowProperty, 0);
 						if (historik.ContainsKey(d1.Date))
 						{
-							rectHeight += historik[d1];
+							rectHeight += historik[d1].Sum(p => p.TotCo2);
 						}
 						d1 = d1.AddDays(1);
 					}
@@ -471,7 +481,7 @@ namespace EcoScanner.Views
 
 		}
 
-		void MakeYearBarGraph(Dictionary<DateTime, float> historik)
+		void MakeYearBarGraph(Dictionary<DateTime, List<Product>> historik)
 		{
 			int graphHeight = 140;
 			DateTime d1 = new DateTime(2023, 1, 20);
@@ -508,7 +518,7 @@ namespace EcoScanner.Views
 					{
 						if (historik.ContainsKey(d1.Date))
 						{
-							monthValue += historik[d1];
+							monthValue += historik[d1].Sum(p => p.TotCo2);
 						}
 						d1 = d1.AddDays(1);
 					}
@@ -596,13 +606,13 @@ namespace EcoScanner.Views
 
 					float rectHeight = 0;
 
-					BoxView rect = createRect();
+					BoxView rect = createRect(d1);
 					for (int j = 0; j < daysInMonth; j++)
 					{
 						rect.SetValue(Grid.RowProperty, 0);
 						if (historik.ContainsKey(d1.Date))
 						{
-							rectHeight += historik[d1];
+							rectHeight += historik[d1].Sum(p => p.TotCo2);
 						}
 						d1 = d1.AddDays(1);
 					}
@@ -659,7 +669,7 @@ namespace EcoScanner.Views
 			}
 		}
 
-		void KalibrerGenmVDig(Dictionary<DateTime, float> historik, int Hustandstal)
+		void KalibrerGenmVDig(Dictionary<DateTime, List<Product>> historik, int Hustandstal)
 		{
 			if (historik.Count == 0)
 			{
@@ -681,7 +691,7 @@ namespace EcoScanner.Views
 			{
 				if (historik.ContainsKey(date.Date)) 
 				{
-					SumCO2 += historik[date];
+					SumCO2 += historik[date].Sum(p => p.TotCo2);
 				}
 
 				date = date.AddDays(1);
