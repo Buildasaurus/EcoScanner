@@ -218,13 +218,14 @@ namespace EcoScanner.Views
 				int weekNum = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d1, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 				int graphheight = 140;
 				int margin = 15;
+				int buttomHeight = 40;
 
 				Grid weekCategory = new Grid();
 				RowDefinition wGridRow1 = new RowDefinition();
 				RowDefinition wGridRow2 = new RowDefinition();
 
 				wGridRow1.Height = new GridLength(30);
-				wGridRow2.Height = new GridLength(graphheight + 30 + margin);
+				wGridRow2.Height = new GridLength(graphheight + buttomHeight + margin);
 				weekCategory.RowDefinitions.Add(wGridRow1);
 				weekCategory.RowDefinitions.Add(wGridRow2);
 
@@ -256,7 +257,7 @@ namespace EcoScanner.Views
 					RowDefinition gridRow1 = new RowDefinition();
 					RowDefinition gridRow2 = new RowDefinition();
 					gridRow1.Height= new GridLength(graphheight);
-					gridRow2.Height= new GridLength(30);
+					gridRow2.Height= new GridLength(buttomHeight);
 					combiningColGrid.RowDefinitions.Add(gridRow1);
 					combiningColGrid.RowDefinitions.Add(gridRow2);
 
@@ -269,7 +270,7 @@ namespace EcoScanner.Views
 					{
 						textDay.FontAttributes = FontAttributes.Bold;
 					}
-
+					textDay.HorizontalTextAlignment = TextAlignment.Center;
 					textDay.TextColor = Color.Black;
 					textDay.HorizontalOptions = LayoutOptions.Center;
 					textDay.VerticalOptions = LayoutOptions.Center;
@@ -437,6 +438,7 @@ namespace EcoScanner.Views
 
 					Label textDay = new Label();
 					textDay.Text = "W " + ugeNummer;
+
 					textDay.TextColor = Color.Black;
 					textDay.VerticalOptions = LayoutOptions.End;
 					textDay.HorizontalOptions = LayoutOptions.Center;
@@ -452,6 +454,10 @@ namespace EcoScanner.Views
 						if (historik.ContainsKey(d1.Date))
 						{
 							rectHeight += historik[d1].Sum(p => p.TotCo2);
+						}
+						if (d1 == DateTime.Today)
+						{
+							textDay.FontAttributes = FontAttributes.Bold;
 						}
 						d1 = d1.AddDays(1);
 					}
@@ -489,7 +495,7 @@ namespace EcoScanner.Views
 		void MakeYearBarGraph(Dictionary<DateTime, List<Product>> historik)
 		{
 			int graphHeight = 140;
-			DateTime d1 = new DateTime(2023, 1, 20);
+			DateTime d1 = new DateTime(2023, 1, 1);
 			DateTime d2 = DateTime.Now;
 
 			List<float> testForBest = new List<float>();
@@ -499,6 +505,7 @@ namespace EcoScanner.Views
 				Grid yearGrid = new Grid();
 				yearGrid.VerticalOptions = LayoutOptions.End;
 				yearGrid.SetValue(Grid.RowProperty, 1);
+				//create columns for all months
 				for (int i = 0; i < 12; i++)
 				{
 					ColumnDefinition gridCol = new ColumnDefinition();
@@ -618,6 +625,10 @@ namespace EcoScanner.Views
 						if (historik.ContainsKey(d1.Date))
 						{
 							rectHeight += historik[d1].Sum(p => p.TotCo2);
+						}
+						if (d1 == DateTime.Today)
+						{
+							textDay.FontAttributes = FontAttributes.Bold;
 						}
 						d1 = d1.AddDays(1);
 					}

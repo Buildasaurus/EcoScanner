@@ -7,8 +7,8 @@
     <ContentView.Content>
         <StackLayout>
             <Grid ColumnDefinitions="Auto, *" HeightRequest="50">
-                <Label Text="Total:" Grid.Column="0" FontSize="16"/>
-                <Label Text="{Binding Total, StringFormat='{}{0:F2} kg CO&#8322;e'}" Grid.Column="1" HorizontalOptions="End" FontSize="16"/>
+                <Label Text="Total:" Grid.Column="0" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="{Binding Total, StringFormat='{}{0:F2} kg CO&#8322;e'}" Grid.Column="1" HorizontalOptions="End" FontSize="20" FontAttributes="Bold"/>
             </Grid>
             <CollectionView x:Name="ItemsListView"
                     ItemsSource="{Binding Items}"
