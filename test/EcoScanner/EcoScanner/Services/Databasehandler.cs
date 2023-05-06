@@ -90,10 +90,7 @@ namespace EcoScanner.Services
 
         static public List<Product> Search(string text)
         {
-            if (!allProductsLoaded)
-            {
-                throw new NullReferenceException("CALL LOADALLPRODUCTS FIRST");
-            }
+            CheckProducts();
             List<Product> matchingProducts = new List<Product>();
             List<Product> sortedMatchingProducts = new List<Product>();
             text = text.ToLower();
@@ -137,7 +134,7 @@ namespace EcoScanner.Services
                     }
                 }
 
-                if (prefix && suffix) //add all to new list, that has " " or "," before or after
+                if (prefix && suffix) //add all to new list, that has " " or "," before and after
                 {
                     sortedMatchingProducts.Add(matchingProducts.ElementAt(i));
                 }

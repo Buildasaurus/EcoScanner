@@ -68,7 +68,6 @@ namespace EcoScanner.Services
                 List<Product> products = JsonSerializer.Deserialize<List<Product>>(File.ReadAllText(filePath));
 
                 //search for product with identical name
-
                 var index = products.FindIndex(x => x.Name == product.Name);
                 if (index != -1) //if exists, and isn't 0
                 {
@@ -86,9 +85,7 @@ namespace EcoScanner.Services
                 string json = JsonSerializer.Serialize(products);
                 File.WriteAllText(filePath, json);
             }
-            ListeViewModel.invoke();
-
-
+            ListeViewModel.invokeSumChanged();
         }
 
         /// <summary>
@@ -97,7 +94,6 @@ namespace EcoScanner.Services
         /// <param name="product"></param>
         public static void overrideProduct(Product product)
         {
-
             if (!File.Exists(filePath))
             {
                 List<Product> products = new List<Product>();
@@ -128,7 +124,7 @@ namespace EcoScanner.Services
                 File.WriteAllText(filePath, json);
 
             }
-            ListeViewModel.invoke();
+            ListeViewModel.invokeSumChanged();
         }
         public static List<Product> getProducts()
         {

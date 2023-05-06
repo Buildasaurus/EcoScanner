@@ -57,7 +57,7 @@ namespace EcoScanner.ViewModels
 			ListeChanged += (sender, e) => refreshList();
 
 		}
-        public static void invoke()
+        public static void invokeSumChanged()
         {
 			SumChanged.Invoke(null, EventArgs.Empty);
 		}
