@@ -495,7 +495,8 @@ namespace EcoScanner.Views
 		void MakeYearBarGraph(Dictionary<DateTime, List<Product>> historik)
 		{
 			int graphHeight = 140;
-			DateTime d1 = new DateTime(2023, 1, 1);
+			DateTime startdate = new DateTime(2023, 1, 1);
+			DateTime d1 = startdate;
 			DateTime d2 = DateTime.Now;
 
 			List<float> testForBest = new List<float>();
@@ -540,7 +541,7 @@ namespace EcoScanner.Views
 
 			}
 
-			d1 = new DateTime(2023, 1, 20);
+			d1 = startdate;
 			float best = 0;
 
 			foreach (float f in testForBest)
