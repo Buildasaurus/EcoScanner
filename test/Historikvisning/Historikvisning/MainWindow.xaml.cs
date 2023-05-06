@@ -33,6 +33,8 @@ namespace Historikvisning
 			boef.Add(key,100);
 			key = new DateTime(2023, 4, 23);
 			boef.Add(key, 60);
+			key = new DateTime(2023, 5, 6);
+			boef.Add(key, 60);
 
 
 			InitializeComponent();
@@ -488,7 +490,9 @@ namespace Historikvisning
 					d1 = d1Keeper;
 
 					float rectHeight = 0;
-					
+
+					d1Keeper = d1;
+					d1 = d1.AddDays(d1.Day);
 					Rectangle rect = new Rectangle();
 					rect.VerticalAlignment = VerticalAlignment.Bottom;
 					rect.Margin = new Thickness(5, 0, 5, 0);
@@ -510,6 +514,7 @@ namespace Historikvisning
 						reelHeight = 0;
 					}
 					rect.Height = reelHeight;
+					//d1 = d1Keeper;
 					
 
 					combiningColGrid.Children.Add(rect);
@@ -517,7 +522,6 @@ namespace Historikvisning
 
 					combiningColGrid.SetValue(Grid.ColumnProperty, i);
 					yearGrid.Children.Add(combiningColGrid);
-					d1 = d1.AddDays(1);
 				}
 
 				yearCategory.Children.Add(textYear);
