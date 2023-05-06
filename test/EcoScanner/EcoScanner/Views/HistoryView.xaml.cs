@@ -264,7 +264,12 @@ namespace EcoScanner.Views
 					weekNum = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(d1, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
 					Label textDay = new Label();
-					textDay.Text = weekDay[0].ToString() + weekNum;
+					textDay.Text = d1.ToString("ddd")+ "\n"+d1.ToString("dd/MM");
+					if(d1 == DateTime.Today)
+					{
+						textDay.FontAttributes = FontAttributes.Bold;
+					}
+
 					textDay.TextColor = Color.Black;
 					textDay.HorizontalOptions = LayoutOptions.Center;
 					textDay.VerticalOptions = LayoutOptions.Center;
