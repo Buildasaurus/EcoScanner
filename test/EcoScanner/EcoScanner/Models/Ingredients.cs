@@ -6,6 +6,9 @@ namespace EcoScanner.Models
 {
     public class Ingredients
     {
+		/// <summary>
+		/// The weight of all the ingredients
+		/// </summary>
 		public List<string> Amount { get; set; } //Can't change the name - but is the weights of the ingredeints
 		/// <summary>
 		/// The name of all the ingredients

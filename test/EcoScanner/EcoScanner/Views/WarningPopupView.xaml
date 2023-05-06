@@ -9,13 +9,13 @@ x:Class="EcoScanner.Views.WarningPopupView" BackgroundColor="#C0808080" Padding=
     x:DataType="vm:WarningPopupViewModel"
     android:Application.WindowSoftInputModeAdjust="Unspecified"
     BackgroundClicked="backgroundClosed">
-    <Grid RowDefinitions="*, 200, *">
+    <Grid RowDefinitions="*, Auto, *">
         <Frame CornerRadius="10" Grid.Row="1">
             <StackLayout>
-                <Label Text="{Binding Message}" FontSize="20" HorizontalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                <Label Text="{Binding Message}" FontSize="22" HorizontalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                <ContentView Content="{Binding MiddleContent}"/>
                 <ContentView Content="{Binding ButtonContent}"/>
             </StackLayout>
         </Frame>
     </Grid>
-    
 </popup:PopupPage>

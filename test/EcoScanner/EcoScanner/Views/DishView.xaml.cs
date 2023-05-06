@@ -24,9 +24,6 @@ namespace EcoScanner.Views
 			InitializeComponent();
 			
 		}
-		private void Button_Click(object sender, EventArgs e)
-		{
-			//write code to open file
-		}
+
 	}
 }

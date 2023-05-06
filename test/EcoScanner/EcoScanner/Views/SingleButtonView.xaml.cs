@@ -13,11 +13,11 @@ namespace EcoScanner.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SingleButtonView : ContentView
 	{
-		ButtonViewModel viewModel;
-		public SingleButtonView()
+		BaseViewModel ViewModel;
+		public SingleButtonView(BaseViewModel viewModel)
 		{
-			viewModel = new ButtonViewModel();
-			BindingContext = viewModel;
+			ViewModel = viewModel;
+			BindingContext = ViewModel;
 			InitializeComponent();
 		}
 	}

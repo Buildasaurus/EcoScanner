@@ -1,8 +1,10 @@
-﻿using EcoScanner.ViewModels;
+﻿using EcoScanner.Models;
+using EcoScanner.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -10,14 +12,15 @@ namespace EcoScanner.Services
 {
     public static class History
     {
-        public static Dictionary<DateTime, float> historyData = new Dictionary<DateTime, float>();
+        public static Dictionary<DateTime, List<Product>> historyData = new Dictionary<DateTime, List<Product>>();
         static string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/Liste";
-        static string filePath = path + "/History";
-        public static Dictionary<DateTime, float> getHistory()
+        static string filePath = path + "/newHistory";
+        public static Dictionary<DateTime, List<Product>> getHistory()
         {
             //read file
             setup();
-            historyData = JsonSerializer.Deserialize<Dictionary<DateTime, float>>(File.ReadAllText(filePath));
+			Dictionary<DateTime, List<Product>> newdata = JsonSerializer.Deserialize<Dictionary<DateTime, List<Product>>> (File.ReadAllText(filePath));
+            historyData = newdata;
             return historyData;
         }
         /// <summary>
@@ -26,36 +29,97 @@ namespace EcoScanner.Services
         public static void setup()
         {
             Directory.CreateDirectory(path);
-            if (!File.Exists(filePath))
+            try
             {
-                historyData = new Dictionary<DateTime, float>();
-                string json = JsonSerializer.Serialize(historyData);
-                File.WriteAllText(filePath, json);
+				if (!File.Exists(filePath))
+				{
+					historyData = new Dictionary<DateTime, List<Product>>();
+					string json = JsonSerializer.Serialize(historyData);
+					File.WriteAllText(filePath, json);
+				}
+			}
+            catch (Exception e)//if it couldn't succesfully read the data, it just removes it all.
+            {
+				clearHistory();
             }
+            
         }
-        public static void addToHistory()
+
+        /// <summary>
+        /// Loops through historyData and returns all products in given interval in a compact list.
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+		public static List<Product> GetProductsInInterval(DateTime start, DateTime end)
+		{
+			var productsInInterval = historyData
+		        .Where(entry => entry.Key >= start && entry.Key <= end)
+		        .SelectMany(entry => entry.Value)
+		        .GroupBy(product => product.ID)
+		        .Select(group => new Product(
+			        group.Key,
+			        group.First().Name,
+			        group.First().CO2,
+			        group.First().Weight,
+			        group.First().Unit,
+			        group.Sum(product => product.Count)))
+		        .ToList();
+
+			return productsInInterval;
+		}
+
+		public static void addToHistory()
         {
             setup();
-            float sum = Liste.getSum();
-            if (sum == 0)
-            {
-                return;
-            }
+			List<Product> products = Liste.getProducts();
+			if (products.Count == 0)
+			{
+				return;
+			}
+			string a = File.ReadAllText(filePath);
 
-            //read file, then add to end of file.
-            Dictionary<DateTime, float> oldData = JsonSerializer.Deserialize<Dictionary<DateTime, float>>(File.ReadAllText(filePath));
-            if (oldData.ContainsKey(DateTime.Today))
+			//read file, then add to end of file.
+			Dictionary<DateTime, List<Product>> oldData = JsonSerializer.Deserialize<Dictionary<DateTime, List<Product>>>(File.ReadAllText(filePath));
+
+			// Create a new dictionary to store the merged data
+			Dictionary<DateTime, List<Product>> mergedData = new Dictionary<DateTime, List<Product>>(oldData);
+
+			// Get the current date
+			DateTime currentDate = DateTime.Today;
+
+			// Check if the oldData dictionary contains the current date as a key
+			if (oldData.ContainsKey(currentDate))
+			{
+				// Merge the products into the value of the oldData dictionary where the key is the current date
+				mergedData[currentDate] = oldData[currentDate]
+					.Concat(products)
+					.GroupBy(p => p.Name)
+					.Select(g =>
+					{
+						var firstProduct = g.First();
+						firstProduct.Count = g.Sum(p => p.Count);
+						return firstProduct;
+					})
+					.ToList();
+			}
+			else
+			{
+				// If the oldData dictionary does not contain the current date as a key, add it with the products list as its value
+				mergedData.Add(currentDate, products);
+			}
+
+			/*if (oldData.ContainsKey(DateTime.Today))
             {
                 oldData[DateTime.Today] += sum;
             }
             else
             {
                 oldData.Add(DateTime.Today, sum);
-            }
-            historyData = oldData;
-            string json = JsonSerializer.Serialize(oldData);
+            }*/
+			historyData = mergedData;
+            string json = JsonSerializer.Serialize(mergedData);
             File.WriteAllText(filePath, json);
-            ListeViewModel.invokeClearList();
         }
         public static void clearHistory()
         {
@@ -81,19 +145,18 @@ namespace EcoScanner.Services
             }
 
             //read file, then add to end of file.
-            Dictionary<DateTime, float> oldData = JsonSerializer.Deserialize<Dictionary<DateTime, float>>(File.ReadAllText(filePath));
+            Dictionary<DateTime, List<Product>> oldData = JsonSerializer.Deserialize<Dictionary<DateTime, List<Product>>>(File.ReadAllText(filePath));
             if (oldData.ContainsKey(new DateTime(2023, 4, 27)))
             {
-                oldData[new DateTime(2023, 4, 27)] += sum;
+
             }
             else
             {
-                oldData.Add(new DateTime(2023, 4, 27), sum);
+                oldData.Add(new DateTime(2023, 4, 27), new List<Product>{ new Product(2, "hej", 2.3f, 2.1f, "kg"), new Product(2, "hej", 2.3f, 2.1f, "kg") });
             }
             historyData = oldData;
             string json = JsonSerializer.Serialize(oldData);
             File.WriteAllText(filePath, json);
-            ListeViewModel.invokeClearList();
         }
     }
 }

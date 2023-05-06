@@ -42,7 +42,7 @@ namespace EcoScanner.ViewModels
         {
             Title = "Liste";
             Items = new ObservableCollection<Product>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command(() => ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Product>(OnItemSelected);
 
@@ -100,27 +100,10 @@ namespace EcoScanner.ViewModels
         async void historyPressed()
         {
 			WarningPopupViewModel viewModel = new WarningPopupViewModel("Vil du rydde listen og gemme din udledning i historikken?\nDette kan ikke gøres om",
-                new TwoButtonWarningView(new StandardTwoButtonViewModel(() => backPressed(), () => goToHistory(), "TilbageKnap.png", "TilfoejTilHistorikKnap.png")));
+                new TwoButtonWarningView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.GoToHistoryAsync(), 
+                "TilbageKnap.png", "LilleGemTilHistorikKnap.png")));
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewModel));
 			
-		}
-		async void backPressed()
-		{
-			//close popup
-			Trace.WriteLine("close popup");
-			WarningPopupView.onPopup = false;
-			await PopupNavigation.Instance.PopAsync();
-
-		}
-		async void goToHistory()
-		{
-			Trace.WriteLine("Go TO History");
-			History.addToHistory();
-			HistoryView.refreshView(); 
-            WarningPopupView.onPopup = false;
-			await PopupNavigation.Instance.PopAsync();
-			await Shell.Current.GoToAsync("//HistoryView");
-
 		}
 
 		void plusClicked(Product item)
@@ -145,25 +128,12 @@ namespace EcoScanner.ViewModels
         {
 			WarningPopupViewModel viewModel = new WarningPopupViewModel("Er du sikker på at du vil slette listen?\nDette kan ikke gøres om",
 							new TwoButtonWarningView(new StandardTwoButtonViewModel(
-                                async () => 
-                                {
-                                    //close popup
-								    Trace.WriteLine("close popup");
-								    WarningPopupView.onPopup = false;
-								    await PopupNavigation.Instance.PopAsync();
-							    }, 
-                                async () => 
-                                {
-								    Trace.WriteLine("clear pressd");
-								    ListeViewModel.invokeClearList();
-								    WarningPopupView.onPopup = false;
-								    await PopupNavigation.Instance.PopAsync();
-							    }, 
+                                () => ButtonCommands.ClosePopup(), () => ButtonCommands.ClearListAsync(), 
                                 "TilbageKnap.png", "RydListenKnap.png")));
 			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewModel));
 		}
 
-		async Task ExecuteLoadItemsCommand()
+		void ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 

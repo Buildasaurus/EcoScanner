@@ -1,5 +1,4 @@
-﻿using EcoScanner.Models;
-using EcoScanner.ViewModels;
+﻿using EcoScanner.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace EcoScanner.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AcceptDeclinePopupView : ContentView
+	public partial class ListOfItemsView : ContentView
 	{
-		AcceptDeclinePopupViewModel viewModel;
-		public AcceptDeclinePopupView(Dish dish)
+		ListOfItemsViewModel viewModel;
+		public ListOfItemsView(ListOfItemsViewModel _viewModel)
 		{
-			viewModel = new AcceptDeclinePopupViewModel(dish);
-			BindingContext = viewModel;
+			BindingContext = viewModel = _viewModel;
 			InitializeComponent();
 		}
 	}

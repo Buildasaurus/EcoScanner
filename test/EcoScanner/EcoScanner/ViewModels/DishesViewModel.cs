@@ -10,11 +10,9 @@ namespace EcoScanner.ViewModels
 {
 	public class DishesViewModel : BaseViewModel
 	{
-		public string Title { get;set; }
 		public DishesViewModel() 
 		{
 			Title = "Inspiration til retter";
 		}
-		
 	}
 }

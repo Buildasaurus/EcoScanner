@@ -6,7 +6,6 @@ namespace EcoScanner.ViewModels
 {
     public class InformationViewModel : BaseViewModel
     {
-        public string Title { get; set; }
         public InformationViewModel() 
         {
             Title = "Information";
