@@ -46,12 +46,10 @@ namespace EcoScanner.ViewModels
 
 		private async void OnScanResultCommand()
 		{
-			
 			if (!MyPopup.onPopup && !WarningPopupView.onPopup)
 			{
-				try
+				if(int.TryParse(Result.Text, out int number))
 				{
-					int number = int.Parse(Result.Text);
 					if (number < 500)
 					{
 						MyPopup.onPopup = true;
@@ -61,20 +59,21 @@ namespace EcoScanner.ViewModels
 					else
 					{
 						WarningPopupView.onPopup = true;
-						WarningPopupViewModel viewmodel = new WarningPopupViewModel("For stort tal - Bør være under 500", 
-							new SingleButtonView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
+						WarningPopupViewModel viewmodel = new WarningPopupViewModel("For stort tal - Bør være under 500",
+							new SingleButtonView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(),
+							async () => await ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
 						await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 					}
 				}
-				catch
+				else
 				{
 					WarningPopupView.onPopup = true;
 					WarningPopupViewModel viewmodel = new WarningPopupViewModel("Forkert formateret kode - Bør være et heltal",
-						new SingleButtonView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
+						new SingleButtonView(new StandardTwoButtonViewModel(async () => await ButtonCommands.ClosePopup(), 
+						async () => await ButtonCommands.ClosePopup(), "TilbageKnap.png", "")));
 					await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
 					Trace.WriteLine("not a number");
 				}
-				//result.Text
 			}
 		}
 		public Result Result { get; set; }
