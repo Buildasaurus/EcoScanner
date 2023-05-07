@@ -98,7 +98,6 @@ namespace EcoScanner.Views
 			else
 			{
 				extraColumns = 11 - DateTime.Now.Month;
-
 			}
 
 			await Task.Delay(100);

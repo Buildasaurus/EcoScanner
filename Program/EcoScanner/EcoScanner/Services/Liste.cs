@@ -50,7 +50,9 @@ namespace EcoScanner.Services
         /// <param name="product"></param>
         public static void saveProduct(Product product)
         {
-            if (product.Count == 0)
+            createFolder();
+
+			if (product.Count == 0)
             {
                 return;
             }

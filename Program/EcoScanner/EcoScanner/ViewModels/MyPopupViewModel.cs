@@ -98,7 +98,7 @@ namespace EcoScanner.ViewModels
 			}
 			else
 			{
-				Liste.overrideProduct(product);
+				Liste.saveProduct(product);
 				ListeViewModel.invokeRefreshList();
 			}
 			closeClicked();
