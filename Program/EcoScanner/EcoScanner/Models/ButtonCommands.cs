@@ -33,7 +33,7 @@ namespace EcoScanner.Models
 			History.addToHistory();
 			ListeViewModel.invokeClearList();
 			HistoryView.refreshView();
-			await ClosePopup();
+			await ClosePopupAsync();
 			await Shell.Current.GoToAsync("//HistoryView");
 		}
 		/// <summary>
@@ -42,7 +42,7 @@ namespace EcoScanner.Models
 		public static async Task ClearListAsync()
 		{
 			ListeViewModel.invokeClearList();
-			await ClosePopup();
+			await ClosePopupAsync();
 		}
 		/// <summary>
 		/// Goes to Url of dish, and closes the current popup.
@@ -51,7 +51,7 @@ namespace EcoScanner.Models
 		public static async Task GoToUrlAsync(Dish dish)
 		{
 			Trace.WriteLine("acceptdeclineViewmodel");
-			await ClosePopup();
+			await ClosePopupAsync();
 			Browser.OpenAsync(dish.URL).Wait();
 		}
 		public static async Task AddDishToListAsync(Dish dish)
@@ -78,7 +78,7 @@ namespace EcoScanner.Models
 					Trace.WriteLine("Couldn't read weight as float");
 				}
 			}
-			await ClosePopup();
+			await ClosePopupAsync();
 		}
 	}
 }
