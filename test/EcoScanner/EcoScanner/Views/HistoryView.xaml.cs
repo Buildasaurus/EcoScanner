@@ -5,6 +5,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq;
@@ -83,18 +84,20 @@ namespace EcoScanner.Views
 
 			//calculate scrolllength
 			int extraColumns = 0;
-			DateTime date = DateTime.Now;
+			DateTime date = DateTime.Now.AddDays(-1);
+
+
 			if (a == 0)
 			{
-				extraColumns = 7 - (int)date.DayOfWeek;
+				extraColumns = 6 - (int)date.DayOfWeek;
 			}
 			else if(a == 1)
 			{
-				extraColumns = 4 - GetWeekNumberOfMonth(DateTime.Today);
+				extraColumns = 3 - GetWeekNumberOfMonth(DateTime.Today);
 			}
 			else
 			{
-				extraColumns = 12 - DateTime.Now.Month;
+				extraColumns = 11 - DateTime.Now.Month;
 
 			}
 
