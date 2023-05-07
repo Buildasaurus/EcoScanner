@@ -53,7 +53,7 @@
       <FileName>ViewModels\DishViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EcoScanner.ViewModels.HistoryViewModel" Collapsed="true">
+  <Class Name="EcoScanner.ViewModels.HistoryViewModel">
     <Position X="5.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAI=</HashCode>
@@ -150,6 +150,13 @@
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAACAAAAAAACAABAAABIAEAEAAAgAAAIAAA=</HashCode>
       <FileName>Services\Liste.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EcoScanner.Services.History">
+    <Position X="3" Y="8" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABgAAAAiAAAAAAAIQEAIAAAAAAAAAIA=</HashCode>
+      <FileName>Services\History.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="EcoScanner.ViewModels.IWarningPopup" Collapsed="true">

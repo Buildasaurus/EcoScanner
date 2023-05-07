@@ -104,19 +104,9 @@ namespace EcoScanner.Services
 					.ToList();
 			}
 			else
-			{
-				// If the oldData dictionary does not contain the current date as a key, add it with the products list as its value
+			{ // If the oldData dictionary does not contain the current date as a key, add it with the products list as its value
 				mergedData.Add(currentDate, products);
 			}
-
-			/*if (oldData.ContainsKey(DateTime.Today))
-            {
-                oldData[DateTime.Today] += sum;
-            }
-            else
-            {
-                oldData.Add(DateTime.Today, sum);
-            }*/
 			historyData = mergedData;
             string json = JsonSerializer.Serialize(mergedData);
             File.WriteAllText(filePath, json);

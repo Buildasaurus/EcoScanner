@@ -159,16 +159,19 @@ namespace EcoScanner.Views
 
 		async Task rectClickedAsync(DateTime startdate, DateTime endDate)
 		{
-			WarningPopupView.onPopup = true;
-			List<Product> products = History.GetProductsInInterval(startdate, endDate);
-			WarningPopupViewModel viewmodel = new WarningPopupViewModel(
-				"I denne tidsperiode har du købt følgende:",
-				new SingleButtonView(new StandardTwoButtonViewModel(
-					async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(),
-					"TilbageKnap.png", "")),
-				new ListOfItemsView( new ListOfItemsViewModel(products))
-				);
-			await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
+			if(!WarningPopupView.onPopup)
+			{
+				WarningPopupView.onPopup = true;
+				List<Product> products = History.GetProductsInInterval(startdate, endDate);
+				WarningPopupViewModel viewmodel = new WarningPopupViewModel(
+					"I denne tidsperiode har du købt følgende:",
+					new SingleButtonView(new StandardTwoButtonViewModel(
+						async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(),
+						"TilbageKnap.png", "")),
+					new ListOfItemsView(new ListOfItemsViewModel(products))
+					);
+				await PopupNavigation.Instance.PushAsync(new WarningPopupView(viewmodel));
+			}
 		}
 		async void MakeWeekBarGraph(Dictionary<DateTime, List<Product>> historik)
 		{
