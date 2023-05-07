@@ -35,7 +35,7 @@ namespace EcoScanner.ViewModels
 		{
 			WarningPopupViewModel viewmodel = new WarningPopupViewModel("Åben opskriften på COOPs hjemmeside eller tilføj ingredienser til listen", 
 				new ThreeButtonView( new ThreeButtonViewModel(
-					async () => await ButtonCommands.ClosePopup(),
+					async () => await ButtonCommands.ClosePopupAsync(),
 					async () => await ButtonCommands.AddDishToListAsync(dish),
 					async () => await ButtonCommands.GoToUrlAsync(dish),
 					"TilbageKnap.png", "TilfoejTilListeKnap.png", "TilHjemmeside.png"

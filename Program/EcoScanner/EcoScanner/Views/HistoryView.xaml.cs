@@ -169,7 +169,7 @@ namespace EcoScanner.Views
 				WarningPopupViewModel viewmodel = new WarningPopupViewModel(
 					"I denne tidsperiode har du købt følgende:",
 					new SingleButtonView(new StandardTwoButtonViewModel(
-						async () => await ButtonCommands.ClosePopup(), async () => await ButtonCommands.ClosePopup(),
+						async () => await ButtonCommands.ClosePopupAsync(), async () => await ButtonCommands.ClosePopupAsync(),
 						"TilbageKnap.png", "")),
 					new ListOfItemsView(new ListOfItemsViewModel(products))
 					);
