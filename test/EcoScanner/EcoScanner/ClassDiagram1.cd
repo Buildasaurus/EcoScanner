@@ -159,6 +159,13 @@
       <FileName>Services\History.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="EcoScanner.Models.ButtonCommands">
+    <Position X="2.75" Y="21.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAABAAAAAAAAAAAAAEACAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\ButtonCommands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="EcoScanner.ViewModels.IWarningPopup" Collapsed="true">
     <Position X="1.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>

@@ -19,7 +19,7 @@ namespace EcoScanner.Models
 		/// <summary>
 		/// Closes current popup
 		/// </summary>
-		public static async Task ClosePopup()
+		public static async Task ClosePopupAsync()
 		{
 			WarningPopupView.onPopup = false;
 			await PopupNavigation.Instance.PopAsync();
